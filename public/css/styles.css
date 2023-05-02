@@ -1,0 +1,120 @@
+* {
+ font-family: 'Roboto';
+}
+
+body {
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.row {
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+
+/*doenca/question create page*/
+
+#doenca-create-container {
+    padding: 30px;
+}
+
+#doenca-create-container label {
+    font-weight: bold;
+}
+
+#doenca-create-container input,
+#doenca-create-container select,
+#doenca-create-container textarea {
+    font-size: 14px;
+}
+
+.btn-mais-pergunta{
+    border-radius: 4px;
+    padding: 3px;
+    margin-top: 5px;
+    display:flex;
+    background-color:#ccc;
+    color: black;
+
+}
+
+/*Dashboard - doencas*/
+
+.dashboard-title-container {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+
+.dashboard-doencas-container th {
+    width: 5%;
+}
+
+.dashboard-doencas-container form {
+    display: inline-block;
+}
+
+
+
+.dashboard-question-container th {
+    width: 15%;
+}
+
+.dashboard-question-container form {
+
+    display: inline-block;
+}
+
+/*messagens flash - feedback para o usuario*/
+.msg {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
+.error {
+    background-color: #d4edda;
+    color: #e01515;
+    border: 1px solid #c3e6cb;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
+/* end */
+
+
+
+
+
+
+
+
+/*footer*/
+footer {
+    text-align: center;
+    background-color: #353e48;
+    color: #fff;
+    padding: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/*tirando a margin do footer*/
+footer p {
+    margin-bottom: 0;
+}
