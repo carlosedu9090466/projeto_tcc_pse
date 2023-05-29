@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 
 //página home
 Route::get('/', [HomeController::class, 'index']);
@@ -32,3 +33,16 @@ Route::post('/question', [QuestionController::class, 'store']);
 Route::get('question/edit/{id}', [QuestionController::class, 'edit']);
 //bank-end salvar os dados no banco
 Route::put('question/update/{id}', [QuestionController::class, 'update']);
+//criar a delete de question
+route::delete('question/{id}', [QuestionController::class, 'destroy']);
+
+//Quiz
+Route::get('/quiz/home', [QuizController::class, 'index']);
+//criar um quiz
+Route::get('/quiz/create', [QuizController::class, 'create']);
+//rota de salve
+Route::post('/quiz', [QuizController::class, 'store']);
+
+//Quiz x pergunta
+Route::get('/quiz/vincular/{id}', [QuizController::class, 'createVinculo']);
+Route::post('/quiz/vincular', [QuizController::class, 'createVinculoQuiz']);

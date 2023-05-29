@@ -13,6 +13,7 @@ class QuestionController extends Controller
 
     public function index()
     {
+        //faz o relacionamento
         $questions = Question::with('doencas')->get();
 
         return view('question.home', ['questions' => $questions]);
@@ -79,5 +80,12 @@ class QuestionController extends Controller
         Question::findOrFail($request->id)->update($data);
 
         return redirect('/question/home')->with('msg', 'Dados editado com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        Question::findOrFail($id)->delete();
+
+        return redirect('/question/home')->with('msg', 'Dado excluido com sucesso!');
     }
 }

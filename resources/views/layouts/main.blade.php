@@ -49,8 +49,13 @@
                         <a href="/doenca/home" class="nav-link">Controle Doenças</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/question/home" class="nav-link">Criar Questionario</a>
+                        <a href="/question/home" class="nav-link">Perguntas</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="/quiz/home" class="nav-link">Questionario</a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="/" class="nav-link">Cadastrar Agente de saúde</a>
                     </li>
