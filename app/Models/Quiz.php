@@ -15,4 +15,10 @@ class Quiz extends Model
 
     //deixa atulizar tudo
     protected $guarded = [];
+
+    public function QuizVinculoQuestion()
+    {
+        //um Quiz pode ter várias Question
+        return $this->belongsToMany('App\Models\Question');
+    }
 }

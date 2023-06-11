@@ -20,4 +20,10 @@ class Question extends Model
     {
         return $this->belongsTo('App\Models\Doenca', 'doenca_id', 'id');
     }
+
+    //Uma questão pode está em várias quizs
+    public function quizs()
+    {
+        return $this->belongsToMany('App\Models\Quiz');
+    }
 }

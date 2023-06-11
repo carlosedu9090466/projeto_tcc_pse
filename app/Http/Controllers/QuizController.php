@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\Quiz_Question;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -60,6 +61,10 @@ class QuizController extends Controller
         if (!$quiz) {
             return redirect('/quiz/home')->with('msg', 'questionario Não encontrado!');
         }
+
+        $quiz_question = Quiz_Question::where('quiz_id', '=', $quiz->id)->get()->pluck('question_id')->all();
+        dd($quiz_question);
+
         $questions = Question::with('doencas')->get();
 
         return view('quiz.createVinculo', ['questions' => $questions, 'quiz' => $quiz]);
@@ -67,6 +72,17 @@ class QuizController extends Controller
 
     public function createVinculoQuiz(Request $request)
     {
-        dd($request);
+
+
+        $quiz = $request->quiz_id;
+
+        foreach ($request->question as $quest) {
+            $vinculo = new Quiz_Question;
+            $vinculo->quiz_id = $quiz;
+            $vinculo->question_id = $quest;
+            $vinculo->save();
+        }
+
+        return redirect('/quiz/home')->with('msg', 'questionario cadastrado com sucesso!');
     }
 }
