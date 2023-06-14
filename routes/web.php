@@ -42,6 +42,8 @@ Route::get('/quiz/home', [QuizController::class, 'index']);
 Route::get('/quiz/create', [QuizController::class, 'create']);
 //rota de salve
 Route::post('/quiz', [QuizController::class, 'store']);
+//deletar quiz
+route::delete('quiz/{id}', [QuizController::class, 'destroy']);
 
 //Quiz x pergunta
 Route::get('/quiz/vincular/{id}', [QuizController::class, 'createVinculo']);

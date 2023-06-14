@@ -47,14 +47,12 @@
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
                                 </a>
-                                <form action="/quiz/{{ $quiz->id }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                        Deletar
-                                    </button>
-                                </form>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#staticBackdrop">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                    Deletar
+                                </button>
                             </td>
                             {{-- end --}}
                         </tr>
@@ -62,45 +60,34 @@
                 </tbody>
             </table>
 
-            {{-- perguntas --}}
-
-            {{-- <!-- Modal -->
+            {{-- modal para delete --}}
             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">2</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Deletar: {{ $quiz->nome_quiz }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    @foreach ($questions as $question)
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 20rem; margin: 5px;">
-                                                <img src="..." class="card-img-top" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ $question->doencas->nome }}</h5>
-                                                    <h4 class="card-title">{{ $question->pergunta }}</h4>
-                                                    <p class="card-text">{{ $question->doencas->sintomas }}</p>
-                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                            <h4>Todos os dados referente ao questionário serão deletadas!</h4>
+                        </div>
+                        <form action="/quiz/{{ $quiz->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                    Deletar
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary">Salvar</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+            {{-- end - Modal --}}
         @else
             <p>Há não Questionário no banco de dados, <a href="/quiz/create">Crie o Questionário</a></p>
         @endif

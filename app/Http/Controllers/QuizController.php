@@ -7,6 +7,7 @@ use App\Models\Quiz;
 use App\Models\Quiz_Question;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 {
@@ -14,6 +15,7 @@ class QuizController extends Controller
     {
         $quizs = Quiz::all();
         $questions = Question::with('doencas')->get();
+
 
         return view('quiz.home', ['quizs' => $quizs, 'questions' => $questions]);
     }
@@ -62,11 +64,21 @@ class QuizController extends Controller
             return redirect('/quiz/home')->with('msg', 'questionario Não encontrado!');
         }
 
-        $quiz_question = Quiz_Question::where('quiz_id', '=', $quiz->id)->get()->pluck('question_id')->all();
-        dd($quiz_question);
+        $quiz_question = Quiz_Question::where('quiz_id', '=', $quiz->id)->get()->pluck('question_id')->toArray();
+        //dd($quiz_question);
+        if (isset($quiz_question) && !empty($quiz_question)) {
+            $result = implode(',', $quiz_question);
+            $quest_dados_id = explode(',', $result);
 
-        $questions = Question::with('doencas')->get();
+            $questions = Question::with('doencas')->whereNotIn('id', $quest_dados_id)->get();
 
+            if ($questions->count() == 0) {
+                return redirect('/quiz/home')->with('msg', 'Não há perguntas para adicionar nesse questionário. crie mais perguntas!');
+            }
+        } else {
+            $questions = Question::with('doencas')->get();
+        }
+        //dd($questions);
         return view('quiz.createVinculo', ['questions' => $questions, 'quiz' => $quiz]);
     }
 
@@ -83,6 +95,17 @@ class QuizController extends Controller
             $vinculo->save();
         }
 
-        return redirect('/quiz/home')->with('msg', 'questionario cadastrado com sucesso!');
+        return redirect('/quiz/home')->with('msg', 'pergunta inserida com sucesso!');
+    }
+
+
+    public function destroy($id)
+    {
+
+        //deletar as questions referente a doenca
+        //Doenca::with('question')->findOrFail($id)->delete();
+        Quiz::findOrFail($id)->delete();
+
+        return redirect('/quiz/home')->with('msg', 'Dado excluido com sucesso!');
     }
 }

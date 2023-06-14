@@ -17,7 +17,7 @@
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $question->doencas->nome }}</h5>
-                                    <p class="card-text">Pergunta:{{ $question->pergunta }}</p>
+                                    <p class="card-text">{{ $question->pergunta }}</p>
                                     {{-- <p class="card-text">Sintomas: {{ $question->doencas->sintomas }}</p> --}}
                                     <input type="text" name="quiz_id" value="{{ $quiz->id }}" hidden>
                                     <input type="checkbox" name="question[]" value="{{ $question->id }}">
@@ -27,7 +27,7 @@
                     </div>
                 @endforeach
             </div>
-            <input type="submit" class="btn btn-primary" value="Criar Questionário">
+            <input type="submit" class="btn btn-primary" value="Inserir perguntas">
         </form>
     </div>
 
