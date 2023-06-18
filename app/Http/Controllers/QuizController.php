@@ -103,7 +103,7 @@ class QuizController extends Controller
     {
 
         //deletar as questions referente a doenca
-        //Doenca::with('question')->findOrFail($id)->delete();
+        Quiz_Question::where('quiz_id', $id)->delete();
         Quiz::findOrFail($id)->delete();
 
         return redirect('/quiz/home')->with('msg', 'Dado excluido com sucesso!');
