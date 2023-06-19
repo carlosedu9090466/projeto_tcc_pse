@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DoencaController;
+use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,11 @@ use App\Http\Controllers\QuizController;
 
 //página home
 Route::get('/', [HomeController::class, 'index']);
+//pagina create doenca
+Route::get('/escola/create', [EscolaController::class, 'create']);
+//escola - create
+Route::post('/escola', [EscolaController::class, 'store']);
+
 
 //doencas - views
 Route::get('/doenca/home', [DoencaController::class, 'index']);

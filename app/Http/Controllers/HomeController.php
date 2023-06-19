@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escola;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,6 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $search = request('search');
+        $municipios = Municipio::all();
         if ($search) {
             $escola = Escola::where([
                 ['nome', 'like', '%' . $search . '%']
@@ -21,6 +23,6 @@ class HomeController extends Controller
         }
 
         //view welcome
-        return view('home', ['escola' => $escola, 'search' => $search]);
+        return view('home', ['escola' => $escola, 'search' => $search, 'municipios' => $municipios]);
     }
 }
