@@ -19,15 +19,15 @@ class EscolaController extends Controller
 
         $regras = [
             'nome' => 'required|min:3|max:100',
-            'sintomas' => 'required|min:5|max:2000'
+            'inep' => 'required',
+            'rua' => 'required',
+            'bairro' => 'required',
+            'rural' => 'required',
+            'localidade_id' => 'required'
         ];
 
         $feedback = [
-            'required' => 'o campo :attribute deve ser preenchido.',
-            'nome.min' => 'o campo nome deve ter no mínino 3 caracteres',
-            'nome.max' => 'o campo nome deve ter no máximo 100 caracteres',
-            'sintomas.min' => 'o campo sintomas deve ter no mínino 5 caracteres',
-            'sintomas.max' => 'o campo sintomas deve ter no máximo 2000 caracteres'
+            'required' => 'o campo :attribute deve ser preenchido.'
         ];
 
         $request->validate($regras, $feedback);

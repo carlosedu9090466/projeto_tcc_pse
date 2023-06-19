@@ -11,8 +11,10 @@ class HomeController extends Controller
     //page home
     public function index()
     {
+
         $search = request('search');
         $municipios = Municipio::all();
+
         if ($search) {
             $escola = Escola::where([
                 ['nome', 'like', '%' . $search . '%']

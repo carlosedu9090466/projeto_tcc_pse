@@ -36,7 +36,7 @@
             <p></p>
         @endif
 
-        <!-- Modal -->
+        <!-- Modal de criação da escola -->
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -49,9 +49,6 @@
                     </div>
 
                     <div class="modal-body">
-
-
-
                         <form action="/escola" method="POST">
                             @csrf
                             <div class="container-fluid">
@@ -60,39 +57,39 @@
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="nome">Nome:</label>
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Nome da Escola">
+                                            <input type="text" class="form-control" id="name" name="nome"
+                                                placeholder="Nome da Escola" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 ml-auto">
                                         <div class="form-group">
-                                            <label for="inep">inep:</label>
+                                            <label for="inep">Inep:</label>
                                             <input type="text" class="form-control" id="inep" name="inep"
-                                                placeholder="Digite o inep">
+                                                placeholder="Digite o inep" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 mr-auto">
                                         <div class="form-group">
-                                            <label for="rua">rua:</label>
+                                            <label for="rua">Rua:</label>
                                             <input type="text" class="form-control" id="rua" name="rua"
-                                                placeholder="Digite o nome da rua">
+                                                placeholder="Digite o nome da rua" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 ml-md-auto">
                                         <div class="form-group">
-                                            <label for="bairro">bairro:</label>
+                                            <label for="bairro">Bairro:</label>
                                             <input type="text" class="form-control" id="bairro" name="bairro"
-                                                placeholder="Digite o bairro da escola">
+                                                placeholder="Digite o bairro da escola" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 ml-md-auto">
                                         <div class="form-group">
-                                            <label for="bairro">numero:</label>
+                                            <label for="bairro">Numero:</label>
                                             <input type="text" class="form-control" id="numero" name="numero"
                                                 placeholder="Digite o número da escola">
                                         </div>
@@ -102,7 +99,7 @@
                                 <div class="row">
                                     <div class="col-md-4 mr-auto">
                                         <div class="form-group">
-                                            <label for="bairro">cep:</label>
+                                            <label for="bairro">Cep:</label>
                                             <input type="text" class="form-control" id="cep" name="cep"
                                                 placeholder="Digite o cep do endereço">
                                         </div>
@@ -110,7 +107,7 @@
 
                                     <div class="col-md-4 ml-auto">
                                         <div class="form-group">
-                                            <label for="bairro">telefone:</label>
+                                            <label for="bairro">Telefone:</label>
                                             <input type="text" class="form-control" id="telefone" name="telefone"
                                                 placeholder="Digite o telefone da escola">
                                         </div>
@@ -118,18 +115,21 @@
 
                                     <div class="col-md-4 ml-md-auto">
                                         <div class="form-group">
-                                            <label for="bairro">Rural:</label>
-                                            <input type="text" class="form-control" id="bairro" name="bairro"
-                                                placeholder="Digite o bairro da escola">
+                                            <label for="bairro">Zona:</label>
+                                            <select class="form-control" name="zona" id="zona" required>
+                                                <option>Selecione a zona...</option>
+                                                <option value="0">Urbana</option>
+                                                <option value="1">Rural</option>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="doenca">localidade:</label>
-                                                <select class="form-control" id="doenca_id" name="doenca_id">
-                                                    <option value="0">-- Selecione a localidade</option>
+                                                <label for="doenca">Localidade:</label>
+                                                <select class="form-control" id="doenca_id" name="doenca_id" required>
+                                                    <option>Selecione a localidade...</option>
                                                     @foreach ($municipios as $municipio)
                                                         <option value="{{ $municipio->id }}">
                                                             {{ $municipio->nome }}
@@ -142,24 +142,16 @@
 
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
                         </form>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary">Salvar</button>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
 
         </div>
-
-
-
-
-
-
+        {{-- END modal de criação --}}
 
     @endsection
