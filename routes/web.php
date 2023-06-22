@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\UserEscolarController;
 
 //página home
 Route::get('/', [HomeController::class, 'index']);
@@ -14,6 +15,16 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/escola/create', [EscolaController::class, 'create']);
 //escola - create
 Route::post('/escola', [EscolaController::class, 'store']);
+
+
+//User Escolar
+Route::get('/userEscolar/home', [UserEscolarController::class, 'index']);
+Route::get('/userEscolar/create', [UserEscolarController::class, 'create']);
+Route::post('/userEscolar', [UserEscolarController::class, 'store']);
+Route::get('/userEscolar/vincularEscola/{id}', [UserEscolarController::class, 'createUserEscolar']);
+Route::post('/userEscolar/vinculo', [UserEscolarController::class, 'createVinculo']);
+
+//End
 
 
 //doencas - views
@@ -27,6 +38,7 @@ Route::get('doenca/edit/{id}', [DoencaController::class, 'edit']);
 //bank-end salvar os dados no banco
 Route::put('doenca/update/{id}', [DoencaController::class, 'update']);
 //Deletar doenca
+Route::get('/doenca/deletar/{id}', [DoencaController::class, 'deletecreate']);
 Route::delete('/doenca/{id}', [DoencaController::class, 'destroy']);
 
 //question-perguntas - views

@@ -33,11 +33,15 @@
                                     Editar
                                 </a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                {{-- <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#staticBackdrop">
                                     <ion-icon name="trash-outline"></ion-icon>
                                     Deletar
-                                </button>
+                                </button> --}}
+                                <a href="/doenca/deletar/{{ $doenca->id }}" class="btn btn-danger edit-btn">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                    Deletar
+                                </a>
                             </td>
                             {{-- end --}}
                         </tr>
@@ -46,7 +50,7 @@
             </table>
 
             {{-- modal para delete --}}
-            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            {{-- <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -57,8 +61,10 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h4>Caso faça a operação de deletar o dado. Todos as perguntas vinculadas a {{ $doenca->nome }}
-                                serão deletadas!</h4>
+                            <h4>
+                                Caso faça a operação de deletar o dado. Todos as perguntas vinculadas a {{ $doenca->nome }}
+                                serão deletadas!
+                            </h4>
                         </div>
                         <form action="/doenca/{{ $doenca->id }}" method="POST">
                             @csrf
@@ -72,7 +78,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- end - Modal --}}
         @else
             <p>Há não registro de doenças no banco de dados, <a href="/doenca/create">Inserir doença</a></p>

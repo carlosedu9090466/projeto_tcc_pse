@@ -95,7 +95,7 @@ class QuizController extends Controller
             $vinculo->save();
         }
 
-        return redirect('/quiz/home')->with('msg', 'pergunta inserida com sucesso!');
+        return redirect('/quiz/home')->with('msg', 'perguntas inserida com sucesso!');
     }
 
 

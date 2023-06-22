@@ -75,6 +75,18 @@ header {
     display: inline-block;
 }
 
+/* .dashboard-userEscolar-container td {
+
+} */
+
+
+.dashboard-userEscolar-container form {
+    display: inline-block;
+}
+.vinculo-btn {
+    padding: 5px;
+}
+
 /*messagens flash - feedback para o usuario*/
 .msg {
     background-color: #d4edda;
@@ -99,10 +111,6 @@ header {
 .ions {
     color: black;
 }
-
-
-
-
 
 
 /*footer*/

@@ -60,7 +60,7 @@
                         <a href="/" class="nav-link">Cadastrar Agente de saúde</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar Usuário Escolar</a>
+                        <a href="/userEscolar/home" class="nav-link">Cadastrar Usuário Escolar</a>
                     </li>
 
                 </ul>

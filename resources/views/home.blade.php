@@ -14,25 +14,66 @@
     </div>
 
     <div class="col-md-10 offset-md-1 dashboard-doencas-container">
-        @if (count($escola) > 0)
-            <a href="/question/create">
+        @if (count($escolas) > 0)
+            <a type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#staticBackdrop">
                 Cadastrar Escola
-                <ion-icon name="add-circle-outline"></ion-icon>
+                <ion-icon class="ions" name="school-outline"></ion-icon>
             </a>
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Inep</th>
+                        <th scope="col">Escola</th>
+                        <th scope="col">Rua</th>
+                        <th scope="col">Bairro</th>
+                        <th scope="col">Localidade</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($escolas as $escola)
+                        <tr>
+                            <td scropt="row">{{ $loop->index + 1 }}</td>
+                            <td>{{ $escola->inep }}</td>
+                            <td>{{ $escola->nome }}</td>
+                            <td>{{ $escola->rua }}</td>
+                            <td>{{ $escola->bairro }}</td>
+                            <td>{{ $escola->EscolaMunicipioOne->nome }}</td>
+                            {{-- editar e excluir --}}
+                            <td>
+                                <a href="/doenca/edit/{{ $escola->id }}" class="btn btn-info edit-btn">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                    Editar
+                                </a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#staticBackdrop1">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                    Deletar
+                                </button>
+                            </td>
+                            {{-- end --}}
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         @else
-            <p>Há não Escolas no banco de dados,
-                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                    Cadastrar Escola
-                    <ion-icon class="ions" name="school-outline"></ion-icon>
-                </a>
-            </p>
+            <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                Cadastrar Escola
+                <ion-icon class="ions" name="school-outline"></ion-icon>
+            </a>
+
         @endif
 
-        @if (count($escola) == 0 && $search)
+        @if (count($escolas) == 0 && $search)
             <p>Não foi possível encontrar nenhuma escola com {{ $search }}!
                 <a href="/">Ver todos as escolas cadastradas!</a>
             </p>
-        @elseif(count($escola) == 0)
+        @elseif(count($escolas) == 0)
             <p></p>
         @endif
 
@@ -49,10 +90,9 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="/escola" method="POST">
+                        <form action="/escola" method="post">
                             @csrf
                             <div class="container-fluid">
-
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
@@ -128,7 +168,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="doenca">Localidade:</label>
-                                                <select class="form-control" id="doenca_id" name="doenca_id" required>
+                                                <select class="form-control" id="localidade_id" name="localidade_id"
+                                                    required>
                                                     <option>Selecione a localidade...</option>
                                                     @foreach ($municipios as $municipio)
                                                         <option value="{{ $municipio->id }}">
@@ -144,10 +185,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                {{-- <button type="submit" class="btn btn-primary">Salvar</button> --}}
+                                <input type="submit" class="btn btn-primary" value="Salvar">
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
 

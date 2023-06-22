@@ -16,15 +16,21 @@ class HomeController extends Controller
         $municipios = Municipio::all();
 
         if ($search) {
-            $escola = Escola::where([
-                ['nome', 'like', '%' . $search . '%']
-            ])->get();
+            $escolas = Escola::where(
+                [
+                    ['nome', 'like', '%' . $search . '%'],
+                ]
+            )->orWhere(
+                [
+                    ['inep', 'like', '%' . $search . '%']
+                ]
+            )->get();
         } else {
             //pegar todos os eventos(dados) do banco
-            $escola = Escola::all();
+            $escolas = Escola::with('EscolaMunicipioOne')->get();
         }
 
         //view welcome
-        return view('home', ['escola' => $escola, 'search' => $search, 'municipios' => $municipios]);
+        return view('home', ['escolas' => $escolas, 'search' => $search, 'municipios' => $municipios]);
     }
 }

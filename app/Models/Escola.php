@@ -16,6 +16,6 @@ class Escola extends Model
     // 1 Escola pode está apenas num municipio
     public function EscolaMunicipioOne()
     {
-        return $this->hasOne('App\Models\Municipio');
+        return $this->belongsTo('App\Models\Municipio', 'localidade_id', 'id');
     }
 }

@@ -66,6 +66,13 @@ class DoencaController extends Controller
         return redirect('/doenca/home')->with('msg', 'Dado editado com sucesso!');
     }
 
+    public function deletecreate($id)
+    {
+        $doenca = Doenca::findOrfail($id);
+
+        return view('doenca.delete', ['doenca' => $doenca]);
+    }
+
     //Deletar uma doença
 
     public function destroy($id)

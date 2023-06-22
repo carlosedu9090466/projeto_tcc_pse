@@ -22,7 +22,7 @@ class EscolaController extends Controller
             'inep' => 'required',
             'rua' => 'required',
             'bairro' => 'required',
-            'rural' => 'required',
+            'zona' => 'required',
             'localidade_id' => 'required'
         ];
 
@@ -32,10 +32,17 @@ class EscolaController extends Controller
 
         $request->validate($regras, $feedback);
 
-        //$doenca->nome = $request->nome;
-        //$doenca->sintomas = $request->sintomas;
-        //$doenca->save();
+        $escola->nome = $request->nome;
+        $escola->inep = $request->inep;
+        $escola->rua = $request->rua;
+        $escola->bairro = $request->bairro;
+        $escola->numero = $request->numero;
+        $escola->cep = $request->cep;
+        $escola->rural = $request->zona;
+        $escola->telefone = $request->telefone;
+        $escola->localidade_id = $request->localidade_id;
+        $escola->save();
 
-        return redirect('/doenca/home')->with('msg', 'Doença cadastrada com sucesso!');
+        return redirect('/')->with('msg', 'Escola cadastrada com sucesso!');
     }
 }
