@@ -68,7 +68,47 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <table>vinculos do User</table>
+
+                    @if (!$UserEscolaVinculos)
+                        <p>Esse Usuário Escolar não possui vinculo com nenhuma Escola!</p>
+                    @else
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">INEP</th>
+                                    <th scope="col">Escola</th>
+                                    <th scope="col">Rural</th>
+                                    <th scope="col">Localidade</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($UserEscolaVinculos->UserEscolarVinculo as $userVinculo)
+                                    <tr>
+                                        <td scropt="row">{{ $loop->index + 1 }}</td>
+                                        <td>{{ $userVinculo->inep }}</td>
+                                        <td>{{ $userVinculo->nome }}</td>
+                                        <td>{{ $userVinculo->rural }}</td>
+                                        <td>{{ $userVinculo->localidade_id }}</td>
+                                        {{-- editar e excluir --}}
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#staticBackdrop">
+                                                <ion-icon name="trash-outline"></ion-icon>
+                                                Deletar Vinculo
+                                            </button>
+                                        </td>
+                                        {{-- end --}}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    @endif
+
                 </div>
             </div>
         </div>

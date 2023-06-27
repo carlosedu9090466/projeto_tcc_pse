@@ -18,4 +18,12 @@ class Escola extends Model
     {
         return $this->belongsTo('App\Models\Municipio', 'localidade_id', 'id');
     }
+
+    public function EscolaVinculoUser()
+    {
+        //uma escola pode ter vários UserEscolar
+        //return $this->belongsToMany('App\Models\UserEscolar');
+        //return $this->hasMany('App\Models\UserEscolar');
+        return $this->belongsToMany(UserEscolar::class, 'escola_users', 'user_id', 'escola_id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Escola;
 use App\Models\User_Escolar;
 use App\Models\UserEscolar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserEscolarController extends Controller
 {
@@ -56,19 +57,24 @@ class UserEscolarController extends Controller
 
     public function createUserEscolar($id)
     {
-
+        //$question = Question::with('doencas')->findOrFail($id);
         $userEscolar = UserEscolar::findOrfail($id);
         $escolas = Escola::all();
-
-        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
+        $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($id);
+        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar, 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
     }
 
     public function createVinculo(Request $request)
     {
 
         //dd($request);
-        $vinculoUserEscolar = new User_Escolar;
 
+        //verifica se possui vinculo com a escola selecionada para salvar!
+        $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $request->userEscolar)->first();
+        if ($existeVinculo) {
+            return redirect('/userEscolar/vincularEscola/' . $request->userEscolar)->with('msg', 'Usuário já possui vinculado com essa escola!');
+        }
+        $vinculoUserEscolar = new User_Escolar;
         $vinculoUserEscolar->user_id = $request->userEscolar;
         $vinculoUserEscolar->escola_id = $request->escola_id;
         $vinculoUserEscolar->status_user_escolar = $request->userAtivo;

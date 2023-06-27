@@ -11,5 +11,7 @@ class User_Escolar extends Model
 
     protected $table = 'escola_users';
 
+    protected $fillable = ['user_id', 'escola_id', 'status_user_escolar'];
+
     protected $guarded = [];
 }
