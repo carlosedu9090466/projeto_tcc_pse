@@ -23,7 +23,8 @@ Route::get('/userEscolar/create', [UserEscolarController::class, 'create']);
 Route::post('/userEscolar', [UserEscolarController::class, 'store']);
 Route::get('/userEscolar/vincularEscola/{id}', [UserEscolarController::class, 'createUserEscolar']);
 Route::post('/userEscolar/vinculo', [UserEscolarController::class, 'createVinculo']);
-
+Route::delete('/userEscolar/deletar/{idUser}&{idEscola}', [UserEscolarController::class, 'deletecreate']);
+Route::delete('/userEscolar/deletar/{id}', [UserEscolarController::class, 'deleteUserEscolar']);
 //End
 
 

@@ -95,11 +95,21 @@
                                         {{-- editar e excluir --}}
                                         <td>
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#staticBackdrop">
+                                            {{-- <a href="/userEscolar/deletar/{{ $userEscolar->id }}&{{ $userVinculo->id }}"
+                                                class="btn btn-danger edit-btn">
                                                 <ion-icon name="trash-outline"></ion-icon>
-                                                Deletar Vinculo
-                                            </button>
+                                                Deletar
+                                            </a> --}}
+                                            <form
+                                                action="/userEscolar/deletar/{{ $userEscolar->id }}&{{ $userVinculo->id }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">
+                                                    <ion-icon name="trash-outline"></ion-icon>
+                                                    Deletar
+                                                </button>
+                                            </form>
                                         </td>
                                         {{-- end --}}
                                     </tr>

@@ -42,6 +42,27 @@
                 @endif
             </div>
 
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="role">Permissão:</label>
+                    <select class="form-control" id="role_id" name="role_id" required>
+                        <option>Selecione...</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">
+                                {{ $role->role }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @if ($errors->has('role_id'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $errors->has('role_id') ? $errors->first('role_id') : '' }}
+                    </div>
+                @endif
+            </div>
+
+
             <div class="form-group">
                 <label for="telefone">telefone:</label>
                 <input type="text" class="form-control" id="telefone" name="telefone"

@@ -48,12 +48,15 @@
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
                                 </a>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#staticBackdrop1">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                    Deletar
-                                </button>
+                                <form action="/userEscolar/deletar/{{ $user->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                        Deletar
+                                    </button>
+                                </form>
+
                             </td>
                             {{-- end --}}
                         </tr>

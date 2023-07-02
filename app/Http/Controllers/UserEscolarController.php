@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escola;
+use App\Models\Role;
 use App\Models\User_Escolar;
 use App\Models\UserEscolar;
 use Illuminate\Http\Request;
@@ -21,7 +22,10 @@ class UserEscolarController extends Controller
 
     public function create()
     {
-        return view('userEscolar.create');
+        //exibir apenas a permissão do User Escolar
+        $roles = Role::where('id', '=', 2)->get();
+        //dd($roles);
+        return view('userEscolar.create', ['roles' => $roles]);
     }
 
     public function store(Request $request)
@@ -35,7 +39,8 @@ class UserEscolarController extends Controller
             'telefone' => 'required',
             'email' => 'required',
             'sexo' => 'required',
-            'data_nascimento' => 'required'
+            'data_nascimento' => 'required',
+            'role_id' => 'required'
         ];
 
         $feedback = [
@@ -49,6 +54,7 @@ class UserEscolarController extends Controller
         $userEscolar->telefone = $request->telefone;
         $userEscolar->email = $request->email;
         $userEscolar->sexo = $request->sexo;
+        $userEscolar->role_id = $request->role_id;
         $userEscolar->data_nascimento = $request->data_nascimento;
         $userEscolar->save();
 
@@ -82,5 +88,22 @@ class UserEscolarController extends Controller
 
         //return redirect('/userEscolar/home')->with('msg', 'Vinculo Estabelecido com sucesso!');
         return redirect('/userEscolar/vincularEscola/' . $request->userEscolar)->with('msg', 'Vinculo Estabelecido com sucesso!');
+    }
+
+    public function deletecreate(int $idUser, int $idEscola)
+    {
+
+        User_Escolar::where('user_id', '=', $idUser)->where('escola_id', '=', $idEscola)->delete();
+        return redirect('/userEscolar/vincularEscola/' . $idUser)->with('msg', 'Vinculo excluido com sucesso!');
+    }
+
+    public function deleteUserEscolar($id)
+    {
+        $vinculoUser = User_Escolar::where('user_id', '=', $id)->first();
+        if ($vinculoUser) {
+            return redirect('/userEscolar/home')->with('msg', 'Não é possível deletar, pois o usuário possui vinculo!');
+        }
+        UserEscolar::where('id', $id)->delete();
+        return redirect('/userEscolar/home');
     }
 }
