@@ -50,11 +50,19 @@
                                     Editar
                                 </a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                {{-- <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#staticBackdrop1">
                                     <ion-icon name="trash-outline"></ion-icon>
                                     Deletar
-                                </button>
+                                </button> --}}
+                                <form action="/escola/{{ $escola->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                        Deletar
+                                    </button>
+                                </form>
                             </td>
                             {{-- end --}}
                         </tr>

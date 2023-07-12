@@ -13,9 +13,17 @@ class AddMunicipioIdToEscolasTable extends Migration
      */
     public function up()
     {
+        // Schema::table('escolas', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('localidade_id');
+        //     $table->foreign('localidade_id')->references('id')->on('municipios');
+        // });
+
         Schema::table('escolas', function (Blueprint $table) {
-            $table->unsignedBigInteger('localidade_id');
-            $table->foreign('localidade_id')->references('id')->on('municipios');
+            // $table->foreign('localidade_id')->references('id')->on('municipios')
+            //     ->onUpdate('CASCADE')
+            //     ->onDelete('CASCADE');
+
+            $table->foreignId('localidade_id')->references('id')->on('municipios')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -27,9 +35,11 @@ class AddMunicipioIdToEscolasTable extends Migration
     public function down()
     {
         Schema::table('escolas', function (Blueprint $table) {
-            $table->foreignId('localidade_id')
-                ->constrained()
-                ->onDelete('cascade');
+            // $table->foreignId('localidade_id')
+            //     ->constrained()
+            //     ->onDelete('cascade');
+            //$table->dropForeign('localidade_id');
+            $table->dropConstrainedForeignId('localidade_id');
         });
     }
 }

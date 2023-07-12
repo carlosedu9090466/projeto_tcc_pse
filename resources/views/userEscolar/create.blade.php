@@ -6,11 +6,11 @@
 @section('content')
 
     <div id="doenca-create-container" class="col-md-6 offset-md-3">
-        <h1>Cadastrar Usuário Escolar</h1>
+        <h1 class="text-center">Usuário Escolar</h1>
 
         <form action="/userEscolar" method="POST">
             @csrf
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome"
                     placeholder="Digite o nome do servidor">
@@ -20,7 +20,7 @@
                     </div>
                 @endif
 
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="cpf">CPF:</label>
@@ -32,7 +32,7 @@
                 @endif
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="email">E-mail:</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Digite o seu E-mail">
                 @if ($errors->has('email'))
@@ -40,10 +40,10 @@
                         {{ $errors->has('nome') ? $errors->first('nome') : '' }}
                     </div>
                 @endif
-            </div>
+            </div> --}}
 
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <div class="form-group">
                     <label for="role">Permissão:</label>
                     <select class="form-control" id="role_id" name="role_id" required>
@@ -60,7 +60,7 @@
                         {{ $errors->has('role_id') ? $errors->first('role_id') : '' }}
                     </div>
                 @endif
-            </div>
+            </div> --}}
 
 
             <div class="form-group">

@@ -45,4 +45,15 @@ class EscolaController extends Controller
 
         return redirect('/')->with('msg', 'Escola cadastrada com sucesso!');
     }
+
+    public function destroy($id)
+    {
+
+        //deletar as questions referente a doenca
+        //Doenca::with('question')->findOrFail($id)->delete();
+        Escola::findOrFail($id)->delete();
+
+
+        return redirect('/')->with('msg', 'Escola excluida com sucesso!');
+    }
 }

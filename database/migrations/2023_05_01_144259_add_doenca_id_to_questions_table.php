@@ -13,8 +13,13 @@ class AddDoencaIdToQuestionsTable extends Migration
      */
     public function up()
     {
+        // Schema::table('questions', function (Blueprint $table) {
+        //     $table->foreignId('doenca_id')->constrained();
+        // });
+
         Schema::table('questions', function (Blueprint $table) {
-            $table->foreignId('doenca_id')->constrained();
+            //$table->('doenca_id')->nullable();
+            $table->foreignId('doenca_id')->references('id')->on('doencas')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -26,9 +31,10 @@ class AddDoencaIdToQuestionsTable extends Migration
     public function down()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->foreignId('doenca_id')
-                ->constrained()
-                ->onDelete('cascade');
+            // $table->foreignId('doenca_id')
+            //     ->constrained()
+            //     ->onDelete('cascade');
+            $table->dropConstrainedForeignId('doenca_id');
         });
     }
 }

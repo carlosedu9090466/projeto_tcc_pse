@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    // proteger a home controller
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //page home
     public function index()
     {

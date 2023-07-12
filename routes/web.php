@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserEscolarController;
+use Illuminate\Support\Facades\Auth;
 
 //página home
 Route::get('/', [HomeController::class, 'index']);
@@ -15,6 +16,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/escola/create', [EscolaController::class, 'create']);
 //escola - create
 Route::post('/escola', [EscolaController::class, 'store']);
+Route::delete('/escola/{id}', [EscolaController::class, 'destroy']);
 
 
 //User Escolar
@@ -67,3 +69,7 @@ route::delete('quiz/{id}', [QuizController::class, 'destroy']);
 //Quiz x pergunta
 Route::get('/quiz/vincular/{id}', [QuizController::class, 'createVinculo']);
 Route::post('/quiz/vincular', [QuizController::class, 'createVinculoQuiz']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

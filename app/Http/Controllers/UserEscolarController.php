@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Escola;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\User_Escolar;
 use App\Models\UserEscolar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class UserEscolarController extends Controller
@@ -16,7 +18,8 @@ class UserEscolarController extends Controller
     {
         $escolas = Escola::all();
         $userEscolar = UserEscolar::all();
-
+        $user = User::with('userEscolar')->get();
+        dd($user);
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
@@ -32,15 +35,20 @@ class UserEscolarController extends Controller
     {
 
         $userEscolar = new UserEscolar;
+        $user_id = Auth::user()->id;
+
+        if (!$user_id) {
+            return redirect('/login')->with('msg', 'Usuário não encontrado!');
+        }
 
         $regras = [
-            'nome' => 'required|min:3|max:100',
+            //'nome' => 'required|min:3|max:100',
             'cpf' => 'required',
             'telefone' => 'required',
-            'email' => 'required',
+            //'email' => 'required',
             'sexo' => 'required',
             'data_nascimento' => 'required',
-            'role_id' => 'required'
+            //'user_id' => 'required'
         ];
 
         $feedback = [
@@ -49,21 +57,22 @@ class UserEscolarController extends Controller
 
         $request->validate($regras, $feedback);
 
-        $userEscolar->nome = $request->nome;
+        //$userEscolar->nome = $request->nome;
         $userEscolar->cpf = $request->cpf;
         $userEscolar->telefone = $request->telefone;
-        $userEscolar->email = $request->email;
+        //$userEscolar->email = $request->email;
         $userEscolar->sexo = $request->sexo;
-        $userEscolar->role_id = $request->role_id;
+        $userEscolar->user_id = $user_id;
         $userEscolar->data_nascimento = $request->data_nascimento;
         $userEscolar->save();
 
-        return redirect('/userEscolar/home')->with('msg', 'Usuário cadastrado com sucesso!');
+        return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar Atulizado as Informações com sucesso!');
     }
 
     public function createUserEscolar($id)
     {
         //$question = Question::with('doencas')->findOrFail($id);
+
         $userEscolar = UserEscolar::findOrfail($id);
         $escolas = Escola::all();
         $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($id);
