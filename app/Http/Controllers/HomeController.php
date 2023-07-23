@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Escola;
 use App\Models\Municipio;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,29 +15,18 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+
+
     //page home
     public function index()
     {
+        $auth = Auth::user()->toArray();
 
-        $search = request('search');
-        $municipios = Municipio::all();
-
-        if ($search) {
-            $escolas = Escola::where(
-                [
-                    ['nome', 'like', '%' . $search . '%'],
-                ]
-            )->orWhere(
-                [
-                    ['inep', 'like', '%' . $search . '%']
-                ]
-            )->get();
+        if ($auth['role_id'] == 2) {
+            $user = User::with('UserEscolarVinculo')->findOrFail($auth['id']);
+            return view('home', ['auth' => $auth, 'user' => $user]);
         } else {
-            //pegar todos os eventos(dados) do banco
-            $escolas = Escola::with('EscolaMunicipioOne')->get();
+            return view('home', ['auth' => $auth]);
         }
-
-        //view welcome
-        return view('home', ['escolas' => $escolas, 'search' => $search, 'municipios' => $municipios]);
     }
 }

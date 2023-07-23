@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UserEscolarController;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,15 @@ Route::get('/escola/create', [EscolaController::class, 'create']);
 //escola - create
 Route::post('/escola', [EscolaController::class, 'store']);
 Route::delete('/escola/{id}', [EscolaController::class, 'destroy']);
+Route::get('/escola/home', [EscolaController::class, 'index']);
+
+//Turmas - UserEscolar - views - acessando a escola com o user
+Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
+//Route::get('/turmas/home/{escola_id}', [TurmaController::class, 'homeTurma']);
+//End
 
 
-//User Escolar
+//User Escolar - criacao, vinculos Escolas
 Route::get('/userEscolar/home', [UserEscolarController::class, 'index']);
 Route::get('/userEscolar/create', [UserEscolarController::class, 'create']);
 Route::post('/userEscolar', [UserEscolarController::class, 'store']);
@@ -43,6 +50,8 @@ Route::put('doenca/update/{id}', [DoencaController::class, 'update']);
 //Deletar doenca
 Route::get('/doenca/deletar/{id}', [DoencaController::class, 'deletecreate']);
 Route::delete('/doenca/{id}', [DoencaController::class, 'destroy']);
+//END VIEWS doencas
+
 
 //question-perguntas - views
 Route::get('/question/home', [QuestionController::class, 'index']);

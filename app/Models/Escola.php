@@ -23,7 +23,13 @@ class Escola extends Model
     {
         //uma escola pode ter vários UserEscolar
         //return $this->belongsToMany('App\Models\UserEscolar');
+        //return $this->belongsToMany('App\Models\User');
         //return $this->hasMany('App\Models\UserEscolar');
-        return $this->belongsToMany(UserEscolar::class, 'escola_users', 'user_id', 'escola_id');
+        return $this->belongsToMany(User::class, 'escola_users', 'user_id', 'escola_id');
+    }
+
+    public function EscolaMuitasTurmas()
+    {
+        return $this->hasMany('App\Models\Turma');
     }
 }

@@ -43,30 +43,9 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/doenca/create" class="nav-link">Registrar Doenças</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/doenca/home" class="nav-link">Controle Doenças</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/question/home" class="nav-link">Perguntas</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="/quiz/home" class="nav-link">Questionario</a>
-                    </li>
                     <li>
-                        <a href="/escola/home" class="nav-link">Escolas do programa</a>
+                        <a href="/turmas/home" class="nav-link">Turmas</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar Agente de saúde</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/userEscolar/home" class="nav-link">Cadastrar Usuário Escolar</a>
-                    </li>
-
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
@@ -84,28 +63,6 @@
                             </li>
                         @endif
                     @else
-                        @if (Auth::user()->role_id == 2)
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Escolas Vinculas
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="/turmas/home" class="nav-link">Turmas</a>
-                            </li>
-                        @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

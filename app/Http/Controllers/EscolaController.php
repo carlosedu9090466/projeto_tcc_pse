@@ -3,10 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escola;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 
 class EscolaController extends Controller
 {
+
+    public function index()
+    {
+
+        $search = request('search');
+        $municipios = Municipio::all();
+
+        if ($search) {
+            $escolas = Escola::where(
+                [
+                    ['nome', 'like', '%' . $search . '%'],
+                ]
+            )->orWhere(
+                [
+                    ['inep', 'like', '%' . $search . '%']
+                ]
+            )->get();
+        } else {
+            //pegar todos os eventos(dados) do banco
+            $escolas = Escola::with('EscolaMunicipioOne')->get();
+        }
+
+        //view welcome
+        return view('escola.home', ['escolas' => $escolas, 'search' => $search, 'municipios' => $municipios]);
+    }
+
     public function create()
     {
         return view('escola.create');
@@ -43,7 +70,7 @@ class EscolaController extends Controller
         $escola->localidade_id = $request->localidade_id;
         $escola->save();
 
-        return redirect('/')->with('msg', 'Escola cadastrada com sucesso!');
+        return redirect('/escola/home')->with('msg', 'Escola cadastrada com sucesso!');
     }
 
     public function destroy($id)

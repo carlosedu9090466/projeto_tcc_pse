@@ -48,4 +48,17 @@ class User extends Authenticatable
         //um user para userEscolar
         return $this->hasOne('App\Models\UserEscolar');
     }
+
+    public function UserEscolarVinculo()
+    {
+        //um UserEscolar pode ser vinculado em várias Escolas
+        return $this->belongsToMany(Escola::class, 'escola_users', 'user_id', 'escola_id');
+        //return $this->belongsToMany('App\Models\Escola');
+    }
+
+    public function getRole()
+    {
+
+        return $this->role_id;
+    }
 }

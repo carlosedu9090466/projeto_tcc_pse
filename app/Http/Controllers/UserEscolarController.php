@@ -19,7 +19,7 @@ class UserEscolarController extends Controller
         $escolas = Escola::all();
         $userEscolar = UserEscolar::all();
         $user = User::with('userEscolar')->get();
-        dd($user);
+        //dd($user);
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
