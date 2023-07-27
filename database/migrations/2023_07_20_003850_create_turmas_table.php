@@ -19,7 +19,10 @@ class CreateTurmasTable extends Migration
             $table->foreign('escola_id')->references('id')->on('escolas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('serie', 50);
             $table->string('turno', 50);
-            $table->string('ano', 4);
+            $table->string('tipo_ensino', 80);
+            $table->string('sala', 10);
+            $table->date('vigencia_inicial');
+            $table->date('vigencia_final');
             $table->boolean('status_turma');
             $table->timestamps();
         });

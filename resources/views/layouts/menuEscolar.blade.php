@@ -44,7 +44,11 @@
                         <a href="/" class="nav-link">Home</a>
                     </li>
                     <li>
-                        <a href="/turmas/home" class="nav-link">Turmas</a>
+                        <a href="/turmas/home/{{ $escola->id }}" class="nav-link">Turmas</a>
+                    </li>
+
+                    <li>
+                        <a href="/alunos/home/{{ $escola->id }}" class="nav-link">Alunos</a>
                     </li>
                 </ul>
 

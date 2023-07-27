@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\DoencaController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\HomeController;
@@ -22,8 +23,13 @@ Route::get('/escola/home', [EscolaController::class, 'index']);
 
 //Turmas - UserEscolar - views - acessando a escola com o user
 Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
-//Route::get('/turmas/home/{escola_id}', [TurmaController::class, 'homeTurma']);
+Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
+Route::post('/turmas', [TurmaController::class, 'store']);
 //End
+
+//Alunos - routes - id é a escola
+Route::get('/alunos/create/{id}', [AlunoController::class, 'create']);
+//END
 
 
 //User Escolar - criacao, vinculos Escolas

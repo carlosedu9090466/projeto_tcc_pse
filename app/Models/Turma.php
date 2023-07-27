@@ -13,6 +13,8 @@ class Turma extends Model
 
     protected $guarded = [];
 
+    protected $dates = ['date'];
+
     public function TurmasEscola()
     {
         //1:1
