@@ -9,6 +9,7 @@ use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class TurmaController extends Controller
 {
@@ -23,6 +24,8 @@ class TurmaController extends Controller
         $turmas = Turma::where('escola_id', $escola->id)->get();
 
         //dd(Auth::guard()->user());
+        //pega o id da escola
+        //dd(Session::get('escola_id'));
 
         return view('turma.home', ['escola' => $escola, 'turmas' => $turmas]);
     }

@@ -41,14 +41,40 @@
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
+                        <a href="/" class="nav-link">Home Escolar</a>
                     </li>
-                    <li>
-                        <a href="/turmas/home/{{ $escola->id }}" class="nav-link">Turmas</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Turmas
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/turmas/home/{{ $escola->id }}">Visualizar Turmas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/turmas/create/{{ $escola->id }}">Criar turma</a>
+                            <div class="dropdown-divider"></div>
+                            {{-- <a class="dropdown-item" href="#">Visualizar Aluno</a> --}}
+                        </div>
                     </li>
-
-                    <li>
+                    {{-- <li>
                         <a href="/alunos/home/{{ $escola->id }}" class="nav-link">Alunos</a>
+                    </li> --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Alunos
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/alunos/create/{{ $escola->id }}">Matricular aluno
+                                <ion-icon name="school-outline">
+                                </ion-icon>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/alunos/vinculo/{{ $escola->id }}">Vincular aluno na
+                                turmas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Visualizar Aluno</a>
+                        </div>
                     </li>
                 </ul>
 

@@ -29,7 +29,10 @@ Route::post('/turmas', [TurmaController::class, 'store']);
 
 //Alunos - routes - id é a escola
 Route::get('/alunos/create/{id}', [AlunoController::class, 'create']);
+Route::post('/alunos', [AlunoController::class, 'store']);
+Route::get('/alunos/vinculo/{id}', [AlunoController::class, 'createVinculoAluno']);
 //END
+
 
 
 //User Escolar - criacao, vinculos Escolas

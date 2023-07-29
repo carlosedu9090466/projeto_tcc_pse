@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Aluno extends Model
 {
     use HasFactory;
-
+    protected $table = 'alunos';
     protected $dates = ['date'];
 
     //deixa atulizar tudo

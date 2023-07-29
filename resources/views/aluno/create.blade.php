@@ -36,9 +36,9 @@
                 <label for="nome">Data de Nascimento:</label>
                 <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
                     placeholder="Data de Nascimento">
-                @if ($errors->has('cpf_aluno'))
+                @if ($errors->has('dataNascimento'))
                     <div class="alert alert-danger" role="alert">
-                        {{ $errors->has('cpf_aluno') ? $errors->first('cpf_aluno') : '' }}
+                        {{ $errors->has('cpf_adataNascimentoluno') ? $errors->first('dataNascimento') : '' }}
                     </div>
                 @endif
             </div>
@@ -48,8 +48,8 @@
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
                         <option>Selecione o sexo...</option>
-                        <option value="0">Masculino</option>
-                        <option value="1">Feminino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
                     </select>
                 </div>
                 @if ($errors->has('sexo'))
