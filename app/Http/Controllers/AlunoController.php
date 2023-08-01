@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Aluno;
 use App\Models\Escola;
 use App\Models\Turma;
+use App\Models\Turma_Aluno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {
@@ -62,10 +64,35 @@ class AlunoController extends Controller
         //trazer as turmas desssa escola e os alunos também!
         $escola = Escola::findOrfail($id);
         $turmas = Turma::where('escola_id', $id)->where('status_turma', 1)->get();
+        $alunos = Aluno::where('inep', $id)->whereNull('id_turma_aluno')->get();
+
         if (!$turmas) {
             return redirect('/turmas/home/' . $id)->with('msg', 'Não há turmas criadas nesse periodo!');
         }
 
-        return view('aluno.vinculoTurma', ['escola' => $escola, 'turmas' => $turmas]);
+        if (!$alunos) {
+            return redirect('/turmas/home/' . $id)->with('msg', 'Não há alunos matriculados nessa escola ou todos estão associados nas suas turmas!');
+        }
+
+        return view('aluno.vinculoTurma', ['escola' => $escola, 'turmas' => $turmas, 'alunos' => $alunos]);
+    }
+
+    public function associarAlunoStore(Request $request)
+    {
+        //escola
+        $id = Session::get('escola_id');
+        $aluno = $request->id_aluno;
+        if (!$aluno) {
+            return redirect('/alunos/vinculo/' . $id)->with('msg', 'Nenhum Aluno selecionado!');
+        }
+
+        $turmaAluno = new Turma_Aluno;
+
+        $id_turma = $request->id_turma;
+        $turma = Turma::find($id_turma);
+        //Ano de criação da turma
+        dd($turma);
+        $ano_turma = date('Y', strtotime($turma->vigencia_inicial));
+        //dd($ano_turma);
     }
 }

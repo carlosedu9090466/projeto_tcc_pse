@@ -30,7 +30,9 @@ Route::post('/turmas', [TurmaController::class, 'store']);
 //Alunos - routes - id é a escola
 Route::get('/alunos/create/{id}', [AlunoController::class, 'create']);
 Route::post('/alunos', [AlunoController::class, 'store']);
+//tela de associacao aluno x turma
 Route::get('/alunos/vinculo/{id}', [AlunoController::class, 'createVinculoAluno']);
+Route::post('/associarAluno', [AlunoController::class, 'associarAlunoStore']);
 //END
 
 
