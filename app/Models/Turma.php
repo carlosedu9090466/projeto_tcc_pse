@@ -20,6 +20,19 @@ class Turma extends Model
         //1:1
         //$this->hasOne('App\Models\Escola');
         //N:1
-        $this->belongsTo('App\Models\Escola');
+        return $this->belongsTo('App\Models\Escola');
+    }
+    //return $this->belongsToMany(Escola::class, 'escola_users', 'user_id', 'escola_id');
+    public function turmaAluno()
+    {
+        //1turma muitos aluno
+        //return $this->hasMany('App\Models\Aluno');
+        //return $this->hasMany(turma_Aluno::class, 'id', 'turma_id');
+        //return $this->hasMany(Turma_Aluno::class, 'id_turma');
+        return $this->belongsToMany(Aluno::class, 'turma_aluno', 'id_turma', 'id_aluno');
+    }
+    public function turmaChamada()
+    {
+        return $this->hasMany(Turma_Aluno::class, 'id_turma');
     }
 }

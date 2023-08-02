@@ -69,7 +69,12 @@ header {
 .dashboard-question-container th {
     width: 15%;
 }
-
+.dashboard-turmas-container th{
+    width: 2%;
+}
+.teste{
+    width: 1% !important;
+}
 .dashboard-question-container form {
 
     display: inline-block;

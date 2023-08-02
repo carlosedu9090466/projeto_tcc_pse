@@ -6,6 +6,7 @@ use App\Models\Escola;
 use App\Models\Sala;
 use App\Models\Serie;
 use App\Models\Turma;
+use App\Models\Turma_Aluno;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,8 @@ class TurmaController extends Controller
         //$user = User::with('UserEscolarVinculo')->findOrFail($id_user);
         //$turmas = Escola::with('EscolaMuitasTurmas')->findOrFail($escola->id);
         // Quiz_Question::where('quiz_id', $id)->delete();
-        $turmas = Turma::where('escola_id', $escola->id)->get();
-
+        $turmas = Turma::with('turmaAluno')->where('escola_id', $escola->id)->get();
+        //dd($turmas);
         //dd(Auth::guard()->user());
         //pega o id da escola
         //dd(Session::get('escola_id'));
@@ -75,5 +76,15 @@ class TurmaController extends Controller
 
         //$turmas = Turma::where('escola_id', $escola->id)->get();
         return redirect('/turmas/home/' . $request->escola_id)->with('msg', 'turma cadastrada com sucesso!');
+    }
+
+    public function espelhoTurma($id_turma)
+    {
+        $id_escola = Session::get('escola_id');
+        $escola = Escola::findOrFail($id_escola);
+        $turma = Turma::with('turmaAluno')->with('turmaChamada')->findOrFail($id_turma);
+        //$turmaAluno = Turma::with(['turmaAluno', 'turmaChamada'])->where('escola_id', '=', $id)->get();
+
+        return view('turma.espelhoturma', ['turma' => $turma, 'escola' => $escola]);
     }
 }

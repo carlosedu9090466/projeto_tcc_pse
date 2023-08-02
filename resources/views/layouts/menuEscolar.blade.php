@@ -53,6 +53,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/turmas/create/{{ $escola->id }}">Criar turma</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/turmas/espelho/{{ $escola->id }}">Espelho Turma</a>
                             {{-- <a class="dropdown-item" href="#">Visualizar Aluno</a> --}}
                         </div>
                     </li>
@@ -74,6 +75,7 @@
                                 turmas</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Visualizar Aluno</a>
+
                         </div>
                     </li>
                 </ul>

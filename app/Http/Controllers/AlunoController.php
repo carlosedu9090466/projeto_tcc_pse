@@ -6,6 +6,8 @@ use App\Models\Aluno;
 use App\Models\Escola;
 use App\Models\Turma;
 use App\Models\Turma_Aluno;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -86,13 +88,26 @@ class AlunoController extends Controller
             return redirect('/alunos/vinculo/' . $id)->with('msg', 'Nenhum Aluno selecionado!');
         }
 
-        $turmaAluno = new Turma_Aluno;
-
         $id_turma = $request->id_turma;
         $turma = Turma::find($id_turma);
+        $status = 'MATRICULADO';
         //Ano de criação da turma
-        dd($turma);
-        $ano_turma = date('Y', strtotime($turma->vigencia_inicial));
-        //dd($ano_turma);
+        //$ano_turma = date('Y', strtotime($turma->vigencia_inicial));
+        //dd($turma);
+        $dt = new DateTime();
+        $now = $dt->format('Y-m-d');
+        //$now = Carbon::now()->format('d-m-Y');
+
+
+        foreach ($request->id_aluno as $aluno) {
+            $turmaAluno = new Turma_Aluno;
+            $turmaAluno->id_aluno = $aluno;
+            $turmaAluno->id_turma = $id_turma;
+            $turmaAluno->status_aluno_turma = $status;
+            $turmaAluno->dt_matricula = $now;
+            $turmaAluno->save();
+        }
+
+        return redirect('/turmas/home/' . $id)->with('msg', 'Alunos Associados na turma: ' . $turma->tipo_ensino . ' - ' . $turma->serie . ' - ' . $turma->turno . ' - ' . $turma->sala);
     }
 }

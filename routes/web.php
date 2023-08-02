@@ -25,6 +25,7 @@ Route::get('/escola/home', [EscolaController::class, 'index']);
 Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
 Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
 Route::post('/turmas', [TurmaController::class, 'store']);
+Route::get('/turmas/espelho/{id}', [TurmaController::class, 'espelhoTurma']);
 //End
 
 //Alunos - routes - id é a escola

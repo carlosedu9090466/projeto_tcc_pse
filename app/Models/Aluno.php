@@ -13,4 +13,13 @@ class Aluno extends Model
 
     //deixa atulizar tudo
     protected $guarded = [];
+
+
+    public function Alunoturma()
+    {
+
+        //return $this->hasOne('App\Models\Turma');
+
+        return $this->belongsToMany(Turma::class, 'turma_aluno', 'id_aluno', 'id_turma');
+    }
 }
