@@ -87,4 +87,19 @@ class TurmaController extends Controller
 
         return view('turma.espelhoturma', ['turma' => $turma, 'escola' => $escola]);
     }
+
+
+    //excluir turma. só é possível excluindo os alunos!
+    public function destroy($id)
+    {
+        $id_escola = Session::get('escola_id');
+        //Turma_Aluno::where('id_aluno', '=', $id_aluno)->where('id_turma', '=', $id_turma)->delete();
+        $existeAlunoTurma = Turma_Aluno::where('id_turma', '=', $id)->count();
+
+        if ($existeAlunoTurma) {
+            return redirect('/turmas/home/' . $id_escola)->with('msg', 'Não é possível a operação. Há alunos na turma!');
+        }
+        Turma::findOrfail($id)->delete();
+        return redirect('/turmas/home/' . $id_escola)->with('msg', 'Turma excluida com sucesso!');
+    }
 }

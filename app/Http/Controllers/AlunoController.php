@@ -20,6 +20,30 @@ class AlunoController extends Controller
         return view('aluno.create', ['escola' => $escola]);
     }
 
+    //verificar essa questão do retorno do valor
+    public function visulizaAluno($id)
+    {
+        $idescola = Session::get('escola_id');
+        $escola = Escola::findOrfail($idescola);
+        //$alunos = Aluno::where('inep', '=', $id)->get();
+
+        $search = request('pesq');
+        if ($search) {
+            $alunos = Aluno::where(
+                [['nome', 'like', '%' . $search . '%'],]
+            )->orWhere(
+                [
+                    ['cpf_aluno', 'like', '%' . $search . '%']
+                ]
+            )->get();
+        } else {
+            $alunos = Aluno::where('inep', '=', $id)->get();
+        }
+        return view('aluno.visualiza', ['alunos' => $alunos, 'escola' => $escola]);
+        //return view('/alunos/visualiza/' . $idescola, ['alunos' => $alunos, 'escola' => $escola]);
+    }
+
+
     public function store(Request $request)
     {
         $regras = [
@@ -30,7 +54,7 @@ class AlunoController extends Controller
             'bairro' => 'required',
             'numero' => 'required',
             'cpf_aluno' => 'required|unique:alunos',
-            'cpf_responsavel' => 'required|unique:alunos',
+            'cpf_responsavel' => 'required',
             'dataNascimento' => 'required',
             'sexo' => 'required',
             //'escola_id' => 'exists:escolas,id'
@@ -106,8 +130,28 @@ class AlunoController extends Controller
             $turmaAluno->status_aluno_turma = $status;
             $turmaAluno->dt_matricula = $now;
             $turmaAluno->save();
+
+            Aluno::where('id', '=', $aluno)->update(['id_turma_aluno' => $id_turma]);
         }
 
         return redirect('/turmas/home/' . $id)->with('msg', 'Alunos Associados na turma: ' . $turma->tipo_ensino . ' - ' . $turma->serie . ' - ' . $turma->turno . ' - ' . $turma->sala);
+    }
+
+
+    //deletar aluno da turma
+    public function destroy(int $id_aluno, int $id_turma)
+    {
+        //User_Escolar::where('user_id', '=', $idUser)->where('escola_id', '=', $idEscola)->delete();
+        Turma_Aluno::where('id_aluno', '=', $id_aluno)->where('id_turma', '=', $id_turma)->delete();
+        return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Aluno excluido da turma com sucesso!');
+    }
+
+
+    //Reponder Quiz
+
+    public function createResponde(Request $request)
+    {
+        dd($request);
+        return view('responderQuiz.create');
     }
 }

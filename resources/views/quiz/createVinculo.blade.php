@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card" style="width: 15rem; margin: 5px;">
-                                <img src="..." class="card-img-top" alt="...">
+                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $question->doencas->nome }}</h5>
                                     <p class="card-text">{{ $question->pergunta }}</p>

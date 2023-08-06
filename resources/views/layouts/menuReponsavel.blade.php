@@ -41,49 +41,24 @@
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Home Escolar</a>
+                        <a href="/responsavel/home" class="nav-link">Resonsavel Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
-                            Turmas
+                            Dados Pessoais
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/turmas/home/{{ Session::get('escola_id') }}">Visualizar
-                                Turmas</a>
+                            <a class="dropdown-item" href="/responsavel/create">Atualizar dados</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/turmas/create/{{ Session::get('escola_id') }}">Criar
+                            <a class="dropdown-item" href="#">Criar
                                 turma</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/turmas/espelho/{{ Session::get('escola_id') }}">Espelho
-                                Turma</a>
-                            {{-- <a class="dropdown-item" href="#">Visualizar Aluno</a> --}}
-                        </div>
-                    </li>
-                    {{-- <li>
-                        <a href="/alunos/home/{{ Session::get('escola_id') }}" class="nav-link">Alunos</a>
-                    </li> --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Alunos
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/alunos/create/{{ Session::get('escola_id') }}">Matricular
-                                aluno
-                                <ion-icon name="school-outline">
-                                </ion-icon>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/alunos/vinculo/{{ Session::get('escola_id') }}">Vincular
-                                aluno na
-                                turmas</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/alunos/visualiza/{{ Session::get('escola_id') }}">Visualizar
-                                Aluno</a>
+                            <a class="dropdown-item" href="#">Espelho Turma</a>
 
                         </div>
                     </li>
+
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ResponsavelController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UserEscolarController;
+use App\Models\Responsavel;
 use Illuminate\Support\Facades\Auth;
 
 //página home
@@ -26,6 +28,7 @@ Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
 Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
 Route::post('/turmas', [TurmaController::class, 'store']);
 Route::get('/turmas/espelho/{id}', [TurmaController::class, 'espelhoTurma']);
+Route::delete('/turmas/{id}', [TurmaController::class, 'destroy']);
 //End
 
 //Alunos - routes - id é a escola
@@ -34,8 +37,19 @@ Route::post('/alunos', [AlunoController::class, 'store']);
 //tela de associacao aluno x turma
 Route::get('/alunos/vinculo/{id}', [AlunoController::class, 'createVinculoAluno']);
 Route::post('/associarAluno', [AlunoController::class, 'associarAlunoStore']);
+Route::delete('/alunos/{idAluno}&{idTurma}', [AlunoController::class, 'destroy']);
+Route::get('/alunos/visualiza/{id}', [AlunoController::class, 'visulizaAluno']);
 //END
 
+//RESPONSAVEIS
+Route::get('/responsavel/home', [ResponsavelController::class, 'index']);
+Route::get('/responsavel/create', [ResponsavelController::class, 'create']);
+Route::post('/responsavel', [ResponsavelController::class, 'store']);
+Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update']);
+//END
+
+//Responder_quiz
+Route::post('/responsavel/responderQuiz/create', [AlunoController::class, 'createResponde']);
 
 
 //User Escolar - criacao, vinculos Escolas

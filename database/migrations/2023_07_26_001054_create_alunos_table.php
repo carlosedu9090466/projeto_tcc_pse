@@ -22,7 +22,7 @@ class CreateAlunosTable extends Migration
             $table->string('bairro', 50);
             $table->string('numero', 10);
             $table->string('cpf_aluno', 11)->unique();
-            $table->string('cpf_responsavel', 11)->unique();
+            $table->string('cpf_responsavel', 11);
             $table->date('dataNascimento');
             $table->string('sexo', 20);
             $table->string('inep', 20);

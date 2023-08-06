@@ -11,15 +11,15 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($turmas) > 0)
-            <a href="/turmas/create/{{ $escola->id }}">
+            {{-- <a href="/turmas/create/{{ $escola->id }}">
                 Criar Turmas
                 <ion-icon name="add-circle-outline"></ion-icon>
-            </a>
-            <a href="/alunos/create/{{ $escola->id }}">
+            </a> --}}
+            {{-- <a href="/alunos/create/{{ $escola->id }}">
                 Matricular Aluno
                 <ion-icon name="school-outline">
                 </ion-icon>
-            </a>
+            </a> --}}
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -57,11 +57,15 @@
                                     Editar
                                 </a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#staticBackdrop">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                    Deletar
-                                </button>
+                                <form action="/turmas/{{ $turma->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Confirma excluir a turma?')">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                        Excluir
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
