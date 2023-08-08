@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Aluno;
 use App\Models\Escola;
+use App\Models\Quiz;
+use App\Models\Quiz_Question;
 use App\Models\Turma;
 use App\Models\Turma_Aluno;
 use Carbon\Carbon;
@@ -151,7 +153,15 @@ class AlunoController extends Controller
 
     public function createResponde(Request $request)
     {
-        dd($request);
-        return view('responderQuiz.create');
+        //dd($request);
+        $dt = new DateTime();
+        $now = $dt->format('Y-m-d');
+        //dd($now);
+        $quiz = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->pluck('id');
+        //$quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
+        //$quiz = Quiz::with('QuizVinculoQuestion')->get();
+        $quizs = Quiz_Question::quizQuestionario($quiz);
+        //dd($quizs);
+        return view('responderQuiz.create', ['quizs' => $quizs]);
     }
 }
