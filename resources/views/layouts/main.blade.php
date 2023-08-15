@@ -43,30 +43,53 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/doenca/create" class="nav-link">Registrar Doenças</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/doenca/home" class="nav-link">Controle Doenças</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/question/home" class="nav-link">Perguntas</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Controle Doenças
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/doenca/create">Registrar</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/doenca/home">Visualizar</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/quiz/home" class="nav-link">Questionario</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Questionarios
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/question/home">Perguntas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/quiz/home">Visualizar Quiz</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
                     </li>
+
                     <li>
                         <a href="/escola/home" class="nav-link">Escolas do programa</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar Agente de saúde</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/userEscolar/home" class="nav-link">Cadastrar Usuário Escolar</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Usuários
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/agente/create">Cadastrar Agente Saúde</a>
+                            <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agente</a>
 
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/userEscolar/home">Cadastrar Usuário Escolar</a>
+                            <a class="dropdown-item" href="/userEscolar/home">Vincular Usuário Escolar</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

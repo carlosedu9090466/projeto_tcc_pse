@@ -55,7 +55,7 @@
                             <a class="dropdown-item" href="/turmas/create/{{ Session::get('escola_id') }}">Criar
                                 turma</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/turmas/espelho/{{ Session::get('escola_id') }}">Espelho
+                            <a class="dropdown-item" href="/turmas/fecharTurma/{{ Session::get('escola_id') }}">Fechar
                                 Turma</a>
                             {{-- <a class="dropdown-item" href="#">Visualizar Aluno</a> --}}
                         </div>

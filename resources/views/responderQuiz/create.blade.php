@@ -23,16 +23,27 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($quizs as $quiz)
-                        <tr>
-                            <td scropt="row">{{ $loop->index + 1 }}</td>
-                            <form id="form_quiz" action="" method="POST">
+                    <form id="form_quiz" action="/respostaQuiz" method="POST">
+                        @csrf
+                        {{-- {{ dd($dado_aluno) }} --}}
+                        <input type="hidden" name="id_turma" id="id_turma" value="{{ $dado_aluno['id_turma'] }}">
+                        <input type="hidden" name="id_aluno" id="id_aluno" value="{{ $dado_aluno['id_aluno'] }}">
+                        {{-- <input type="hidden" name="cpf_responsavel" id="cpf_responsavel"
+                            value="{{ $dado_aluno['cpf_responsavel'] }}"> --}}
+
+                        @foreach ($quizs as $quiz)
+                            <tr>
+                                <td scropt="row">{{ $loop->index + 1 }}</td>
                                 <td>{{ $quiz->pergunta }}</td>
                                 <td>{{ $quiz->nome }}</td>
+                                {{-- <input type="hidden" name="id_quiz" id="quiz" value="{{ $quiz->id_quiz }}"> --}}
+                                <input type="hidden" name="id_quiz_question[]" id="quiz_question"
+                                    value="{{ $quiz->id_quiz_question }}">
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1" value="option1">
+                                        <input class="form-check-input" type="radio"
+                                            name="<?= "resposta[{$quiz->id_quiz_question}]" ?>" id="id_resposta"
+                                        value="S">
                                         <label class="form-check-label" for="exampleRadios1">
                                             SIM
                                         </label>
@@ -40,19 +51,22 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2" value="option2" checked>
+                                        <input class="form-check-input" type="radio"
+                                            name="<?= "resposta[{$quiz->id_quiz_question}]" ?>" id="id_resposta"
+                                        value="N" checked>
                                         <label class="form-check-label" for="exampleRadios2">
                                             Não
                                         </label>
                                     </div>
                                 </td>
 
-                        </tr>
+                            </tr>
+                        @endforeach
 
-                        </form>
-                    @endforeach
-                    <button form="form_quiz" class="btn btn-primary mb-2">Enviar</button>
+                    </form>
+
+                    <button form="form_quiz" class="btn btn-primary mb-2"
+                        onclick="return confirm('Clique para confirmar as respostas!')">Responder</button>
                 </tbody>
             </table>
         @else

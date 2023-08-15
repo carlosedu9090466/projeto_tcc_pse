@@ -11,7 +11,7 @@
                 <h4>Alunos - {{ $escola->nome }}</h4>
             </div>
             <div class="col-6 col-md-4 dashboard-title-container">
-                <form action="/alunos/visualiza" method="GET" class="form-inline my-2 my-lg-0">
+                <form action="/alunos/visualiza/{{ $escola->id }}/" method="GET" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" id="pesq" name="pesq"
                         placeholder="Pesquisar aluno" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>

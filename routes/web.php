@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgenteController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\DoencaController;
 use App\Http\Controllers\EscolaController;
@@ -28,6 +29,8 @@ Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
 Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
 Route::post('/turmas', [TurmaController::class, 'store']);
 Route::get('/turmas/espelho/{id}', [TurmaController::class, 'espelhoTurma']);
+Route::get('/turmas/fecharTurma/{id}', [TurmaController::class, 'turmasAbertas']);
+Route::put('/turmas/fechar/{id}', [TurmaController::class, 'fecharTurma']);
 Route::delete('/turmas/{id}', [TurmaController::class, 'destroy']);
 //End
 
@@ -50,6 +53,7 @@ Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update'])
 
 //Responder_quiz
 Route::post('/responsavel/responderQuiz/create', [AlunoController::class, 'createResponde']);
+Route::post('/respostaQuiz', [AlunoController::class, 'storeResposta']);
 
 
 //User Escolar - criacao, vinculos Escolas
@@ -61,6 +65,14 @@ Route::post('/userEscolar/vinculo', [UserEscolarController::class, 'createVincul
 Route::delete('/userEscolar/deletar/{idUser}&{idEscola}', [UserEscolarController::class, 'deletecreate']);
 Route::delete('/userEscolar/deletar/{id}', [UserEscolarController::class, 'deleteUserEscolar']);
 //End
+
+//AGENTE DE SAÚDE
+Route::get('/agente/create', [AgenteController::class, 'create']);
+Route::post('/agente', [AgenteController::class, 'store']);
+Route::get('/agente/createVinculo', [AgenteController::class, 'homeAgente']);
+//END
+
+
 
 
 //doencas - views

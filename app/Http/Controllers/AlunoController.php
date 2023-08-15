@@ -6,6 +6,7 @@ use App\Models\Aluno;
 use App\Models\Escola;
 use App\Models\Quiz;
 use App\Models\Quiz_Question;
+use App\Models\Responde_Quiz;
 use App\Models\Turma;
 use App\Models\Turma_Aluno;
 use Carbon\Carbon;
@@ -144,6 +145,10 @@ class AlunoController extends Controller
     public function destroy(int $id_aluno, int $id_turma)
     {
         //User_Escolar::where('user_id', '=', $idUser)->where('escola_id', '=', $idEscola)->delete();
+        $turma = Turma::where('id', '=', $id_turma)->where('status_turma', '=', 0)->first();
+        if ($turma) {
+            return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Não é possível excluir o aluno, pois a turma está fechada!');
+        }
         Turma_Aluno::where('id_aluno', '=', $id_aluno)->where('id_turma', '=', $id_turma)->delete();
         return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Aluno excluido da turma com sucesso!');
     }
@@ -153,7 +158,7 @@ class AlunoController extends Controller
 
     public function createResponde(Request $request)
     {
-        //dd($request);
+        $dado_aluno = $request->all();
         $dt = new DateTime();
         $now = $dt->format('Y-m-d');
         //dd($now);
@@ -162,6 +167,37 @@ class AlunoController extends Controller
         //$quiz = Quiz::with('QuizVinculoQuestion')->get();
         $quizs = Quiz_Question::quizQuestionario($quiz);
         //dd($quizs);
-        return view('responderQuiz.create', ['quizs' => $quizs]);
+        return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
+    }
+
+
+
+    public function storeResposta(Request $request)
+    {
+
+        $dt = new DateTime();
+        $data_resposta = $dt->format('Y-m-d');
+
+        $quiz_question = $request->id_quiz_question;
+        $resposta = $request->resposta;
+
+
+        $verificaRespostaQuiz = Responde_Quiz::where('id_aluno', '=', $request->id_aluno)->where('id_turma', '=', $request->id_turma)->first();
+        //dd($verificaRespostaQuiz);
+        if ($verificaRespostaQuiz != null) {
+            return redirect('responsavel/home')->with('msg', 'Não é possível responder esse questionário, pois foi respondido!');
+        }
+
+        foreach ($quiz_question as $q) {
+            $responde_quiz = new Responde_Quiz;
+            $responde_quiz->id_aluno = $request->id_aluno;
+            $responde_quiz->id_turma = $request->id_turma;
+            $responde_quiz->id_quiz_question = $q;
+            $responde_quiz->resposta_question = $resposta[$q];
+            $responde_quiz->data_resposta = $data_resposta;
+            $responde_quiz->save();
+        }
+
+        return redirect('responsavel/home')->with('msg', 'Questionario respondido com sucesso!');
     }
 }

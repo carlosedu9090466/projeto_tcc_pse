@@ -51,11 +51,6 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/responsavel/create">Atualizar dados</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Criar
-                                turma</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Espelho Turma</a>
-
                         </div>
                     </li>
 

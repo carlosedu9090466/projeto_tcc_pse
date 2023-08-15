@@ -38,7 +38,7 @@
                             <td>
                                 {{ date('d/m/Y', strtotime($aluno->dataNascimento)) }}
                             </td>
-                            <td>Matriculado</td>
+                            <td>MATRICULADO</td>
                             <td>
                                 <form action="/alunos/{{ $aluno->id }}&{{ $turma->id }}" method="POST">
                                     @csrf

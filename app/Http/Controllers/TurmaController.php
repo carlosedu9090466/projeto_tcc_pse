@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aluno;
 use App\Models\Escola;
+use App\Models\Responde_Quiz;
 use App\Models\Sala;
 use App\Models\Serie;
 use App\Models\Turma;
@@ -88,13 +90,41 @@ class TurmaController extends Controller
         return view('turma.espelhoturma', ['turma' => $turma, 'escola' => $escola]);
     }
 
+    //turmas abertas view
+    public function turmasAbertas()
+    {
+        $id_escola = Session::get('escola_id');
+        //turmas abertas
+        $turmasAbertas = Turma::where('escola_id', '=', $id_escola)->get();
+        //dd($turmasAbertas);
+        return view('turma.fecharTurma', ['turmasAbertas' => $turmasAbertas]);
+    }
+
+    public function fecharTurma(Request $request)
+    {
+        $id_escola = Session::get('escola_id');
+
+        $fechamento = Turma::findOrfail($request->id_turma)->update(['status_turma' => $request->status]);
+
+        if ($fechamento) {
+            Aluno::where('id_turma_aluno', '=', $request->id_turma)->update(['id_turma_aluno' => null]);
+        }
+
+        return redirect('/turmas/fecharTurma/' . $id_escola)->with('msg', 'Turma fechada com sucesso!');
+    }
+
+
 
     //excluir turma. só é possível excluindo os alunos!
     public function destroy($id)
     {
         $id_escola = Session::get('escola_id');
-        //Turma_Aluno::where('id_aluno', '=', $id_aluno)->where('id_turma', '=', $id_turma)->delete();
+        $existeRespostaAluno = Responde_Quiz::where('id_turma', '=', $id)->count();
         $existeAlunoTurma = Turma_Aluno::where('id_turma', '=', $id)->count();
+
+        if ($existeRespostaAluno) {
+            return redirect('/turmas/home/' . $id_escola)->with('msg', 'Não é possível a operação. Há respostas de questionário!');
+        }
 
         if ($existeAlunoTurma) {
             return redirect('/turmas/home/' . $id_escola)->with('msg', 'Não é possível a operação. Há alunos na turma!');
