@@ -81,7 +81,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/agente/create">Cadastrar Agente Saúde</a>
-                            <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agente</a>
+                            <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agentes</a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/userEscolar/home">Cadastrar Usuário Escolar</a>

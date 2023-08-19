@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -60,5 +61,16 @@ class User extends Authenticatable
     {
 
         return $this->role_id;
+    }
+
+    public static function AgenteInformacoes($role_id)
+    {
+        $agentes = DB::table('users')
+            ->join('agentes', 'users.id', '=', 'agentes.user_id')
+            ->where('users.role_id', '=', $role_id)
+            ->select('users.name', 'users.email', 'agentes.id', 'agentes.codigo_agente', 'agentes.cpf', 'agentes.sexo', 'agentes.dataNascimento', 'agentes.status_conta')
+            ->get();
+
+        return $agentes;
     }
 }

@@ -67,9 +67,15 @@ Route::delete('/userEscolar/deletar/{id}', [UserEscolarController::class, 'delet
 //End
 
 //AGENTE DE SAÚDE
+Route::get('/agente/agenteHome', [AgenteController::class, 'index']);
+Route::get('/agente/home', [AgenteController::class, 'homeAgente']);
 Route::get('/agente/create', [AgenteController::class, 'create']);
 Route::post('/agente', [AgenteController::class, 'store']);
 Route::get('/agente/createVinculo', [AgenteController::class, 'homeAgente']);
+Route::get('/agente/dados', [AgenteController::class, 'createDados']);
+Route::post('/agenteDados', [AgenteController::class, 'storeDados']);
+Route::put('/agente/update/{id}', [AgenteController::class, 'update']);
+Route::get('/agente/vincularEscola/{id}', [AgenteController::class, 'createAgenteEscolar']);
 //END
 
 
