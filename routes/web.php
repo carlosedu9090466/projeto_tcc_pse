@@ -76,6 +76,7 @@ Route::get('/agente/dados', [AgenteController::class, 'createDados']);
 Route::post('/agenteDados', [AgenteController::class, 'storeDados']);
 Route::put('/agente/update/{id}', [AgenteController::class, 'update']);
 Route::get('/agente/vincularEscola/{id}', [AgenteController::class, 'createAgenteEscolar']);
+Route::post('/agenteEscolar/vinculo', [AgenteController::class, 'storeVinculoEscolar']);
 //END
 
 

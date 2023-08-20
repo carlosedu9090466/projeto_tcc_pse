@@ -26,4 +26,10 @@ class Agente extends Model
 
         return $agente[0];
     }
+
+    public function UserAgenteVinculo()
+    {
+        //um Agente pode ser vinculado em várias Escolas
+        return $this->belongsToMany(Escola::class, 'agentes_escolas', 'agente_id', 'escola_id');
+    }
 }

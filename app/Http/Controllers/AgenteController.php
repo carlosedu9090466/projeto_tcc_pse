@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agente;
+use App\Models\Agente_Escola;
 use App\Models\Escola;
 use App\Models\Role;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -125,9 +127,32 @@ class AgenteController extends Controller
     public function createAgenteEscolar($id)
     {
         $agente = Agente::AgenteInformacoes($id);
-        dd($agente);
-        $escolas = Escola::all();
 
-        return view('agente.vincularEscola', ['agente' => $agente, 'escolas' => $escolas]);
+        $escolas = Escola::all();
+        $agentesVinculados = Agente::with('UserAgenteVinculo')->where('id', '=', $id)->get();
+        //dd($agentesVinculados[0]);
+        return view('agente.vincularEscola', ['agente' => $agente, 'escolas' => $escolas, 'agentesVinculados' => $agentesVinculados[0]]);
+    }
+
+    public function storeVinculoEscolar(Request $request)
+    {
+        //dd($request);
+        $existeVinculo = Agente_Escola::where('escola_id', '=', $request->escola_id)->where('agente_id', '=', $request->agenteEscolar)->first();
+        if ($existeVinculo) {
+            return redirect('/agente/vincularEscola/' . $request->agenteEscolar)->with('msg', 'Usuário já possui vinculado com essa escola!');
+        }
+
+        $dt = new DateTime();
+        $now = $dt->format('Y-m-d');
+
+        $vinculoUserAgente = new Agente_Escola;
+
+        $vinculoUserAgente->agente_id = $request->agenteEscolar;
+        $vinculoUserAgente->escola_id = $request->escola_id;
+        $vinculoUserAgente->status_agente_escola = $request->agenteAtivo;
+        $vinculoUserAgente->dia_lotado = $now;
+        $vinculoUserAgente->save();
+
+        return redirect('/agente/vincularEscola/' . $request->agenteEscolar)->with('msg', 'Agente vinculado a Escola!');
     }
 }
