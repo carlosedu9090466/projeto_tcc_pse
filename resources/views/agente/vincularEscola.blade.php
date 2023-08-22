@@ -68,7 +68,7 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    @if (!$agentesVinculados)
+                    @if ($agentesVinculados->UserAgenteVinculo->count() == 0)
                         <p>Esse Usuário Escolar não possui vinculo com nenhuma Escola!</p>
                     @else
                         <table class="table table-striped">
@@ -93,11 +93,12 @@
                                         <td>{{ $agenteVinculo->localidade_id }}</td>
                                         <td>
                                             <form
-                                                action="/userEscolar/deletar/{{ $agente->id }}&{{ $agenteVinculo->id }}"
+                                                action="/agenteEscolar/deletar/{{ $agente->id }}&{{ $agenteVinculo->id }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('Tem Certeza? clique OK para confirmar!')">
                                                     <ion-icon name="trash-outline"></ion-icon>
                                                     Deletar
                                                 </button>

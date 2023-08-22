@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AgenteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -33,7 +37,7 @@ class AgenteController extends Controller
 
     public function create()
     {
-        $roles = Role::where('id', '=', 3)->get();
+        $roles = Role::whereIn('id', [3, 2])->get();
         return view('agente.create', ['roles' => $roles]);
     }
 
@@ -55,7 +59,10 @@ class AgenteController extends Controller
 
     public function index()
     {
-        return view('agente.home');
+        $agente_id = auth()->user()->id;
+        $escolasVinculadasAgente = Agente::agenteVinculoEscolas($agente_id);
+        //dd($escolasVinculadasAgente);
+        return view('agente.home', ['escolasVinculadasAgente' => $escolasVinculadasAgente]);
     }
 
     public function homeAgente()
@@ -154,5 +161,12 @@ class AgenteController extends Controller
         $vinculoUserAgente->save();
 
         return redirect('/agente/vincularEscola/' . $request->agenteEscolar)->with('msg', 'Agente vinculado a Escola!');
+    }
+
+    public function deletecreate(int $idAgente, int $idEscola)
+    {
+
+        Agente_Escola::where('agente_id', '=', $idAgente)->where('escola_id', '=', $idEscola)->delete();
+        return redirect('/agente/vincularEscola/' . $idAgente)->with('msg', 'Vinculo excluido com sucesso!');
     }
 }

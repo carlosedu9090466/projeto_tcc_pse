@@ -11,15 +11,6 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($turmas) > 0)
-            {{-- <a href="/turmas/create/{{ $escola->id }}">
-                Criar Turmas
-                <ion-icon name="add-circle-outline"></ion-icon>
-            </a> --}}
-            {{-- <a href="/alunos/create/{{ $escola->id }}">
-                Matricular Aluno
-                <ion-icon name="school-outline">
-                </ion-icon>
-            </a> --}}
             <table class="table table-striped">
                 <thead>
                     <tr>

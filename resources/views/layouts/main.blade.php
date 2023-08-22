@@ -80,12 +80,11 @@
                             Usuários
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/agente/create">Cadastrar Agente Saúde</a>
-                            <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agentes</a>
-
+                            <a class="dropdown-item" href="/agente/create">Cadastrar Usuários</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/userEscolar/home">Cadastrar Usuário Escolar</a>
-                            <a class="dropdown-item" href="/userEscolar/home">Vincular Usuário Escolar</a>
+                            <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agentes de Saúde</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/userEscolar/home">Visualizar Usuários Escolares</a>
                             <div class="dropdown-divider"></div>
                         </div>
 

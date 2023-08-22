@@ -11,19 +11,19 @@
 
     <div class="col-md-10 offset-md-1 dashboard-userEscolar-container">
         @if (count($userEscolar) > 0)
-            <a href="/userEscolar/create" type="button" class="btn btn-primary mb-3">
+            {{-- <a href="/userEscolar/create" type="button" class="btn btn-primary mb-3">
                 Cadastrar Usuário Escolar
                 <ion-icon class="ions" name="school-outline"></ion-icon>
-            </a>
+            </a> --}}
 
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">CPF</th>
+                        {{-- <th scope="col">CPF</th> --}}
                         <th scope="col">Nome</th>
                         <th scope="col">email</th>
-                        <th scope="col">Status Conta</th>
+                        {{-- <th scope="col">Status Conta</th> --}}
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -32,10 +32,10 @@
                     @foreach ($userEscolar as $user)
                         <tr>
                             <td scropt="row">{{ $loop->index + 1 }}</td>
-                            <td>{{ $user->cpf }}</td>
-                            <td>{{ $user->nome }}</td>
+                            {{-- <td>{{ $user->cpf }}</td> --}}
+                            <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $status = $user->ativo_user == 1 ? 'Ativo' : 'Desativado' }}</td>
+                            {{-- <td>{{ $status = $user->ativo_user == 1 ? 'Ativo' : 'Desativado' }}</td> --}}
                             {{-- editar e excluir --}}
                             <td>
                                 {{-- Escolas vinculadas --}}

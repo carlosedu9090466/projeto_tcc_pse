@@ -27,6 +27,20 @@ class Agente extends Model
         return $agente[0];
     }
 
+    public static function agenteVinculoEscolas($id_user)
+    {
+        $escolas = DB::table('agentes')
+            ->join('agentes_escolas', 'agentes.id', '=', 'agentes_escolas.agente_id')
+            ->join('escolas', 'agentes_escolas.escola_id', '=', 'escolas.id')
+            ->join('municipios', 'municipios.id', '=', 'escolas.localidade_id')
+            ->where('agentes.user_id', '=', $id_user)
+            ->select('agentes.id as id_agente', 'agentes.codigo_agente', 'agentes.cpf', 'agentes_escolas.status_agente_escola', 'escolas.id as id_escola', 'escolas.nome', 'escolas.inep', 'municipios.nome as municipio')
+            ->get();
+
+        return $escolas;
+    }
+
+
     public function UserAgenteVinculo()
     {
         //um Agente pode ser vinculado em várias Escolas

@@ -17,8 +17,9 @@ class UserEscolarController extends Controller
     public function index()
     {
         $escolas = Escola::all();
-        $userEscolar = UserEscolar::all();
-        $user = User::with('userEscolar')->get();
+        //$userEscolar = UserEscolar::all();
+
+        $userEscolar = User::where('role_id', '=', 2)->get();
         //dd($user);
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
@@ -71,9 +72,11 @@ class UserEscolarController extends Controller
 
     public function createUserEscolar($id)
     {
-        //$question = Question::with('doencas')->findOrFail($id);
-
-        $userEscolar = UserEscolar::findOrfail($id);
+        //$userEscolar = UserEscolar::findOrfail($id)->first();
+        $userEscolar = UserEscolar::where('user_id')->get();
+        if ($userEscolar->count() == 0) {
+            return redirect('/userEscolar/home')->with('msg', 'O Usuário Escolar precisar completar os dados cadastrias para pode vincular a escola!');
+        }
         $escolas = Escola::all();
         $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($id);
         return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar, 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
