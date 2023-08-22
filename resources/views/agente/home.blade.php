@@ -31,7 +31,7 @@
                             <td>{{ $escolasVinculadas->inep }}</td>
                             <td>{{ $escolasVinculadas->municipio }}</td>
                             <td>
-                                <a href="/turmas/espelho/{{ $escolasVinculadas->id_escola }}" class="btn btn-info edit-btn">
+                                <a href="/agente/turmas/{{ $escolasVinculadas->id_escola }}" class="btn btn-info edit-btn">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Visualizar Turmas
                                 </a>

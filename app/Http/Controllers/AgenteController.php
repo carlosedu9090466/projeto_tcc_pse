@@ -6,6 +6,7 @@ use App\Models\Agente;
 use App\Models\Agente_Escola;
 use App\Models\Escola;
 use App\Models\Role;
+use App\Models\Turma;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -71,6 +72,14 @@ class AgenteController extends Controller
         $agentes = User::AgenteInformacoes(3);
         //dd($agentes);
         return view('agente.createVinculo', ['agentes' => $agentes]);
+    }
+
+    public function escolasTurmasAgente($id_escola)
+    {
+
+        $turmas = Turma::where('escola_id', '=', $id_escola)->get();
+        dd($turmas);
+        return view('agente.turmasEscolasAgente');
     }
 
 
