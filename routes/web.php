@@ -78,6 +78,8 @@ Route::put('/agente/update/{id}', [AgenteController::class, 'update']);
 Route::get('/agente/vincularEscola/{id}', [AgenteController::class, 'createAgenteEscolar']);
 Route::post('/agenteEscolar/vinculo', [AgenteController::class, 'storeVinculoEscolar']);
 Route::get('/agente/turmas/{id}', [AgenteController::class, 'escolasTurmasAgente']);
+Route::get('/agente/visualizarAlunos/{id}', [AgenteController::class, 'visualizarAlunosTurma']);
+Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::class, 'visualizaQuizAluno']);
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
 //END
 

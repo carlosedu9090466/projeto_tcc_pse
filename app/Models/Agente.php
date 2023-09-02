@@ -40,6 +40,33 @@ class Agente extends Model
         return $escolas;
     }
 
+    public static function visualizarAlunosTurma($id_turma)
+    {
+        $alunos = DB::table('turmas')
+            ->join('turma_aluno', 'turma_aluno.id_turma', '=', 'turmas.id')
+            ->join('alunos', 'alunos.id', '=', 'turma_aluno.id_aluno')
+            ->where('turmas.id', '=', $id_turma)
+            ->select('alunos.id', 'alunos.nome', 'alunos.cpf_aluno', 'alunos.dataNascimento', 'alunos.sexo', 'turma_aluno.id_turma', 'turma_aluno.status_aluno_turma', 'turma_aluno.dt_matricula')
+            ->get();
+
+        return $alunos;
+    }
+
+    public static function alunoQuestionario($id_aluno, $id_turma)
+    {
+        $questionario = DB::table('quiz_question')
+            ->join('responde_quiz', 'responde_quiz.id_quiz_question', '=', 'quiz_question.id')
+            ->join('questions', 'questions.id', '=', 'quiz_question.id')
+            ->join('doencas', 'doencas.id', '=', 'questions.doenca_id')
+            ->where('responde_quiz.id_aluno', '=', $id_aluno)
+            ->where('responde_quiz.id_turma', '=', $id_turma)
+            ->select('responde_quiz.id_quiz_question as id_pergunta_quiz', 'questions.id as id_pergunta', 'questions.pergunta', 'responde_quiz.resposta_question as resposta', 'responde_quiz.data_resposta', 'doencas.nome as doenca')
+            ->get();
+
+        return $questionario;
+    }
+
+
 
     public function UserAgenteVinculo()
     {

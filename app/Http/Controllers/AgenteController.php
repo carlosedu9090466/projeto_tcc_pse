@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agente;
 use App\Models\Agente_Escola;
+use App\Models\Aluno;
 use App\Models\Escola;
 use App\Models\Role;
 use App\Models\Turma;
@@ -77,9 +78,29 @@ class AgenteController extends Controller
     public function escolasTurmasAgente($id_escola)
     {
 
-        $turmas = Turma::where('escola_id', '=', $id_escola)->get();
-        dd($turmas);
-        return view('agente.turmasEscolasAgente');
+        $turmas = Turma::where('escola_id', '=', $id_escola)->where('status_turma', 1)->get();
+
+        return view('agente.turmasEscolasAgente', ['turmas' => $turmas]);
+    }
+
+    public function visualizarAlunosTurma($id_turma)
+    {
+        //query alunos turma
+        $alunos = Agente::visualizarAlunosTurma($id_turma);
+        //dd($alunos);
+        return view('agente.visualizarAlunosTurma', ['alunos' => $alunos]);
+    }
+
+    public function visualizaQuizAluno(int $id_aluno, int $id_turma)
+    {
+
+        $alunoResposta = Agente::alunoQuestionario($id_aluno, $id_turma);
+        if ($alunoResposta->count() == 0) {
+            dd('aqui');
+        }
+        $aluno = Aluno::findOrfail($id_aluno);
+        //dd($alunoResposta);
+        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno]);
     }
 
 
