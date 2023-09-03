@@ -99,8 +99,11 @@ class AgenteController extends Controller
             dd('aqui');
         }
         $aluno = Aluno::findOrfail($id_aluno);
-        //dd($alunoResposta);
-        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno]);
+        $agente_id = auth()->user()->id;
+        $agente = Agente::where('user_id', $agente_id)->get();
+        $turma = Turma::findOrfail($id_turma);
+        //dd($agente);
+        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma]);
     }
 
 

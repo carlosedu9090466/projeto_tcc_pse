@@ -11,6 +11,9 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($alunoResposta) > 0)
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">
+                Observações do aluno
+            </button>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -19,7 +22,7 @@
                         <th scope="col">Pergunta</th>
                         <th scope="col">Resposta</th>
                         <th scope="col">Data Resposta</th>
-                        <th scope="col">Ações</th>
+                        {{-- <th scope="col">Ações</th> --}}
                     </tr>
                 </thead>
 
@@ -32,21 +35,77 @@
                             <td>{{ $resp->pergunta }}</td>
                             <td>{{ $resp->resposta }}</td>
                             <td>{{ date('d/m/Y', strtotime($resp->data_resposta)) }}</td>
-                            <td>
+                            {{-- <td>
                                 <a href="/agente/acompanhamento/{{ $resp->id_pergunta_quiz }}"
                                     class="btn btn-info edit-btn">
                                     <ion-icon name="bandage-outline"></ion-icon>
                                     Visualizar Questionário
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
 
                 </tbody>
             </table>
-        @else
-            <p>Não há Respostas desse aluno!</p>
-        @endif
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form action="/agente/acompanhamento" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="date">Data do acompanhamento</label>
+                                                <input type="date" class="form-control" id="date_obs" name="date_obs">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Observação do dia</label>
+                                                <textarea class="form-control" style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;"
+                                                    autofocus id="exampleFormControlTextarea1">
+                                                </textarea>
+                                            </div>
+                                            <input type="hidden" id="id_aluno" name="id_aluno"
+                                                value="{{ $aluno->id }}">
+                                            <input type="hidden" name="id_agente" id="id_agente"
+                                                value="{{ $agente->id }}">
+
+                                            <input type="hidden" name="id_turma" id="id_turma"
+                                                value="{{ $turma->id }}">
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h1>Observações</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+@else
+    <p>Não há Respostas desse aluno!</p>
+    @endif
     </div>
 
 @endsection
