@@ -67,13 +67,15 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="date">Data do acompanhamento</label>
-                                                <input type="date" class="form-control" id="date_obs" name="date_obs">
+                                                <input type="date" class="form-control" id="dia_observado"
+                                                    name="dia_observado">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">Observação do dia</label>
-                                                <textarea class="form-control" style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;"
-                                                    autofocus id="exampleFormControlTextarea1">
+                                                <textarea class="form-control" name="observacao"
+                                                    style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;" autofocus
+                                                    id="exampleFormControlTextarea1">
                                                 </textarea>
                                             </div>
 
@@ -86,9 +88,9 @@
                                                     <option value="Finalizado">Finalizado</option>
                                                 </select>
 
-                                                @if ($errors->has('tipo_ensino'))
+                                                @if ($errors->has('status_acompanhamento'))
                                                     <div class="alert alert-danger" role="alert">
-                                                        {{ $errors->has('tipo_ensino') ? $errors->first('tipo_ensino') : '' }}
+                                                        {{ $errors->has('status_acompanhamento') ? $errors->first('status_acompanhamento') : '' }}
                                                     </div>
                                                 @endif
 
@@ -101,7 +103,7 @@
 
                                             <input type="hidden" name="id_turma" id="id_turma"
                                                 value="{{ $turma->id }}">
-                                        </form>
+
                                     </div>
                                 </div>
                                 <hr>
@@ -119,8 +121,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary">Salvar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
