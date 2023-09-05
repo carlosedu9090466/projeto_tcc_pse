@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcompanhamentoController;
 use App\Http\Controllers\AgenteController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\DoencaController;
@@ -83,7 +84,9 @@ Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::clas
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
 //END
 
-
+//ACOMPANHAMENTO
+Route::post('/acompanhamento', [AcompanhamentoController::class, 'storeAcompanhamento']);
+//END
 
 
 //doencas - views

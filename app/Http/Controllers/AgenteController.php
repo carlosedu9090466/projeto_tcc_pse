@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acompanhamento;
 use App\Models\Agente;
 use App\Models\Agente_Escola;
 use App\Models\Aluno;
@@ -102,8 +103,9 @@ class AgenteController extends Controller
         $agente_id = auth()->user()->id;
         $agente = Agente::where('user_id', $agente_id)->get();
         $turma = Turma::findOrfail($id_turma);
-        //dd($agente);
-        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma]);
+        $observacao = Acompanhamento::where('id_aluno', $id_aluno)->where('id_turma', $id_turma)->get();
+
+        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma, 'observacao' => $observacao]);
     }
 
 

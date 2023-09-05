@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AcompanhamentoController' => $baseDir . '/app/Http/Controllers/AcompanhamentoController.php',
     'App\\Http\\Controllers\\AgenteController' => $baseDir . '/app/Http/Controllers/AgenteController.php',
     'App\\Http\\Controllers\\AlunoController' => $baseDir . '/app/Http/Controllers/AlunoController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -34,6 +35,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\Acompanhamento' => $baseDir . '/app/Models/Acompanhamento.php',
     'App\\Models\\Agente' => $baseDir . '/app/Models/Agente.php',
     'App\\Models\\Agente_Escola' => $baseDir . '/app/Models/Agente_Escola.php',
     'App\\Models\\Aluno' => $baseDir . '/app/Models/Aluno.php',
