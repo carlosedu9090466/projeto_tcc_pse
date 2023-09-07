@@ -60,7 +60,7 @@
                             Escolas
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/agente/vinculo">Vinculos Escolares</a>
+                            <a class="dropdown-item" href="#">Vinculos Escolares</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>

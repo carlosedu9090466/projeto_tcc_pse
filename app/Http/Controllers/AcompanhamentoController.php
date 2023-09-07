@@ -10,6 +10,15 @@ class AcompanhamentoController extends Controller
 
     public function storeAcompanhamento(Request $request)
     {
+
+
+
+        //deve-se verificar se o aluno nessa turma já possui o acompanhamento finalizado
+        $verificaAcompanhamentoFinalizado = Acompanhamento::where('id_turma', $request->id_turma)->where('id_aluno', $request->id_aluno)->where('status_acompanhamento', '=', 'Finalizado')->first();
+        if ($verificaAcompanhamentoFinalizado && $verificaAcompanhamentoFinalizado != null) {
+            return redirect('/agente/acompanhamento/' . $request->id_aluno . '&' . $request->id_turma)->with('msg', 'O aluno já possui acompanhamento finalizado!');
+        }
+
         $regras = [
             'dia_observado' => 'required',
             'observacao' => 'required|min:5|max:600',
@@ -36,6 +45,6 @@ class AcompanhamentoController extends Controller
         // salvando no banco os dados vindo do form através do request
         $acompanhamento->save();
 
-        return redirect('/agente/acompanhamento/' . $request->id_aluno . '&' . $request->id_turma)->with('msg', 'questionario cadastrado com sucesso!');
+        return redirect('/agente/acompanhamento/' . $request->id_aluno . '&' . $request->id_turma)->with('msg', 'Observação cadastrado com sucesso!');
     }
 }

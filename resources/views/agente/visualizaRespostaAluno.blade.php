@@ -80,7 +80,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="acompanhamento">Status Acompanhamento</label>
+                                                <label for="acompanhamento">Status do Acompanhamento</label>
                                                 <select class="form-control" id="status_acompanhamento"
                                                     name="status_acompanhamento">
                                                     <option value="0">-- Selecione --</option>
@@ -107,15 +107,31 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        @if ($observacao->count() == 0)
-                                            <p>Não há acompanhamento para esse aluno!</p>
-                                        @else
-                                            <p>hello world!</p>
-                                        @endif
+
+                                @if ($observacao->count() == 0)
+                                    <p>Não há acompanhamento para esse aluno!</p>
+                                @else
+                                    <div class="row">
+                                        @foreach ($observacao as $obs)
+                                            <div class="col-md-4 mb-3">
+                                                <div class="card" style="width: 14rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            {{ $obs->status_acompanhamento }}
+                                                        </h5>
+                                                        <p class="card-text">{{ $obs->observacao }}</p>
+                                                        <p class="card-text">
+                                                            {{ date('d/m/Y', strtotime($obs->dia_observado)) }}
+                                                        </p>
+                                                        {{-- <a href="#" class="card-link">Card link</a>
+                                                        <a href="#" class="card-link">Another link</a> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                </div>
+                                @endif
+
 
                             </div>
                         </div>
