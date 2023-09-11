@@ -45,14 +45,13 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password"
+                            <div id="divEscola" class="form-group row" style="display:none">
+                                <label for="escola"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Escola') }}</label>
 
                                 <div class="col-md-6">
-
                                     <select class="form-control" id="escola_id" name="escola_id" required>
-                                        <option>Selecione a Escola</option>
+                                        <option value="0">Selecione a Escola</option>
                                         @foreach ($escolas as $escola)
                                             <option value="{{ $escola->id }}">
                                                 {{ $escola->nome }}
@@ -69,7 +68,7 @@
                             </div>
 
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
@@ -79,8 +78,24 @@
                                             {{ __('Remember Me') }}
                                         </label>
                                     </div>
+
+                                </div>
+                            </div> --}}
+
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" onclick="mostrarDivEscola()" type="checkbox"
+                                            id="mostrar">
+
+                                        <label class="form-check-label" for="mostrar">
+                                            {{ __('Usuário Escolar ?') }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
+
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
