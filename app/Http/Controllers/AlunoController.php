@@ -163,10 +163,11 @@ class AlunoController extends Controller
         $now = $dt->format('Y-m-d');
         //dd($now);
         $quiz = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->pluck('id');
+
         //$quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
         //$quiz = Quiz::with('QuizVinculoQuestion')->get();
         $quizs = Quiz_Question::quizQuestionario($quiz);
-        //dd($quizs);
+
         return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
     }
 
