@@ -53,7 +53,8 @@ Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update'])
 //END
 
 //Responder_quiz
-Route::post('/responsavel/responderQuiz/create', [AlunoController::class, 'createResponde']);
+Route::post('/responsavel/responderQuiz/create', [AlunoController::class, 'createQuestionarios']);
+Route::post('responsavel/responderQuiz', [AlunoController::class, 'createResponde']);
 Route::post('/respostaQuiz', [AlunoController::class, 'storeResposta']);
 
 

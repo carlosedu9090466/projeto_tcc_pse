@@ -84,6 +84,12 @@ header {
 
 } */
 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
 
 .dashboard-userEscolar-container form {
     display: inline-block;

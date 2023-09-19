@@ -26,7 +26,7 @@
                                     value="{{ $aluno->cpf }}">
                                 <input type="hidden" name="status_aluno" id="status_aluno"
                                     value="{{ $aluno->status_aluno_turma }}">
-                                <input type="submit" class="btn btn-primary" value="Visualizar Questionário">
+                                <input type="submit" class="btn btn-primary" value="Exibir Questionários">
                             </div>
 
                         </div>

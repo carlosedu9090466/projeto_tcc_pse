@@ -65,8 +65,12 @@
 
                     </form>
 
-                    <button form="form_quiz" class="btn btn-primary mb-2"
-                        onclick="return confirm('Clique para confirmar as respostas!')">Responder</button>
+                    <div class="button-container">
+                        <button form="form_quiz" class="btn btn-primary mb-2"
+                            onclick="return confirm('Clique para confirmar as respostas!')">Responder</button>
+
+                        <button class="btn btn-warning" onclick="history.back()">Voltar</button>
+                    </div>
                 </tbody>
             </table>
         @else

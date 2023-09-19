@@ -156,17 +156,27 @@ class AlunoController extends Controller
 
     //Reponder Quiz
 
-    public function createResponde(Request $request)
+    public function createQuestionarios(Request $request)
     {
         $dado_aluno = $request->all();
         $dt = new DateTime();
         $now = $dt->format('Y-m-d');
         //dd($now);
-        $quiz = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->pluck('id');
-
+        $quizs = Quiz::where('status_quiz', '=', 1)/*->where('date_fim_quiz', '>=', $now)->pluck('id')*/->get();
+        //dd($dado_aluno);
         //$quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
         //$quiz = Quiz::with('QuizVinculoQuestion')->get();
-        $quizs = Quiz_Question::quizQuestionario($quiz);
+        //$quizs = Quiz_Question::quizQuestionario($quiz);
+
+        //return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
+        return view('responderQuiz.questionariosAbertos', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
+    }
+
+    public function createResponde(Request $request)
+    {
+        //dd($request);
+        $quizs = Quiz_Question::quizQuestionario($request->id_quiz);
+        $dado_aluno = $request->all();
 
         return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
     }
