@@ -14,8 +14,7 @@
                         <div class="form-group row">
                             <label for="nome" class="col-sm-2 col-form-label">Nome</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" readonly
-                                    value="{{ $userName = Auth::user()->name }}">
+                                <input type="text" class="form-control" readonly value="{{ $userAtivo->name }}">
                             </div>
                         </div>
 
@@ -29,8 +28,7 @@
                         <div class="form-group row">
                             <label for="nome" class="col-sm-2 col-form-label">E-mail</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" readonly
-                                    value="{{ $userName = Auth::user()->email }}">
+                                <input type="text" class="form-control" readonly value="{{ $userAtivo->email }}">
                             </div>
                         </div>
 

@@ -98,21 +98,21 @@ class UserEscolarController extends Controller
     {
         //$userEscolar = UserEscolar::findOrfail($id)->first();
         $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
+
         //dd($userEscolar);
         if ($userEscolar->count() == 0) {
             return redirect('/userEscolar/home')->with('msg', 'O Usuário Escolar precisar completar os dados cadastrias para pode vincular a escola!');
         }
         $escolas = Escola::all();
         $userAtivo = User::where('id', '=', $id)->get();
-        //dd($userAtivo);
-        $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($id);
-        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar[0], 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
+
+        $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar[0]->id);
+
+        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar[0], 'userAtivo' => $userAtivo[0], 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
     }
 
     public function createVinculo(Request $request)
     {
-
-        //dd($request);
 
         //verifica se possui vinculo com a escola selecionada para salvar!
         $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $request->userEscolar)->first();
