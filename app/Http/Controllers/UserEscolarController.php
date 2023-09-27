@@ -10,6 +10,7 @@ use App\Models\UserEscolar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class UserEscolarController extends Controller
 {
@@ -26,8 +27,13 @@ class UserEscolarController extends Controller
 
     public function homeUser()
     {
+        $id = auth()->user()->id;
 
-        return view('userEscolar.homeUser');
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
+
+        $escolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar[0]->id);
+
+        return view('userEscolar.homeUser', ['escolaVinculos' => $escolaVinculos]);
     }
 
 
@@ -119,6 +125,7 @@ class UserEscolarController extends Controller
         if ($existeVinculo) {
             return redirect('/userEscolar/vincularEscola/' . $request->userEscolar)->with('msg', 'Usuário já possui vinculado com essa escola!');
         }
+
         $vinculoUserEscolar = new User_Escolar;
         $vinculoUserEscolar->user_id = $request->userEscolar;
         $vinculoUserEscolar->escola_id = $request->escola_id;

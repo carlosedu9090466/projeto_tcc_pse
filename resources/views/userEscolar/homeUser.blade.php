@@ -1,9 +1,13 @@
 @extends('layouts.menuEscolar')
 
-@section('title', 'PSE')
+@section('title', 'Ambiente ADM Escolar')
 
 @section('content')
 
-    <h1>Home - USER ESCOLAR</h1>
+    @if (count($escolaVinculos->UserEscolarVinculo) > 0 && !empty(Session::get('escola_id')))
+        <p>Possui Vinculos</p>
+    @else
+        <p>Não possui Vinculos com nenhuma escola ou Não foi selecionado nenhuma escola no Login!</p>
+    @endif
 
 @endsection

@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Auth;
 
 use App\Models\Escola;
 use App\Models\User_Escolar;
+use App\Models\UserEscolar;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,8 +121,9 @@ trait AuthenticatesUsers
         }
 
         //auth escola x user
-        $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', Auth::guard()->user()->id)->first();
-        //dd(Auth::guard()->user()->role_id);
+        $id = UserEscolar::where('user_id', '=', Auth::guard()->user()->id)->get();
+
+        $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $id[0]->id)->first();
         if ($existeVinculo && $existeVinculo != null && Auth::guard()->user()->role_id === 2) {
             Session::put('escola_id', $request->escola_id);
             return redirect('turmas/home/' . $request->escola_id);
@@ -130,6 +132,8 @@ trait AuthenticatesUsers
         } else if (Auth::guard()->user()->role_id === 3) {
             return redirect('/agente/agenteHome');
         }
+        //caso não consiga nehuma das opçoes acima!!
+        self::logout($request);
         return redirect('/login');
 
 
