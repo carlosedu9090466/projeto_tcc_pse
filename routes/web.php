@@ -59,8 +59,11 @@ Route::post('/respostaQuiz', [AlunoController::class, 'storeResposta']);
 
 
 //User Escolar - criacao, vinculos Escolas
+Route::get('/userEscolar/homeUser', [UserEscolarController::class, 'homeUser']);
 Route::get('/userEscolar/home', [UserEscolarController::class, 'index']);
 Route::get('/userEscolar/create', [UserEscolarController::class, 'create']);
+//PUT
+Route::put('/userEscolar/update/{id}', [UserEscolarController::class, 'update']);
 Route::post('/userEscolar', [UserEscolarController::class, 'store']);
 Route::get('/userEscolar/vincularEscola/{id}', [UserEscolarController::class, 'createUserEscolar']);
 Route::post('/userEscolar/vinculo', [UserEscolarController::class, 'createVinculo']);

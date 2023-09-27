@@ -18,12 +18,9 @@ class TurmaController extends Controller
 {
     public function index($id)
     {
-        //trazer o relacionamento com as escolas nessa view
-        // $question = Question::with('doencas')->findOrFail($id);
+
         $escola = Escola::findOrFail($id);
-        //$user = User::with('UserEscolarVinculo')->findOrFail($id_user);
-        //$turmas = Escola::with('EscolaMuitasTurmas')->findOrFail($escola->id);
-        // Quiz_Question::where('quiz_id', $id)->delete();
+
         $turmas = Turma::with('turmaAluno')->where('escola_id', $escola->id)->get();
         //dd($turmas);
         //dd(Auth::guard()->user());

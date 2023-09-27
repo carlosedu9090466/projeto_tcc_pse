@@ -24,12 +24,26 @@ class UserEscolarController extends Controller
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
+    public function homeUser()
+    {
+
+        return view('userEscolar.homeUser');
+    }
+
+
     public function create()
     {
-        //exibir apenas a permissão do User Escolar
-        $roles = Role::where('id', '=', 2)->get();
-        //dd($roles);
-        return view('userEscolar.create', ['roles' => $roles]);
+        $userEscolar_id = auth()->user()->id;
+
+        $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->count();
+
+        if ($userEscolar == 0) {
+            return view('userEscolar.create');
+        }
+
+        $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->get();
+
+        return view('userEscolar.dadosAtualiza', ['userEscolar' => $userEscolar[0]]);
     }
 
     public function store(Request $request)
@@ -67,19 +81,32 @@ class UserEscolarController extends Controller
         $userEscolar->data_nascimento = $request->data_nascimento;
         $userEscolar->save();
 
-        return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar Atulizado as Informações com sucesso!');
+        return redirect('/userEscolar/homeUser')->with('msg', 'Usuário Escolar Atulizado as Informações com sucesso!');
     }
+
+    public function update(Request $request)
+    {
+        $data = $request->all();
+
+        UserEscolar::findOrFail($request->id)->update($data);
+
+        return redirect('/userEscolar/homeUser')->with('msg', 'Dados Atualizados com sucesso!');
+    }
+
 
     public function createUserEscolar($id)
     {
         //$userEscolar = UserEscolar::findOrfail($id)->first();
-        $userEscolar = UserEscolar::where('user_id')->get();
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
+        //dd($userEscolar);
         if ($userEscolar->count() == 0) {
             return redirect('/userEscolar/home')->with('msg', 'O Usuário Escolar precisar completar os dados cadastrias para pode vincular a escola!');
         }
         $escolas = Escola::all();
+        $userAtivo = User::where('id', '=', $id)->get();
+        //dd($userAtivo);
         $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($id);
-        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar, 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
+        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar[0], 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
     }
 
     public function createVinculo(Request $request)
