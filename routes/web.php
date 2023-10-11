@@ -126,8 +126,14 @@ route::delete('question/{id}', [QuestionController::class, 'destroy']);
 Route::get('/quiz/home', [QuizController::class, 'index']);
 //criar um quiz
 Route::get('/quiz/create', [QuizController::class, 'create']);
+//edit
+Route::get('/quiz/edit/{id}', [QuizController::class, 'edit']);
+//salvando...
+Route::put('/quiz/update/{id}', [QuizController::class, 'update']);
 //rota de salve
 Route::post('/quiz', [QuizController::class, 'store']);
+//delete
+route::get('/quiz/delete/{id}', [QuizController::class, 'delete']);
 //deletar quiz
 route::delete('quiz/{id}', [QuizController::class, 'destroy']);
 

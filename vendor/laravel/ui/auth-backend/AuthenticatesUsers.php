@@ -121,21 +121,25 @@ trait AuthenticatesUsers
         }
 
         //auth escola x user
-        $id = UserEscolar::where('user_id', '=', Auth::guard()->user()->id)->get();
-
-        $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $id[0]->id)->first();
-        if ($existeVinculo && $existeVinculo != null && Auth::guard()->user()->role_id === 2) {
-            Session::put('escola_id', $request->escola_id);
-            return redirect('turmas/home/' . $request->escola_id);
-        } else if (Auth::guard()->user()->role_id === 4) {
+        if (Auth::guard()->user()->role_id === 2) {
+            $id = UserEscolar::where('user_id', '=', Auth::guard()->user()->id)->get();
+            $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $id[0]->id)->first();
+            if ($existeVinculo && $existeVinculo != null && Auth::guard()->user()->role_id === 2) {
+                Session::put('escola_id', $request->escola_id);
+                return redirect('turmas/home/' . $request->escola_id);
+            }
+        }
+        if (Auth::guard()->user()->role_id === 4) {
             return redirect('/responsavel/home');
         } else if (Auth::guard()->user()->role_id === 3) {
             return redirect('/agente/agenteHome');
+        } else if (Auth::guard()->user()->role_id === 1) {
+            return redirect('/home');
+        } else {
+            //caso não consiga nehuma das opçoes acima!!
+            self::logout($request);
+            return redirect('/login');
         }
-        //caso não consiga nehuma das opçoes acima!!
-        self::logout($request);
-        return redirect('/login');
-
 
         // return $request->wantsJson()
         //     ? new JsonResponse([], 204)

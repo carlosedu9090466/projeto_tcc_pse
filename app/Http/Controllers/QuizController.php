@@ -26,6 +26,23 @@ class QuizController extends Controller
         return view('quiz.create');
     }
 
+    public function edit($id)
+    {
+        $quiz = Quiz::findOrFail($id);
+        //dd($quiz);
+        return view('quiz.edit', ['quiz' => $quiz]);
+    }
+
+    public function update(Request $request)
+    {
+
+        $data = $request->all();
+
+        Quiz::findOrFail($request->id)->update($data);
+
+        return redirect('/quiz/home')->with('msg', 'Dados editados com sucesso!');
+    }
+
     public function store(Request $request)
     {
         $regras = [
@@ -96,6 +113,15 @@ class QuizController extends Controller
         }
 
         return redirect('/quiz/home')->with('msg', 'perguntas inserida com sucesso!');
+    }
+
+    public function delete($id)
+    {
+        /*buscar os dados relacionados ao quiz e mostrar para o usuário antes de deletar*/
+        $quiz = Quiz::findOrfail($id);
+
+
+        return view('quiz.delete');
     }
 
 
