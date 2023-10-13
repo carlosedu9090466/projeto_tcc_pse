@@ -131,9 +131,16 @@ class QuizController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($id, $alunosCount)
     {
 
+        if ($alunosCount > 0) {
+            $ids_quiz_question = Quiz_Question::where('quiz_id', '=', $id)->pluck('id');
+            //deletar na table responde_question
+            foreach ($ids_quiz_question as $quiz_question) {
+                Responde_Quiz::where('id_quiz_question', '=', $quiz_question)->delete();
+            }
+        }
         //deletar as questions referente a doenca
         Quiz_Question::where('quiz_id', $id)->delete();
         Quiz::findOrFail($id)->delete();

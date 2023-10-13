@@ -135,7 +135,7 @@ Route::post('/quiz', [QuizController::class, 'store']);
 //delete
 route::get('/quiz/delete/{id}', [QuizController::class, 'delete']);
 //deletar quiz
-route::delete('quiz/{id}', [QuizController::class, 'destroy']);
+route::delete('quiz/{id}&{id_repostas}', [QuizController::class, 'destroy']);
 
 //Quiz x pergunta
 Route::get('/quiz/vincular/{id}', [QuizController::class, 'createVinculo']);

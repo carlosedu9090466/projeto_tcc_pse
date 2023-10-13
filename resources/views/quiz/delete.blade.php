@@ -16,7 +16,7 @@
 
         <div class="btn-group" role="group" aria-label="Exemplo básico">
             <a href="javascript:history.back()" class="btn btn-secondary mr-3">Voltar</a>
-            <form action="/quiz/{{ $quiz->id }}" method="POST">
+            <form action="/quiz/{{ $quiz->id }}&&{{ $respostas_alunos }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">
