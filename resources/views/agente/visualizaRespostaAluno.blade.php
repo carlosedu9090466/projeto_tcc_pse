@@ -14,6 +14,10 @@
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">
                 Observações do aluno
             </button>
+
+            <button type="button" class="btn btn-warning mb-2" data-toggle="modal" data-target="#staticBackdrop2">
+                Cadastrar IMC
+            </button>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -48,7 +52,7 @@
                 </tbody>
             </table>
 
-            <!-- Modal -->
+            <!-- Modal Observações -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -143,6 +147,103 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal IMC -->
+            <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">IMC - Aluno</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form action="/imc" method="POST">
+                                            @csrf
+
+                                            <div class="form-group">
+                                                <label for="peso">Peso:</label>
+                                                <input type="text" class="form-control" id="peso" name="peso"
+                                                    placeholder="peso em kg">
+                                                @if ($errors->has('peso'))
+                                                    <div class="alert alert-danger" role="alert">
+                                                        {{ $errors->has('peso') ? $errors->first('peso') : '' }}
+                                                    </div>
+                                                @endif
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="altura">Altura:</label>
+                                                <input type="text" class="form-control" id="altura" name="altura"
+                                                    placeholder="Altura em metros">
+                                                @if ($errors->has('altura'))
+                                                    <div class="alert alert-danger" role="alert">
+                                                        {{ $errors->has('altura') ? $errors->first('altura') : '' }}
+                                                    </div>
+                                                @endif
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="date">Data do registro</label>
+                                                <input type="date" class="form-control" id="dia_registrado"
+                                                    name="dia_registrado">
+                                            </div>
+
+                                            <input type="hidden" id="id_aluno" name="id_aluno"
+                                                value="{{ $aluno->id }}">
+                                            <input type="hidden" name="id_agente" id="id_agente"
+                                                value="{{ $agente->id }}">
+
+                                            <input type="hidden" name="id_turma" id="id_turma"
+                                                value="{{ $turma->id }}">
+
+                                    </div>
+                                </div>
+                                <hr>
+
+                                @if ($observacao->count() == 0)
+                                    <p>Não há acompanhamento para esse aluno!</p>
+                                @else
+                                    <div class="row">
+                                        @foreach ($observacao as $obs)
+                                            <div class="col-md-4 mb-3">
+                                                <div class="card" style="width: 14rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            {{ $obs->status_acompanhamento }}
+                                                        </h5>
+                                                        <p class="card-text">{{ $obs->observacao }}</p>
+                                                        <p class="card-text">
+                                                            {{ date('d/m/Y', strtotime($obs->dia_observado)) }}
+                                                        </p>
+                                                        {{-- <a href="#" class="card-link">Card link</a>
+                                                        <a href="#" class="card-link">Another link</a> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
     </div>
 @else
     <p>Não há Respostas desse aluno!</p>
