@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Quiz_Question;
+use App\Models\Responde_Quiz;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,8 +121,13 @@ class QuizController extends Controller
         /*buscar os dados relacionados ao quiz e mostrar para o usuário antes de deletar*/
         $quiz = Quiz::findOrfail($id);
 
+        //numeros de QUESTIONS relacionadas vinculadas ao QUIZ
+        $quiz_question = Quiz_Question::where('quiz_id', '=', $id)->count();
+        //dd($quiz_question);
+        //agora deu certo
+        $respostas_alunos = Responde_Quiz::respostasAlunos($id)->unique()->count();
 
-        return view('quiz.delete');
+        return view('quiz.delete', ['quiz' => $quiz, 'quiz_question' => $quiz_question, 'respostas_alunos' => $respostas_alunos]);
     }
 
 

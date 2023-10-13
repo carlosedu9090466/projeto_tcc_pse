@@ -7,9 +7,11 @@
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Deseja realmente fazer a operação?</h4>
         <p>
-            Caso faça a operação de deletar o dado. Todos as perguntas vinculadas a {{ $doenca->nome }}
-            Caso faça a operação os dados
+            Caso faça a operação de deletar o dado. Todas as perguntas relacionadas ao Questionário serão deletadas e também
+            as respostas dos alunos vinculados ao mesmo!
         </p>
+        <p>Pergutas vinculas: {{ $quiz_question }}</p>
+        <p>Total de alunos com respostas vinculadas: {{ $respostas_alunos }}</p>
         <hr>
 
         <div class="btn-group" role="group" aria-label="Exemplo básico">
