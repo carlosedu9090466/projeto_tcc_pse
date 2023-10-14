@@ -6,6 +6,7 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\DoencaController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImcController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\QuestionController;
@@ -91,6 +92,9 @@ Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController:
 //ACOMPANHAMENTO
 Route::post('/acompanhamento', [AcompanhamentoController::class, 'storeAcompanhamento']);
 //END
+
+//IMC CADASTRO
+Route::post('/imc', [ImcController::class, 'store']);
 
 
 //doencas - views

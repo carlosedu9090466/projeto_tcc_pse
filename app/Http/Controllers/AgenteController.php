@@ -7,6 +7,7 @@ use App\Models\Agente;
 use App\Models\Agente_Escola;
 use App\Models\Aluno;
 use App\Models\Escola;
+use App\Models\Imc;
 use App\Models\Role;
 use App\Models\Turma;
 use App\Models\User;
@@ -104,8 +105,9 @@ class AgenteController extends Controller
         $agente = Agente::where('user_id', $agente_id)->get();
         $turma = Turma::findOrfail($id_turma);
         $observacao = Acompanhamento::where('id_aluno', $id_aluno)->where('id_turma', $id_turma)->get();
-        //dd($observacao);
-        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma, 'observacao' => $observacao]);
+        $imc = Imc::where('id_aluno', $id_aluno)->get();
+
+        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma, 'observacao' => $observacao, 'imc' => $imc]);
     }
 
 

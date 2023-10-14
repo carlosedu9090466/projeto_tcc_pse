@@ -208,23 +208,24 @@
                                 </div>
                                 <hr>
 
-                                @if ($observacao->count() == 0)
-                                    <p>Não há acompanhamento para esse aluno!</p>
+                                @if ($imc->count() == 0)
+                                    <p>O aluno não possui o seu IMC cadastrado!</p>
                                 @else
                                     <div class="row">
-                                        @foreach ($observacao as $obs)
+                                        @foreach ($imc as $im)
                                             <div class="col-md-4 mb-3">
                                                 <div class="card" style="width: 14rem;">
                                                     <div class="card-body">
                                                         <h5 class="card-title">
-                                                            {{ $obs->status_acompanhamento }}
+                                                            Grau: {{ $im->grau_imc }}
                                                         </h5>
-                                                        <p class="card-text">{{ $obs->observacao }}</p>
-                                                        <p class="card-text">
-                                                            {{ date('d/m/Y', strtotime($obs->dia_observado)) }}
+                                                        <p class="card-text">IMC: {{ $im->imc }}</p>
+                                                        <p class="card-text">Altura: {{ $im->altura }} m</p>
+                                                        <p class="card-text">Peso: {{ $im->peso }} kg</p>
+                                                        <p class="card-text"> dia registrado:
+                                                            {{ date('d/m/Y', strtotime($im->dia_acompanhado)) }}
                                                         </p>
-                                                        {{-- <a href="#" class="card-link">Card link</a>
-                                                        <a href="#" class="card-link">Another link</a> --}}
+
                                                     </div>
                                                 </div>
                                             </div>
