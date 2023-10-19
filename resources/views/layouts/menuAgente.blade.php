@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="" class="navbar-brand">
                     {{-- Logo do projeto --}}
-                    <img src="" alt="PSE">
+                    <img src="/img/pse_logo.png" alt="Logo PSE" width="80px">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">

@@ -1,119 +1,106 @@
-@extends('layouts.app')
+@extends('layouts.mainLogin')
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+        <div class="content second-content">
+            <div class="first-column">
+                <img src="/img/pse_logo.png" alt="Logo PSE" width="150px">
+                <h2 class="title title-primary">Sistema PSE!</h2>
+                <p class="description description-primary">Entre de acordo com a sua permissão</p>
+                <p class="description description-primary">Admistrador - Agente de Saúde - Usuário Escolar - Aluno</p>
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Senha') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div id="divEscola" class="form-group row" style="display:none">
-                                <label for="escola"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Escola') }}</label>
-
-                                <div class="col-md-6">
-                                    <select class="form-control" id="escola_id" name="escola_id" required>
-                                        <option value="0">Selecione a Escola</option>
-                                        @foreach ($escolas as $escola)
-                                            <option value="{{ $escola->id }}">
-                                                {{ $escola->nome }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('escola_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            {{-- <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
-
-                                </div>
-                            </div> --}}
-
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" onclick="mostrarDivEscola()" type="checkbox"
-                                            id="mostrar">
-
-                                        <label class="form-check-label" for="mostrar">
-                                            {{ __('Usuário Escolar ?') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
-                                    </button>
-
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <a class="btn btn-primary" href="{{ route('register') }}">Criar</a>
             </div>
-        </div>
+
+            <div class="second-column">
+                <h2 class="title title-second">Bem Vindo</h2>
+                <div class="social-media">
+                    {{-- <ul class="list-social-media">
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-facebook-f"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-google-plus-g"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-linkedin-in"></i>
+                            </li>
+                        </a>
+                    </ul> --}}
+                </div><!-- social media -->
+                <p class="description description-second">Acesse com seu E-mail cadastrado:</p>
+                <form class="form" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        {{-- <input type="email" placeholder="E-mail"> --}}
+                        <input id="email" type="email" @error('email') is-invalid @enderror" name="email"
+                            value="{{ old('email') }}" placeholder="E-mail" required>
+                    </label>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input id="password" type="password" @error('password') is-invalid @enderror" name="password"
+                            placeholder="Senha" required autocomplete="current-password">
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </label>
+
+                    {{-- <input type="checkbox" id="mostrar" onclick="mostrarDivEscola()"> --}}
+                    <label class="label-input" id="mostrar" onclick="mostrarDivEscola()" for="">Usuário Escolar ?
+                    </label>
+
+                    {{-- <input class="label-input" onclick="mostrarDivEscola()" type="checkbox" id="mostrar">Usuário
+                    Escolar? --}}
+
+                    {{-- <label class="label-input" for="mostrar">
+                                Usuário Escolar
+                            </label> --}}
+
+                    <div id="divEscola" class="form-group row" style="display:none">
+                        <label for="escola" class="col-md-4 col-form-label text-md-right">{{ __('Escola') }}</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" id="escola_id" name="escola_id" required>
+                                <option value="0">Selecione a Escola</option>
+                                @foreach ($escolas as $escola)
+                                    <option value="{{ $escola->id }}">
+                                        {{ $escola->nome }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('escola_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    @if (Route::has('password.request'))
+                        <a class="password" href="{{ route('password.request') }}">
+                            Esqueceu a senha?
+                        </a>
+                    @endif
+                    {{-- <a class="password" href="#">Esqueceu a senha?</a> --}}
+                    <button class="btn btn-second">Logar</button>
+                </form>
+            </div><!-- second column -->
+        </div><!-- second-content -->
     </div>
 @endsection

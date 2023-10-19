@@ -162,7 +162,7 @@ class AlunoController extends Controller
         $dt = new DateTime();
         $now = $dt->format('Y-m-d');
         //dd($now);
-        $quizs = Quiz::where('status_quiz', '=', 1)/*->where('date_fim_quiz', '>=', $now)->pluck('id')*/->get();
+        $quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
         //dd($dado_aluno);
         //$quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
         //$quiz = Quiz::with('QuizVinculoQuestion')->get();

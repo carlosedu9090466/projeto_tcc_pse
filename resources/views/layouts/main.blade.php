@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="" class="navbar-brand">
                     {{-- Logo do projeto --}}
-                    <img src="" alt="PSE">
+                    <img src="/img/pse_logo.png" alt="Logo PSE" width="80px">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -168,7 +168,16 @@
         </div>
     </main>
     <footer>
-        <p>PSE - Programa sáude na escola &copy; 2023</p>
+        <div class="row">
+            <div class="col-md-6">
+                <p>PSE - Programa sáude na escola &copy; 2023</p>
+            </div>
+            <div class="col-md-6">
+                <img src="/img/estado_rondonia_logo.png" alt="Logo Estado" width="100px">
+            </div>
+        </div>
+
+
     </footer>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
