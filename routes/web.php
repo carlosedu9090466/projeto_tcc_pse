@@ -51,6 +51,7 @@ Route::get('/responsavel/home', [ResponsavelController::class, 'index']);
 Route::get('/responsavel/create', [ResponsavelController::class, 'create']);
 Route::post('/responsavel', [ResponsavelController::class, 'store']);
 Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update']);
+Route::get('/adm/visulizaResponsaveis', [ResponsavelController::class, 'indexTodos']);
 //END
 
 //Responder_quiz
@@ -87,6 +88,7 @@ Route::get('/agente/turmas/{id}', [AgenteController::class, 'escolasTurmasAgente
 Route::get('/agente/visualizarAlunos/{id}', [AgenteController::class, 'visualizarAlunosTurma']);
 Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::class, 'visualizaQuizAluno']);
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
+Route::delete('/agente/deletar/{id}&{idU}', [AgenteController::class, 'deleteUserAgente']);
 //END
 
 //ACOMPANHAMENTO

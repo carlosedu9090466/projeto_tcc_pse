@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
-@section('title', 'Agentes de saúde - Vinculos')
+@section('title', 'Responsáveis - Cadastrados')
 
 @section('content')
     <div class="col-md-10 offset-md-1 dashboard-title-container">
-        <h1>Agentes de Saúde</h1>
+        <h1>Responsáveis cadastrados</h1>
     </div>
 
     <div class="col-md-10 offset-md-1 dashboard-userEscolar-container">
-        @if (count($agentes) > 0)
+        @if (count($responsaveis) > 0)
             <table class="table table-striped">
                 <thead>
                     <tr>

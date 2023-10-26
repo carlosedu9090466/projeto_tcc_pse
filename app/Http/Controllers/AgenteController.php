@@ -73,7 +73,7 @@ class AgenteController extends Controller
     {
         //$agentes = Agente::all();
         $agentes = User::AgenteInformacoes(3);
-        //dd($agentes);
+
         return view('agente.createVinculo', ['agentes' => $agentes]);
     }
 
@@ -205,5 +205,22 @@ class AgenteController extends Controller
 
         Agente_Escola::where('agente_id', '=', $idAgente)->where('escola_id', '=', $idEscola)->delete();
         return redirect('/agente/vincularEscola/' . $idAgente)->with('msg', 'Vinculo excluido com sucesso!');
+    }
+    public function deleteUserAgente(int $idAgente, int $idUserAgente)
+    {
+
+        $vinculoAgenteEscola = Agente_Escola::where('agente_id', '=', $idAgente)->first();
+        $acompanhamento = Acompanhamento::where('id_agente', '=', $idAgente)->select('id_aluno')->distinct()->get()->count();
+
+        if ($acompanhamento && $acompanhamento != null) {
+            return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui dados de acompanhamento!');
+        } else if ($vinculoAgenteEscola && $vinculoAgenteEscola != null) {
+            return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui vinculo com escolas!');
+        } else {
+            Agente::where('user_id', $idAgente)->delete();
+            User::where('id', $idUserAgente)->delete();
+
+            return redirect('/agente/createVinculo')->with('msg', 'Agente Saúde deletado com sucesso!');
+        }
     }
 }

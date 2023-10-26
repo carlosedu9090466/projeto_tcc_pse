@@ -82,6 +82,8 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/agente/create">Cadastrar Usuários</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/adm/visulizaResponsaveis">Visualizar Reponsáveis</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/agente/createVinculo">Visualizar Agentes de Saúde</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/userEscolar/home">Visualizar Usuários Escolares</a>

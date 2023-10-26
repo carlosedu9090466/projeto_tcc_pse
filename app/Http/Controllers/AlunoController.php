@@ -175,7 +175,7 @@ class AlunoController extends Controller
     public function createResponde(Request $request)
     {
         /*VERIFICAR A QUESTÃO DA DATA SE ESTÁ OK PARA RESPONDER*/
-        //dd($request);
+
         $quizs = Quiz_Question::quizQuestionario($request->id_quiz);
         $dado_aluno = $request->all();
 

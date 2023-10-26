@@ -16,6 +16,11 @@ class ResponsavelController extends Controller
         return view('responsavel.home', ['alunosVinculados' => $alunosVinculados]);
     }
 
+    public function indexTodos()
+    {
+        return view('responsavel.visualizarTodosRes');
+    }
+
 
     public function create()
     {

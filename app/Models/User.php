@@ -68,7 +68,7 @@ class User extends Authenticatable
         $agentes = DB::table('users')
             ->join('agentes', 'users.id', '=', 'agentes.user_id')
             ->where('users.role_id', '=', $role_id)
-            ->select('users.name', 'users.email', 'agentes.id', 'agentes.codigo_agente', 'agentes.cpf', 'agentes.sexo', 'agentes.dataNascimento', 'agentes.status_conta')
+            ->select('users.id as id_user', 'users.name', 'users.email', 'agentes.id', 'agentes.codigo_agente', 'agentes.cpf', 'agentes.sexo', 'agentes.dataNascimento', 'agentes.status_conta')
             ->get();
 
         return $agentes;
