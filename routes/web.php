@@ -88,7 +88,7 @@ Route::get('/agente/turmas/{id}', [AgenteController::class, 'escolasTurmasAgente
 Route::get('/agente/visualizarAlunos/{id}', [AgenteController::class, 'visualizarAlunosTurma']);
 Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::class, 'visualizaQuizAluno']);
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
-Route::delete('/agente/deletar/{id}&{idU}', [AgenteController::class, 'deleteUserAgente']);
+Route::delete('/agente/deletar/{id}', [AgenteController::class, 'deleteUserAgente']);
 //END
 
 //ACOMPANHAMENTO

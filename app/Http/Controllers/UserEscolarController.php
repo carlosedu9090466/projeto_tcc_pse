@@ -21,7 +21,7 @@ class UserEscolarController extends Controller
         //$userEscolar = UserEscolar::all();
 
         $userEscolar = User::where('role_id', '=', 2)->get();
-
+        
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
@@ -147,13 +147,16 @@ class UserEscolarController extends Controller
     {
 
         $userEscolar = UserEscolar::where('user_id', '=', $id)->get()->pluck('id')->toArray();
-
-        if ($userEscolar) {
+        
+        if ($userEscolar && !empty($userEscolar)) {
             $vinculoUser = User_Escolar::where('user_id', '=', $userEscolar[0])->first();
             if ($vinculoUser && $vinculoUser != null) {
                 return redirect('/userEscolar/home')->with('msg', 'Não é possível deletar, pois o usuário possui vinculo com escolas!');
             }
             UserEscolar::where('user_id', $id)->delete();
+            User::where('id', $id)->delete();
+            return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
+        }else {
             User::where('id', $id)->delete();
             return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
         }

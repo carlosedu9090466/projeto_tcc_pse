@@ -21,7 +21,7 @@ class Agente extends Model
         $agente = DB::table('users')
             ->join('agentes', 'users.id', '=', 'agentes.user_id')
             ->where('agentes.id', '=', $id)
-            ->select('users.name', 'users.email', 'agentes.id', 'agentes.codigo_agente', 'agentes.cpf', 'agentes.sexo', 'agentes.dataNascimento', 'agentes.status_conta')
+            ->select('users.id as idUser','users.name', 'users.email', 'agentes.id', 'agentes.codigo_agente', 'agentes.cpf', 'agentes.sexo', 'agentes.dataNascimento', 'agentes.status_conta')
             ->get();
 
         return $agente[0];
