@@ -18,7 +18,7 @@ class UserFactory extends Factory
             'name' => 'adm',
             'email' => 'adm@adm.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$ZG7nkdR5HqXDIM80w7c63ePQ25cEWmEatV9HvQtg5NqLSibzY4ryC', // password
+            'password' => '$2y$10$lkkc.221RrHM21ifJegmtu25TzQCWakgkbJnLAL7XYDFFeDuZwVj2', // password
             'remember_token' => Str::random(10),
             'role_id' => 1
         ];

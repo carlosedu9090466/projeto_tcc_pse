@@ -12,34 +12,32 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">CPF</th>
+                    <th scope="col">#</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Código Agente</th>
                         <th scope="col">email</th>
-                        <th scope="col">Status Conta</th>
+                      <!-- <th scope="col">Status Conta</th> -->
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($agentes as $agente)
+                    @foreach ($responsaveis as $responsavel)
                         <tr>
                             <td scropt="row">{{ $loop->index + 1 }}</td>
-                            <td>{{ $agente->cpf }}</td>
-                            <td>{{ $agente->name }}</td>
-                            <td>{{ $agente->codigo_agente }}</td>
-                            <td>{{ $agente->email }}</td>
-                            <td>{{ $status = $agente->status_conta == 1 ? 'Ativo' : 'Desativado' }}</td>
+                          
+                            <td>{{ $responsavel->name }}</td>
+                    
+                            <td>{{ $responsavel->email }}</td>
+                           
                             {{-- editar e excluir --}}
                             <td>
                                 {{-- Escolas vinculadas --}}
-                                <a href="/agente/vincularEscola/{{ $agente->id }}" class="btn btn-primary">
+                                <!-- <a href="/agente/vincularEscola/{{ $responsavel->id }}" class="btn btn-primary">
                                     <ion-icon name="caret-down-circle-outline"></ion-icon>
-                                    Vinculo Escolar
-                                </a>
+                                    Visualizar Aluno
+                                </a> -->
                                 {{-- END --}}
-                                <form action="/agente/deletar/{{ $agente->id }}&{{ $agente->id_user }}" method="POST">
+                                <form action="/responsavel/deletar/{{ $responsavel->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
