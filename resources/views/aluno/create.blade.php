@@ -5,8 +5,8 @@
 {{-- conteudos dessa pagina --}}
 @section('content')
 
-    <div id="doenca-create-container" class="col-md-6 offset-md-3">
-        <h1>Matrícula Individual</h1>
+    <div id="cadastro-turma-container" class="col-md-6 offset-md-3">
+        <h1 id="title-cadastros">Matrícula Individual</h1>
         <form action="/alunos" method="POST">
             @csrf
 

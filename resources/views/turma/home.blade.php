@@ -11,7 +11,7 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($turmas) > 0)
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col" class="teste">#</th>
@@ -43,7 +43,7 @@
                                     <ion-icon name="create-outline"></ion-icon>
                                     visualizar
                                 </a>
-                                <a href="/turmas/edit/{{ $turma->id }}" class="btn btn-info edit-btn">
+                                <a href="/turma/edit/{{ $turma->id }}" class="btn btn-info edit-btn">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
                                 </a>

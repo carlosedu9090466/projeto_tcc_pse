@@ -30,6 +30,8 @@ Route::get('/escola/home', [EscolaController::class, 'index']);
 Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
 Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
 Route::post('/turmas', [TurmaController::class, 'store']);
+Route::get('/turma/edit/{id}', [TurmaController::class, 'editTurma']);
+Route::put('/turma/update/{id}', [TurmaController::class, 'update']);
 Route::get('/turmas/espelho/{id}', [TurmaController::class, 'espelhoTurma']);
 Route::get('/turmas/fecharTurma/{id}', [TurmaController::class, 'turmasAbertas']);
 Route::put('/turmas/fechar/{id}', [TurmaController::class, 'fecharTurma']);
