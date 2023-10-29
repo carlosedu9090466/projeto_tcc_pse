@@ -16,7 +16,7 @@
                 <ion-icon class="ions" name="school-outline"></ion-icon>
             </a> --}}
 
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -44,10 +44,10 @@
                                     Vinculo Escolar
                                 </a>
                                 {{-- END --}}
-                                <a href="/userEscolar/edit/{{ $user->id }}" class="btn btn-info edit-btn">
+                                {{-- <a href="/userEscolar/edit/{{ $user->id }}" class="btn btn-info edit-btn">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
-                                </a>
+                                </a> --}}
                                 <form action="/userEscolar/deletar/{{ $user->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')

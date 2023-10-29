@@ -30,6 +30,8 @@ Route::get('/escola/home', [EscolaController::class, 'index']);
 Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
 Route::get('/turmas/create/{id}', [TurmaController::class, 'create']);
 Route::post('/turmas', [TurmaController::class, 'store']);
+Route::get('/turma/edit/{id}', [TurmaController::class, 'editTurma']);
+Route::put('/turma/update/{id}', [TurmaController::class, 'update']);
 Route::get('/turmas/espelho/{id}', [TurmaController::class, 'espelhoTurma']);
 Route::get('/turmas/fecharTurma/{id}', [TurmaController::class, 'turmasAbertas']);
 Route::put('/turmas/fechar/{id}', [TurmaController::class, 'fecharTurma']);
@@ -51,6 +53,7 @@ Route::get('/responsavel/home', [ResponsavelController::class, 'index']);
 Route::get('/responsavel/create', [ResponsavelController::class, 'create']);
 Route::post('/responsavel', [ResponsavelController::class, 'store']);
 Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update']);
+Route::get('/adm/visulizaResponsaveis', [ResponsavelController::class, 'indexTodos']);
 //END
 
 //Responder_quiz
@@ -87,6 +90,7 @@ Route::get('/agente/turmas/{id}', [AgenteController::class, 'escolasTurmasAgente
 Route::get('/agente/visualizarAlunos/{id}', [AgenteController::class, 'visualizarAlunosTurma']);
 Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::class, 'visualizaQuizAluno']);
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
+Route::delete('/agente/deletar/{id}', [AgenteController::class, 'deleteUserAgente']);
 //END
 
 //ACOMPANHAMENTO

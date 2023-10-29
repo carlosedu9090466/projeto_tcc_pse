@@ -77,6 +77,31 @@ class TurmaController extends Controller
         return redirect('/turmas/home/' . $request->escola_id)->with('msg', 'turma cadastrada com sucesso!');
     }
 
+    public function editTurma($id_turma)
+    {
+        $id_escola = Session::get('escola_id');
+
+        $turma = Turma::where('id', '=', $id_turma)->where('escola_id', '=', $id_escola)->first();
+
+        if (!$turma && is_null($turma)) {
+            return redirect('/turmas/home/' . $id_escola)->with('msg', 'turma não encontrada!');
+        }
+        $series = Serie::all();
+        $salas = Sala::all();
+
+        return view('turma.editTurma', ['turma' => $turma, 'series' => $series, 'salas' => $salas]);
+    }
+
+    public function update(Request $request)
+    {
+        $id_escola = Session::get('escola_id');
+        $data = $request->all();
+
+        Turma::findOrFail($request->id)->update($data);
+        return redirect('/turmas/home/' . $id_escola)->with('msg', 'turma editada com sucesso!');
+    }
+
+
     public function espelhoTurma($id_turma)
     {
         $id_escola = Session::get('escola_id');

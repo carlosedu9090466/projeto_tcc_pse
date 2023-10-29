@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Responsavel;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ResponsavelController extends Controller
@@ -14,6 +15,12 @@ class ResponsavelController extends Controller
         $alunosVinculados = Responsavel::AlunosVinculadosCpfResponsavel($cpf);
         //dd($alunosVinculados);
         return view('responsavel.home', ['alunosVinculados' => $alunosVinculados]);
+    }
+
+    public function indexTodos()
+    {
+        $responsaveis = User::where('role_id','=',4)->get();
+        return view('responsavel.visualizarTodosRes', ['responsaveis' => $responsaveis]);
     }
 
 

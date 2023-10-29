@@ -38,4 +38,5 @@ class Responsavel extends Model
 
         return $alunosVinculadosCpf;
     }
+
 }

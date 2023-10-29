@@ -21,7 +21,7 @@ class UserEscolarController extends Controller
         //$userEscolar = UserEscolar::all();
 
         $userEscolar = User::where('role_id', '=', 2)->get();
-        //dd($user);
+
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
@@ -29,11 +29,15 @@ class UserEscolarController extends Controller
     {
         $id = auth()->user()->id;
 
-        $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->first();
 
-        $escolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar[0]->id);
+        if (!is_null($userEscolar)) {
+            $escolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar->id);
 
-        return view('userEscolar.homeUser', ['escolaVinculos' => $escolaVinculos]);
+            return view('userEscolar.homeUser', ['escolaVinculos' => $escolaVinculos]);
+        } else {
+            return view('userEscolar.homeUser');
+        }
     }
 
 
@@ -145,11 +149,20 @@ class UserEscolarController extends Controller
 
     public function deleteUserEscolar($id)
     {
-        $vinculoUser = User_Escolar::where('user_id', '=', $id)->first();
-        if ($vinculoUser) {
-            return redirect('/userEscolar/home')->with('msg', 'Não é possível deletar, pois o usuário possui vinculo!');
+
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->get()->pluck('id')->toArray();
+
+        if ($userEscolar && !empty($userEscolar)) {
+            $vinculoUser = User_Escolar::where('user_id', '=', $userEscolar[0])->first();
+            if ($vinculoUser && $vinculoUser != null) {
+                return redirect('/userEscolar/home')->with('msg', 'Não é possível deletar, pois o usuário possui vinculo com escolas!');
+            }
+            UserEscolar::where('user_id', $id)->delete();
+            User::where('id', $id)->delete();
+            return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
+        } else {
+            User::where('id', $id)->delete();
+            return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
         }
-        UserEscolar::where('id', $id)->delete();
-        return redirect('/userEscolar/home');
     }
 }

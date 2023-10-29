@@ -16,6 +16,15 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+thead {
+    background-color: #5dd55d; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto branca */
+}
+
+table tbody tr:hover {
+    background-color: rgba(255, 165, 0, 0.3); /* Cor de fundo ao passar o mouse sobre uma linha */
+}
+
 .row {
     margin: 0;
 }
@@ -50,6 +59,22 @@ header {
     color: black;
 
 }
+
+/*turma*/
+
+#cadastro-turma-container{
+    padding: 30px;
+    margin-top: 15px;
+    border: 1px solid #ffa500;
+    border-radius: 3%;
+}
+
+#title-cadastros{
+    color: #353e48;
+    text-align: center;
+}
+
+/*endturma*/
 
 /*Dashboard - doencas*/
 
