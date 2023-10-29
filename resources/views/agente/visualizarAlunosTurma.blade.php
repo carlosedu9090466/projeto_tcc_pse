@@ -11,7 +11,7 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($alunos) > 0)
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

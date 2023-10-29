@@ -21,7 +21,7 @@ class UserEscolarController extends Controller
         //$userEscolar = UserEscolar::all();
 
         $userEscolar = User::where('role_id', '=', 2)->get();
-        
+
         return view('userEscolar.home', ['userEscolar' => $userEscolar, 'escolas' => $escolas]);
     }
 
@@ -29,11 +29,15 @@ class UserEscolarController extends Controller
     {
         $id = auth()->user()->id;
 
-        $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->first();
 
-        $escolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar[0]->id);
+        if (!is_null($userEscolar)) {
+            $escolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar->id);
 
-        return view('userEscolar.homeUser', ['escolaVinculos' => $escolaVinculos]);
+            return view('userEscolar.homeUser', ['escolaVinculos' => $escolaVinculos]);
+        } else {
+            return view('userEscolar.homeUser');
+        }
     }
 
 
@@ -147,7 +151,7 @@ class UserEscolarController extends Controller
     {
 
         $userEscolar = UserEscolar::where('user_id', '=', $id)->get()->pluck('id')->toArray();
-        
+
         if ($userEscolar && !empty($userEscolar)) {
             $vinculoUser = User_Escolar::where('user_id', '=', $userEscolar[0])->first();
             if ($vinculoUser && $vinculoUser != null) {
@@ -156,7 +160,7 @@ class UserEscolarController extends Controller
             UserEscolar::where('user_id', $id)->delete();
             User::where('id', $id)->delete();
             return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
-        }else {
+        } else {
             User::where('id', $id)->delete();
             return redirect('/userEscolar/home')->with('msg', 'Usuário Escolar deletado com sucesso!');
         }

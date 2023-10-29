@@ -149,6 +149,7 @@ class AlunoController extends Controller
         if ($turma) {
             return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Não é possível excluir o aluno, pois a turma está fechada!');
         }
+        //verificar se o o aluno possui resposta
         Turma_Aluno::where('id_aluno', '=', $id_aluno)->where('id_turma', '=', $id_turma)->delete();
         return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Aluno excluido da turma com sucesso!');
     }

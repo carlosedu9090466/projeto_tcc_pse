@@ -11,8 +11,8 @@
 
     <div class="col-md-10 offset-md-1 dashboard-turmas-container">
         @if (count($escolasVinculadasAgente) > 0)
-            <table class="table table-striped">
-                <thead>
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Escola</th>

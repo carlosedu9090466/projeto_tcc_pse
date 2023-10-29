@@ -45,9 +45,11 @@
                         @csrf
                         <div class="form-group">
                             <label for="escola">Escola:</label>
-                            <input type="hidden" class="form-control" id="agenteEscolar" name="agenteEscolar" value="{{ $agente->id }}">
+                            <input type="hidden" class="form-control" id="agenteEscolar" name="agenteEscolar"
+                                value="{{ $agente->id }}">
                             <input type="hidden" class="form-control" id="agenteAtivo" name="agenteAtivo" value="1">
-                            <input type="hidden" class="form-control" id="UserAgenteID" name="UserAgenteID" value="{{ $agente->idUser }}">
+                            <input type="hidden" class="form-control" id="UserAgenteID" name="UserAgenteID"
+                                value="{{ $agente->idUser }}">
                             <select class="form-control" id="escola_id" name="escola_id" required>
                                 <option>Selecione a escola...</option>
                                 @foreach ($escolas as $escola)
@@ -71,8 +73,8 @@
                     @if ($agentesVinculados->UserAgenteVinculo->count() == 0)
                         <p>Esse Usuário Escolar não possui vinculo com nenhuma Escola!</p>
                     @else
-                        <table class="table table-striped">
-                            <thead>
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">INEP</th>

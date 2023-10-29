@@ -18,7 +18,7 @@
             <button type="button" class="btn btn-warning mb-2" data-toggle="modal" data-target="#staticBackdrop2">
                 Cadastrar IMC
             </button>
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
