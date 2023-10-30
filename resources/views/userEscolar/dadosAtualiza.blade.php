@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="{{$userEscolar ? $userEscolar->cpf : ''}}"
+            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" value="{{$userEscolar ? $userEscolar->cpf : ''}}"
                 placeholder="Digite o seu CPF">
             @if ($errors->has('cpf'))
                 <div class="alert alert-danger" role="alert">
@@ -43,9 +43,12 @@
             <div class="form-group">
                 <label for="sexo">Sexo:</label>
                 <select class="form-control" name="sexo" id="sexo">
-                    <option>Selecione o sexo...</option>
-                    <option value="0" {{$responsavel && $responsavel->sexo === 0 ? 'selected' : ''}} >Masculino</option>
-                    <option value="1" {{$responsavel && $responsavel->sexo === 1 ? 'selected' : ''}}>Feminino</option>
+                    <option>Selecione o gênero...</option>
+                    @foreach ($generos as $genero)
+                        <option value="{{ $genero->genero }}" {{ $userEscolar->sexo === $genero->genero ? 'selected' : '' }}>
+                            {{ $genero->genero }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
             @if ($errors->has('sexo'))

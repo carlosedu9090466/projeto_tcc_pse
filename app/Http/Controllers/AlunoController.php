@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aluno;
 use App\Models\Escola;
+use App\Models\Genero;
 use App\Models\Quiz;
 use App\Models\Quiz_Question;
 use App\Models\Responde_Quiz;
@@ -19,8 +20,8 @@ class AlunoController extends Controller
     public function create($id)
     {
         $escola = Escola::findOrfail($id);
-
-        return view('aluno.create', ['escola' => $escola]);
+        $generos = Genero::all();
+        return view('aluno.create', ['escola' => $escola, 'generos' => $generos]);
     }
 
     //verificar essa questão do retorno do valor

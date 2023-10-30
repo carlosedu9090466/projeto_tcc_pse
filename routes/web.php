@@ -17,6 +17,9 @@ use App\Http\Controllers\UserEscolarController;
 use App\Models\Responsavel;
 use Illuminate\Support\Facades\Auth;
 
+
+Route::middleware(['auth'])->group(function(){
+    
 //página home
 Route::get('/', [HomeController::class, 'index']);
 //pagina create doenca
@@ -25,6 +28,8 @@ Route::get('/escola/create', [EscolaController::class, 'create']);
 Route::post('/escola', [EscolaController::class, 'store']);
 Route::delete('/escola/{id}', [EscolaController::class, 'destroy']);
 Route::get('/escola/home', [EscolaController::class, 'index']);
+
+
 
 //Turmas - UserEscolar - views - acessando a escola com o user
 Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
@@ -56,11 +61,12 @@ Route::put('/responsavel/update/{id}', [ResponsavelController::class, 'update'])
 Route::get('/adm/visulizaResponsaveis', [ResponsavelController::class, 'indexTodos']);
 //END
 
+
+
 //Responder_quiz
 Route::post('/responsavel/responderQuiz/create', [AlunoController::class, 'createQuestionarios']);
 Route::post('responsavel/responderQuiz', [AlunoController::class, 'createResponde']);
 Route::post('/respostaQuiz', [AlunoController::class, 'storeResposta']);
-
 
 //User Escolar - criacao, vinculos Escolas
 Route::get('/userEscolar/homeUser', [UserEscolarController::class, 'homeUser']);
@@ -74,6 +80,7 @@ Route::post('/userEscolar/vinculo', [UserEscolarController::class, 'createVincul
 Route::delete('/userEscolar/deletar/{idUser}&{idEscola}', [UserEscolarController::class, 'deletecreate']);
 Route::delete('/userEscolar/deletar/{id}', [UserEscolarController::class, 'deleteUserEscolar']);
 //End
+
 
 //AGENTE DE SAÚDE
 Route::get('/agente/agenteHome', [AgenteController::class, 'index']);
@@ -92,6 +99,7 @@ Route::get('/agente/acompanhamento/{idAluno}&{idTurma}', [AgenteController::clas
 Route::delete('/agenteEscolar/deletar/{idAgente}&{idEscola}', [AgenteController::class, 'deletecreate']);
 Route::delete('/agente/deletar/{id}', [AgenteController::class, 'deleteUserAgente']);
 //END
+
 
 //ACOMPANHAMENTO
 Route::post('/acompanhamento', [AcompanhamentoController::class, 'storeAcompanhamento']);
@@ -148,7 +156,11 @@ route::delete('quiz/{id}&{id_repostas}', [QuizController::class, 'destroy']);
 //Quiz x pergunta
 Route::get('/quiz/vincular/{id}', [QuizController::class, 'createVinculo']);
 Route::post('/quiz/vincular', [QuizController::class, 'createVinculoQuiz']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

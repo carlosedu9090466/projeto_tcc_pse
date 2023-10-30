@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o seu CPF">
+                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" placeholder="Digite o seu CPF">
                 @if ($errors->has('cpf'))
                     <div class="alert alert-danger" role="alert">
                         {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
@@ -36,9 +36,12 @@
                 <div class="form-group">
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
-                        <option>Selecione o sexo...</option>
-                        <option value="0">Masculino</option>
-                        <option value="1">Feminino</option>
+                        <option>Selecione o seu gênero</option>
+                        @foreach ($generos as $genero)
+                        <option value="{{ $genero->genero }}">
+                            {{ $genero->genero }}
+                        </option>
+                    @endforeach
                     </select>
                 </div>
                 @if ($errors->has('sexo'))
