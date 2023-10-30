@@ -19,7 +19,7 @@ class CreateUserEscolarsTable extends Migration
             $table->char('cpf', 11)->unique();
             $table->string('telefone', 13);
             //$table->string('email', 100);
-            $table->boolean('sexo');
+            $table->string('sexo');
             $table->date('data_nascimento');
             $table->boolean('ativo_user')->default(1);
             $table->timestamps();
