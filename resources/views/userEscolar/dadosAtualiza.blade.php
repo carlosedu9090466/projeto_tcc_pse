@@ -7,7 +7,7 @@
 
     <div id="doenca-create-container" class="col-md-6 offset-md-3">
         <h1>Atualização cadastral</h1>
-        @if ($userEscolar)
+        @isset($userEscolar)
             <form action="/userEscolar/update/{{ $userEscolar->id }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="{{ $userEscolar->cpf }}"
+            <input type="text" class="form-control" id="cpf" name="cpf" value="{{$userEscolar ? $userEscolar->cpf : ''}}"
                 placeholder="Digite o seu CPF">
             @if ($errors->has('cpf'))
                 <div class="alert alert-danger" role="alert">
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="telefone">telefone:</label>
-            <input type="text" class="form-control" id="telefone" name="telefone" value="{{ $userEscolar->telefone }}"
+            <input type="text" class="form-control" id="telefone" name="telefone" value="{{$userEscolar ? $userEscolar->telefone : ''}}"
                 placeholder="Digite o seu celular">
             @if ($errors->has('telefone'))
                 <div class="alert alert-danger" role="alert">
@@ -44,8 +44,8 @@
                 <label for="sexo">Sexo:</label>
                 <select class="form-control" name="sexo" id="sexo">
                     <option>Selecione o sexo...</option>
-                    <option value="0">Masculino</option>
-                    <option value="1">Feminino</option>
+                    <option value="0" {{$responsavel && $responsavel->sexo === 0 ? 'selected' : ''}} >Masculino</option>
+                    <option value="1" {{$responsavel && $responsavel->sexo === 1 ? 'selected' : ''}}>Feminino</option>
                 </select>
             </div>
             @if ($errors->has('sexo'))

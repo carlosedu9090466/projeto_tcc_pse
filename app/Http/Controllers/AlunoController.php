@@ -179,7 +179,7 @@ class AlunoController extends Controller
 
         $quizs = Quiz_Question::quizQuestionario($request->id_quiz);
         $dado_aluno = $request->all();
-
+       
         return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
     }
 
@@ -193,11 +193,13 @@ class AlunoController extends Controller
 
         $quiz_question = $request->id_quiz_question;
         $resposta = $request->resposta;
+        
 
-
-        $verificaRespostaQuiz = Responde_Quiz::where('id_aluno', '=', $request->id_aluno)->where('id_turma', '=', $request->id_turma)->first();
+        //$verificaRespostaQuiz = Responde_Quiz::where('id_aluno', '=', $request->id_aluno)->where('id_turma', '=', $request->id_turma)->first();
         //dd($verificaRespostaQuiz);
-        if ($verificaRespostaQuiz != null) {
+        $verificaRespostaQuiz = Responde_Quiz::verificaQuizRespondido($request->id_quiz, $request->id_turma,$request->id_aluno);
+       
+        if ($verificaRespostaQuiz > 0) {
             return redirect('responsavel/home')->with('msg', 'Não é possível responder esse questionário, pois foi respondido!');
         }
 

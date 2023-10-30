@@ -47,7 +47,7 @@
                 @endforeach
             </div>
         @else
-            <p>Há não Questionário disponível, <a href="/responsavel/home">Voltar</a></p>
+            <p>Não há Questionário disponível, <a href="/responsavel/home">Voltar</a></p>
         @endif
     </div>
 

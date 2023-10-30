@@ -29,9 +29,9 @@ class ResponsavelController extends Controller
         //atualizar os dados na table responsavels
         $responsavel_id = auth()->user()->id;
         //verificar o dados restantes na table responsavels
-        $responsavel = Responsavel::where('user_id', $responsavel_id)->get();
-        //dd($responsavel[0]);
-        return view('responsavel.create', ['responsavel' => $responsavel[0]]);
+        $responsavel = Responsavel::where('user_id', $responsavel_id)->first();
+        
+        return view('responsavel.create', ['responsavel' => $responsavel]);
     }
 
     public function store(Request $request)
