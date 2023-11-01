@@ -35,10 +35,10 @@
                             <td>{{ $aluno->sexo }}</td>
                             <td>{{ $aluno->status_aluno_turma }}</td>
                             <td>
-                                <a href="/agente/acompanhamento/{{ $aluno->id }}&{{ $aluno->id_turma }}"
+                                <a href="/agente/visualizaQuestions/{{ $aluno->id }}&{{ $aluno->id_turma }}"
                                     class="btn btn-info edit-btn">
                                     <ion-icon name="bandage-outline"></ion-icon>
-                                    Visualizar Questionário
+                                    Visualizar Questionários
                                 </a>
                             </td>
                         </tr>

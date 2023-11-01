@@ -52,7 +52,22 @@ class Agente extends Model
         return $alunos;
     }
 
-    public static function alunoQuestionario($id_aluno, $id_turma)
+    public static function visualizaQuestionariosTodos($id_aluno, $id_turma){
+
+        $questionarios = DB::table('quizs')
+                    ->join('quiz_question', 'quiz_question.quiz_id', '=', 'quizs.id')
+                    ->join('responde_quiz', 'responde_quiz.id_quiz_question', '=','quiz_question.id')
+                    ->where('responde_quiz.id_turma', '=', $id_turma)
+                    ->where('responde_quiz.id_aluno', '=', $id_aluno)
+                    ->select('quizs.id', 'quizs.nome_quiz', 'quizs.date_inicio_quiz','quizs.date_fim_quiz', 'responde_quiz.id_aluno','responde_quiz.id_turma')
+                    ->distinct()
+                    ->get();
+
+        return $questionarios;
+    }
+
+
+    public static function alunoQuestionario($id_aluno, $id_turma,$id_quiz)
     {
         $questionario = DB::table('quiz_question')
             ->join('responde_quiz', 'responde_quiz.id_quiz_question', '=', 'quiz_question.id')
@@ -60,6 +75,7 @@ class Agente extends Model
             ->join('doencas', 'doencas.id', '=', 'questions.doenca_id')
             ->where('responde_quiz.id_aluno', '=', $id_aluno)
             ->where('responde_quiz.id_turma', '=', $id_turma)
+            ->where('quiz_question.quiz_id', '=',$id_quiz)
             ->select('responde_quiz.id_quiz_question as id_pergunta_quiz', 'questions.id as id_pergunta', 'questions.pergunta', 'responde_quiz.resposta_question as resposta', 'responde_quiz.data_resposta', 'doencas.nome as doenca')
             ->get();
 

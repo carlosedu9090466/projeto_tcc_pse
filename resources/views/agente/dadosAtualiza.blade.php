@@ -57,8 +57,8 @@
                 <label for="sexo">Sexo:</label>
                 <select class="form-control" name="sexo" id="sexo" required>
                     <option>Selecione o sexo...</option>
-                    <option value="Masculino" {{$responsavel && $responsavel->sexo === 'Masculino' ? 'selected' : ''}}>Masculino</option>
-                    <option value="Feminino" {{$responsavel && $responsavel->sexo === 'Feminino' ? 'selected' : ''}}>Feminino</option>
+                    <option value="Masculino" {{$agente && $agente->sexo === 'Masculino' ? 'selected' : ''}}>Masculino</option>
+                    <option value="Feminino" {{$agente && $agente->sexo === 'Feminino' ? 'selected' : ''}}>Feminino</option>
                 </select>
             </div>
             @if ($errors->has('sexo'))

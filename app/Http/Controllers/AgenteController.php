@@ -111,14 +111,23 @@ class AgenteController extends Controller
     {
         //query alunos turma
         $alunos = Agente::visualizarAlunosTurma($id_turma);
-        //dd($alunos);
+       
         return view('agente.visualizarAlunosTurma', ['alunos' => $alunos]);
     }
 
-    public function visualizaQuizAluno(int $id_aluno, int $id_turma)
+    public function questionariosDisponiveis(int $id_aluno, int $id_turma){
+
+        $questionariosDisponiveisAluno = Agente::visualizaQuestionariosTodos($id_aluno, $id_turma);
+        
+
+        return view('agente.visualizaQuestionarios', ['questionariosDisponiveisAluno' => $questionariosDisponiveisAluno]);
+    }
+
+
+    public function visualizaQuizAluno(int $id_aluno, int $id_turma, int $id_quiz)
     {
 
-        $alunoResposta = Agente::alunoQuestionario($id_aluno, $id_turma);
+        $alunoResposta = Agente::alunoQuestionario($id_aluno, $id_turma, $id_quiz);
         if ($alunoResposta->count() == 0) {
             dd('aqui');
         }
