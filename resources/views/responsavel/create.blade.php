@@ -48,7 +48,7 @@
                 <select class="form-control" name="sexo" id="sexo" required>
                     <option>Selecione o seu gênero</option>
                     @foreach ($generos as $genero)
-                        <option value="{{ $genero->genero }}" {{ $responsavel->sexo === $genero->genero ? 'selected' : '' }}>
+                        <option value="{{ $genero->genero }}" {{$responsavel && $responsavel->sexo == $genero->genero ? 'selected' : '' }}>
                             {{ $genero->genero }}
                         </option>
                     @endforeach
