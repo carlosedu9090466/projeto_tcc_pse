@@ -23,9 +23,10 @@ class Quiz_Question extends Model
             ->join('quiz_question', 'quiz_question.quiz_id', '=', 'quizs.id')
             ->join('questions', 'questions.id', '=', 'quiz_question.question_id')
             ->join('doencas', 'doencas.id', '=', 'questions.doenca_id')
+            ->leftJoin('responde_quiz', 'responde_quiz.id_quiz_question', '=', 'quiz_question.id')
             ->where('quizs.status_quiz', '=', 1)
             ->where('quizs.id', $ids)
-            ->select('quiz_question.id as id_quiz_question', 'questions.id as id_question', 'questions.pergunta', 'quizs.id as id_quiz', 'quizs.nome_quiz', 'quizs.date_inicio_quiz', 'quizs.date_fim_quiz', 'doencas.nome', 'doencas.sintomas')
+            ->select('quiz_question.id as id_quiz_question', 'questions.id as id_question', 'questions.pergunta','responde_quiz.resposta_question' ,'quizs.id as id_quiz', 'quizs.nome_quiz', 'quizs.date_inicio_quiz', 'quizs.date_fim_quiz', 'doencas.nome', 'doencas.sintomas')
             ->get();
 
         return $quiz;

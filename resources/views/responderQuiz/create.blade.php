@@ -6,12 +6,12 @@
 @section('content')
 
     <div class="col-md-10 offset-md-1 dashboard-title-container">
-        <h1>Questionario</h1>
+        <h1>Questionário</h1>
     </div>
 
     <div class="col-md-10 offset-md-1 dashboard-doencas-container">
         @if (count($quizs) > 0)
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -36,14 +36,13 @@
                                 <td scropt="row">{{ $loop->index + 1 }}</td>
                                 <td>{{ $quiz->pergunta }}</td>
                                 <td>{{ $quiz->nome }}</td>
-                                {{-- <input type="hidden" name="id_quiz" id="quiz" value="{{ $quiz->id_quiz }}"> --}}
-                                <input type="hidden" name="id_quiz_question[]" id="quiz_question"
-                                    value="{{ $quiz->id_quiz_question }}">
+                             <input type="hidden" name="id_quiz" id="quiz" value="{{ $quiz->id_quiz }}">
+                            <input type="hidden" name="id_quiz_question[]" id="quiz_question" value="{{ $quiz->id_quiz_question }}">
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio"
                                             name="<?= "resposta[{$quiz->id_quiz_question}]" ?>" id="id_resposta"
-                                        value="S">
+                                        value="S" {{$quiz->resposta_question != null && $quiz->resposta_question === 'S' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="exampleRadios1">
                                             SIM
                                         </label>
@@ -53,7 +52,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio"
                                             name="<?= "resposta[{$quiz->id_quiz_question}]" ?>" id="id_resposta"
-                                        value="N" checked>
+                                        value="N" {{$quiz->resposta_question == null || $quiz->resposta_question === 'N' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="exampleRadios2">
                                             Não
                                         </label>

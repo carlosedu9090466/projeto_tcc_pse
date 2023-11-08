@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genero;
 use App\Models\Responsavel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,9 +30,9 @@ class ResponsavelController extends Controller
         //atualizar os dados na table responsavels
         $responsavel_id = auth()->user()->id;
         //verificar o dados restantes na table responsavels
-        $responsavel = Responsavel::where('user_id', $responsavel_id)->get();
-        //dd($responsavel[0]);
-        return view('responsavel.create', ['responsavel' => $responsavel[0]]);
+        $responsavel = Responsavel::where('user_id', $responsavel_id)->first();
+        $generos = Genero::all();
+        return view('responsavel.create', ['responsavel' => $responsavel, 'generos' => $generos]);
     }
 
     public function store(Request $request)

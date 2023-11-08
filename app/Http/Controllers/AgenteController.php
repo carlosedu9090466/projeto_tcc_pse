@@ -7,6 +7,7 @@ use App\Models\Agente;
 use App\Models\Agente_Escola;
 use App\Models\Aluno;
 use App\Models\Escola;
+use App\Models\Genero;
 use App\Models\Imc;
 use App\Models\Role;
 use App\Models\Turma;
@@ -57,7 +58,7 @@ class AgenteController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect('/agente/createVinculo')->with('msg', 'Agente cadastrado com sucesso!');
+        return redirect('/agente/create')->with('msg', 'Usuário cadastrado com sucesso!');
     }
 
 
@@ -110,14 +111,23 @@ class AgenteController extends Controller
     {
         //query alunos turma
         $alunos = Agente::visualizarAlunosTurma($id_turma);
-        //dd($alunos);
+       
         return view('agente.visualizarAlunosTurma', ['alunos' => $alunos]);
     }
 
-    public function visualizaQuizAluno(int $id_aluno, int $id_turma)
+    public function questionariosDisponiveis(int $id_aluno, int $id_turma){
+
+        $questionariosDisponiveisAluno = Agente::visualizaQuestionariosTodos($id_aluno, $id_turma);
+        
+
+        return view('agente.visualizaQuestionarios', ['questionariosDisponiveisAluno' => $questionariosDisponiveisAluno]);
+    }
+
+
+    public function visualizaQuizAluno(int $id_aluno, int $id_turma, int $id_quiz)
     {
 
-        $alunoResposta = Agente::alunoQuestionario($id_aluno, $id_turma);
+        $alunoResposta = Agente::alunoQuestionario($id_aluno, $id_turma, $id_quiz);
         if ($alunoResposta->count() == 0) {
             dd('aqui');
         }
@@ -138,14 +148,14 @@ class AgenteController extends Controller
         $agente_id = auth()->user()->id;
 
         $agente = Agente::where('user_id', $agente_id)->count();
-
+        $generos = Genero::all();
         if ($agente == 0) {
-            return view('agente.createDados');
+            return view('agente.createDados', ['generos' => $generos]);
         }
 
         $agente = Agente::where('user_id', $agente_id)->get();
-
-        return view('agente.dadosAtualiza', ['agente' => $agente[0]]);
+    
+        return view('agente.dadosAtualiza', ['agente' => $agente[0], 'generos' => $generos]);
     }
 
     public function storeDados(Request $request)

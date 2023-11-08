@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escola;
+use App\Models\Genero;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\User_Escolar;
@@ -46,14 +47,16 @@ class UserEscolarController extends Controller
         $userEscolar_id = auth()->user()->id;
 
         $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->count();
-
+        $generos = Genero::all();
+        
         if ($userEscolar == 0) {
-            return view('userEscolar.create');
+            return view('userEscolar.create', ['generos' => $generos]);
         }
 
         $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->get();
-
-        return view('userEscolar.dadosAtualiza', ['userEscolar' => $userEscolar[0]]);
+        
+        
+        return view('userEscolar.dadosAtualiza', ['userEscolar' => $userEscolar[0], 'generos' => $generos]);
     }
 
     public function store(Request $request)

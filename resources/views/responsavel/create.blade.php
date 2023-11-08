@@ -8,7 +8,7 @@
 
     <div id="doenca-create-container" class="col-md-6 offset-md-3">
         <h1>Atualização cadastral</h1>
-        @if ($responsavel)
+        @isset($responsavel)
             <form action="/responsavel/update/{{ $responsavel->id }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -22,7 +22,7 @@
         <div class="form-group">
             <label for="nome">CPF:</label>
             <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11"
-                value="{{ $responsavel->cpf }}" placeholder="CPF - Responsavel">
+                value="{{$responsavel ? $responsavel->cpf : ''}}" placeholder="CPF - Responsavel">
             @if ($errors->has('cpf'))
                 <div class="alert alert-danger" role="alert">
                     {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="nome">Data de Nascimento:</label>
             <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
-                placeholder="Data de Nascimento" value="{{ $responsavel->dataNascimento }}">
+                placeholder="Data de Nascimento" value="{{$responsavel ? $responsavel->dataNascimento : ''}}">
             @if ($errors->has('dataNascimento'))
                 <div class="alert alert-danger" role="alert">
                     {{ $errors->has('dataNascimento') ? $errors->first('dataNascimento') : '' }}
@@ -46,9 +46,12 @@
             <div class="form-group">
                 <label for="sexo">Sexo:</label>
                 <select class="form-control" name="sexo" id="sexo" required>
-                    <option>Selecione o sexo...</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
+                    <option>Selecione o seu gênero</option>
+                    @foreach ($generos as $genero)
+                        <option value="{{ $genero->genero }}" {{$responsavel && $responsavel->sexo == $genero->genero ? 'selected' : '' }}>
+                            {{ $genero->genero }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
             @if ($errors->has('sexo'))
