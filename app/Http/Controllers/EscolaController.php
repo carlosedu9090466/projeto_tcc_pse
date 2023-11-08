@@ -77,6 +77,14 @@ class EscolaController extends Controller
         return redirect('/escola/home')->with('msg', 'Escola cadastrada com sucesso!');
     }
 
+    public function edit($id){
+        $escola = Escola::with('EscolaMunicipioOne')->findOrfail($id);
+        $municipios = Municipio::all();
+        
+        return view('escola.edit', ['escola' => $escola, 'municipios' => $municipios]);
+    }
+
+
     public function destroy($id)
     {
 

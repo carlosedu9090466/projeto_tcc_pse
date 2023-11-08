@@ -28,6 +28,7 @@ Route::get('/escola/create', [EscolaController::class, 'create']);
 Route::post('/escola', [EscolaController::class, 'store']);
 Route::delete('/escola/{id}', [EscolaController::class, 'destroy']);
 Route::get('/escola/home', [EscolaController::class, 'index']);
+Route::get('/escola/edit/{id}',[EscolaController::class, 'edit']);
 
 
 

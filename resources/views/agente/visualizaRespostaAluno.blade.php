@@ -18,6 +18,9 @@
             <button type="button" class="btn btn-warning mb-2" data-toggle="modal" data-target="#staticBackdrop2">
                 Cadastrar IMC
             </button>
+
+            <button class="btn btn-warning mb-2" onclick="history.back()">Voltar</button>
+           
             <table class="table">
                 <thead>
                     <tr>

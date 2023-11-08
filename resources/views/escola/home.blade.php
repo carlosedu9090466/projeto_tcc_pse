@@ -45,7 +45,7 @@
                             <td>{{ $escola->EscolaMunicipioOne->nome }}</td>
                             {{-- editar e excluir --}}
                             <td>
-                                <a href="/doenca/edit/{{ $escola->id }}" class="btn btn-info edit-btn">
+                                <a href="/escola/edit/{{ $escola->id }}" class="btn btn-info edit-btn">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
                                 </a>
