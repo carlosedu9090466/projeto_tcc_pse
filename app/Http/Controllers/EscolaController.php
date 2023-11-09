@@ -20,7 +20,7 @@ class EscolaController extends Controller
         $municipios = Municipio::all();
 
         if ($search) {
-            $escolas = Escola::where(
+            $escolas = Escola::with('EscolaMunicipioOne')->where(
                 [
                     ['nome', 'like', '%' . $search . '%'],
                 ]
@@ -83,6 +83,16 @@ class EscolaController extends Controller
         
         return view('escola.edit', ['escola' => $escola, 'municipios' => $municipios]);
     }
+
+    public function update(Request $request){
+
+        $data = $request->all();
+
+        Escola::findOrFail($request->id)->update($data);
+        
+        return redirect('/escola/home')->with('msg', 'Escola Atualizada com sucesso!');
+    }
+
 
 
     public function destroy($id)

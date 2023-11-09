@@ -5,31 +5,45 @@
 @section('content')
 
 
-    <div id="doenca-create-container" class="col-md-6 offset-md-3">
-        <h1>Vincule suas pergunta ao Quiz: {{ $quiz->nome_quiz }}</h1>
-        <form action="/quiz/vincular" method="POST">
-            @csrf
-            <div class="container-fluid d-flex flex-wrap">
+<div class="col-md-10 offset-md-1 dashboard-title-container">
+    <h1>Vincule as perguntas ao Quiz</h1>
+</div>
+
+<div class="col-md-10 offset-md-1 dashboard-doencas-container">
+    @if (count($questions) > 0)
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Pergunta</th>
+                <th scope="col">Doença</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            <form action="/quiz/vincular" method="POST">
+                @csrf
                 @foreach ($questions as $question)
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="card" style="width: 15rem; margin: 5px;">
-                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $question->doencas->nome }}</h5>
-                                    <p class="card-text">{{ $question->pergunta }}</p>
-                                    {{-- <p class="card-text">Sintomas: {{ $question->doencas->sintomas }}</p> --}}
-                                    <input type="text" name="quiz_id" value="{{ $quiz->id }}" hidden>
-                                    <input type="checkbox" name="question[]" value="{{ $question->id }}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <input type="text" name="quiz_id" value="{{ $quiz->id }}" hidden>
+                <tr>
+                    <td scropt="row">{{ $loop->index + 1 }}</td>
+                    <td>
+                        <input type="checkbox" name="question[]" value="{{$question->id}}">
+                    </td>
+                    <td>{{ $question->pergunta }}</td>
+                    <td>{{ $question->doencas->nome }}</td>
+                </tr>
                 @endforeach
-            </div>
-            <input type="submit" class="btn btn-primary" value="Inserir perguntas">
-        </form>
-    </div>
+        </tbody>
+    </table>
+    <input type="submit" class="btn btn-primary" value="Inserir perguntas">
+    </form>
+    @else
+    <p>Há não registro de doenças no banco de dados, <a href="/doenca/create">Inserir doença</a></p>
+    @endif
+</div>
 
 
 @endsection
