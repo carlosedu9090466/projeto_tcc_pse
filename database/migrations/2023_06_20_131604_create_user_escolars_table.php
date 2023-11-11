@@ -20,6 +20,7 @@ class CreateUserEscolarsTable extends Migration
             $table->string('telefone', 13);
             //$table->string('email', 100);
             $table->string('sexo');
+            $table->string('genero');
             $table->date('data_nascimento');
             $table->boolean('ativo_user')->default(1);
             $table->timestamps();

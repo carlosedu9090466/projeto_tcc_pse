@@ -19,6 +19,7 @@ class CreateAgentesTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->char('cpf', 11)->unique();
             $table->string('sexo');
+            $table->string('genero');
             $table->date('dataNascimento');
             $table->boolean('status_conta')->default(1);
             $table->timestamps();

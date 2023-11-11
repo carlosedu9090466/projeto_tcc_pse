@@ -13,7 +13,8 @@
 
             <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" placeholder="Digite o seu CPF">
+                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11"
+                    placeholder="Digite o seu CPF">
                 @if ($errors->has('cpf'))
                     <div class="alert alert-danger" role="alert">
                         {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
@@ -37,11 +38,30 @@
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
                         <option>Selecione o seu gênero</option>
+                        @foreach ($sexos as $sexo)
+                            <option value="{{ $sexo->sexo }}">
+                                {{ $sexo->sexo }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @if ($errors->has('sexo'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $errors->has('sexo') ? $errors->first('sexo') : '' }}
+                    </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="sexo">Gênero:</label>
+                    <select class="form-control" name="genero" id="genero">
+                        <option>Selecione o seu gênero</option>
                         @foreach ($generos as $genero)
-                        <option value="{{ $genero->genero }}">
-                            {{ $genero->genero }}
-                        </option>
-                    @endforeach
+                            <option value="{{ $genero->genero }}">
+                                {{ $genero->genero }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 @if ($errors->has('sexo'))

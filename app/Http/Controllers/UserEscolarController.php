@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Escola;
 use App\Models\Genero;
 use App\Models\Role;
+use App\Models\Sexo;
 use App\Models\User;
 use App\Models\User_Escolar;
 use App\Models\UserEscolar;
@@ -48,15 +49,16 @@ class UserEscolarController extends Controller
 
         $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->count();
         $generos = Genero::all();
-        
+        $sexos = Sexo::all();
+
         if ($userEscolar == 0) {
-            return view('userEscolar.create', ['generos' => $generos]);
+            return view('userEscolar.create', ['generos' => $generos, 'sexos' => $sexos]);
         }
 
         $userEscolar = UserEscolar::where('user_id', $userEscolar_id)->get();
-        
-        
-        return view('userEscolar.dadosAtualiza', ['userEscolar' => $userEscolar[0], 'generos' => $generos]);
+
+
+        return view('userEscolar.dadosAtualiza', ['userEscolar' => $userEscolar[0], 'generos' => $generos, 'sexos' => $sexos]);
     }
 
     public function store(Request $request)
@@ -75,6 +77,7 @@ class UserEscolarController extends Controller
             'telefone' => 'required',
             //'email' => 'required',
             'sexo' => 'required',
+            'genero' => 'required',
             'data_nascimento' => 'required',
             //'user_id' => 'required'
         ];
@@ -90,6 +93,7 @@ class UserEscolarController extends Controller
         $userEscolar->telefone = $request->telefone;
         //$userEscolar->email = $request->email;
         $userEscolar->sexo = $request->sexo;
+        $userEscolar->genero = $request->genero;
         $userEscolar->user_id = $user_id;
         $userEscolar->data_nascimento = $request->data_nascimento;
         $userEscolar->save();
@@ -110,18 +114,21 @@ class UserEscolarController extends Controller
     public function createUserEscolar($id)
     {
         //$userEscolar = UserEscolar::findOrfail($id)->first();
-        $userEscolar = UserEscolar::where('user_id', '=', $id)->get();
 
-        //dd($userEscolar);
-        if ($userEscolar->count() == 0) {
+        $userEscolar = UserEscolar::where('user_id', '=', $id)->first();
+        //bugado
+
+        if ($userEscolar == null && is_null($userEscolar)) {
+
             return redirect('/userEscolar/home')->with('msg', 'O Usuário Escolar precisar completar os dados cadastrias para pode vincular a escola!');
+        } else {
+            $escolas = Escola::all();
+            $userAtivo = User::where('id', '=', $id)->get();
+
+            $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar->id);
+
+            return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar, 'userAtivo' => $userAtivo[0], 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
         }
-        $escolas = Escola::all();
-        $userAtivo = User::where('id', '=', $id)->get();
-
-        $UserEscolaVinculos = UserEscolar::with('UserEscolarVinculo')->findOrFail($userEscolar[0]->id);
-
-        return view('userEscolar.createVinculoEscola', ['userEscolar' => $userEscolar[0], 'userAtivo' => $userAtivo[0], 'escolas' => $escolas, 'UserEscolaVinculos' => $UserEscolaVinculos]);
     }
 
     public function createVinculo(Request $request)
@@ -130,7 +137,7 @@ class UserEscolarController extends Controller
         //verifica se possui vinculo com a escola selecionada para salvar!
         $existeVinculo = User_Escolar::where('escola_id', '=', $request->escola_id)->where('user_id', '=', $request->userEscolar)->first();
         if ($existeVinculo) {
-            return redirect('/userEscolar/vincularEscola/' . $request->userEscolar)->with('msg', 'Usuário já possui vinculado com essa escola!');
+            return redirect('/userEscolar/vincularEscola/' . $request->userId)->with('msg', 'Usuário já possui vinculado com essa escola!');
         }
 
         $vinculoUserEscolar = new User_Escolar;
@@ -140,7 +147,7 @@ class UserEscolarController extends Controller
         $vinculoUserEscolar->save();
 
         //return redirect('/userEscolar/home')->with('msg', 'Vinculo Estabelecido com sucesso!');
-        return redirect('/userEscolar/vincularEscola/' . $request->userEscolar)->with('msg', 'Vinculo Estabelecido com sucesso!');
+        return redirect('/userEscolar/vincularEscola/' . $request->userId)->with('msg', 'Vinculo Estabelecido com sucesso!');
     }
 
     public function deletecreate(int $idUser, int $idEscola)

@@ -49,6 +49,8 @@
                             <input type="hidden" class="form-control" id="userEscolar" name="userEscolar"
                                 value="{{ $userEscolar->id }}">
                             <input type="hidden" class="form-control" id="userAtivo" name="userAtivo" value="1">
+                            <input type="hidden" class="form-control" id="userId" name="userId"
+                                value="{{ $userAtivo->id }}">
                             <select class="form-control" id="escola_id" name="escola_id" required>
                                 <option>Selecione a escola...</option>
                                 @foreach ($escolas as $escola)

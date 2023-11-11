@@ -14,12 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       
+
         $this->call(MunicipioSeeder::class);
         $this->call(GenerosSexuais::class);
         $this->call(RoleSeeder::class);
         $this->call(SerieSeeder::class);
         $this->call(SalaSeeder::class);
+        $this->call(SexoSeeder::class);
         \App\Models\User::factory(1)->create();
     }
 }

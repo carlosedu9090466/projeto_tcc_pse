@@ -45,10 +45,33 @@
             <div class="form-group">
                 <div class="form-group">
                     <label for="sexo">Sexo:</label>
-                    <select class="form-control" name="sexo" id="sexo" required>
-                        <option>Selecione o sexo...</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
+                    <select class="form-control" name="sexo" id="sexo">
+                        <option>Selecione o seu gênero</option>
+                        @foreach ($sexos as $sexo)
+                            <option value="{{ $sexo->sexo }}">
+                                {{ $sexo->sexo }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @if ($errors->has('sexo'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $errors->has('sexo') ? $errors->first('sexo') : '' }}
+                    </div>
+                @endif
+            </div>
+
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="sexo">Gênero:</label>
+                    <select class="form-control" name="genero" id="genero">
+                        <option>Selecione o seu gênero</option>
+                        @foreach ($generos as $genero)
+                            <option value="{{ $genero->genero }}">
+                                {{ $genero->genero }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 @if ($errors->has('sexo'))

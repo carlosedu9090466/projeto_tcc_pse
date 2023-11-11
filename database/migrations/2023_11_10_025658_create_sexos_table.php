@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateResponsavelsTable extends Migration
+class CreateSexosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateResponsavelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('responsavels', function (Blueprint $table) {
+        Schema::create('sexos', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf', 11)->unique();
             $table->string('sexo');
-            $table->string('genero');
-            $table->date('dataNascimento');
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -33,6 +27,6 @@ class CreateResponsavelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('responsavels');
+        Schema::dropIfExists('sexos');
     }
 }

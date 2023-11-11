@@ -10,6 +10,7 @@ use App\Models\Escola;
 use App\Models\Genero;
 use App\Models\Imc;
 use App\Models\Role;
+use App\Models\Sexo;
 use App\Models\Turma;
 use App\Models\User;
 use DateTime;
@@ -68,7 +69,7 @@ class AgenteController extends Controller
         $agente_id = auth()->user()->id;
         $escolasVinculadasAgente = Agente::agenteVinculoEscolas($agente_id);
         //dd($escolasVinculadasAgente);
-      
+
         return view('agente.home', ['escolasVinculadasAgente' => $escolasVinculadasAgente]);
     }
 
@@ -80,7 +81,7 @@ class AgenteController extends Controller
         //$userAgente = User::where('role_id', '=', 3)->get();
 
         if ($search) {
-            $userAgente = User::where('role_id','=',3)->where(
+            $userAgente = User::where('role_id', '=', 3)->where(
                 [
                     ['name', 'like', '%' . $search . '%'],
                 ]
@@ -94,7 +95,7 @@ class AgenteController extends Controller
             $userAgente = User::where('role_id', '=', 3)->get();
         }
 
-      
+
         //return view('agente.createVinculo', ['agentes' => $agentes]);
         return view('agente.createVinculo', ['userAgente' => $userAgente, 'search' => $search]);
     }
@@ -111,14 +112,15 @@ class AgenteController extends Controller
     {
         //query alunos turma
         $alunos = Agente::visualizarAlunosTurma($id_turma);
-       
+
         return view('agente.visualizarAlunosTurma', ['alunos' => $alunos]);
     }
 
-    public function questionariosDisponiveis(int $id_aluno, int $id_turma){
+    public function questionariosDisponiveis(int $id_aluno, int $id_turma)
+    {
 
         $questionariosDisponiveisAluno = Agente::visualizaQuestionariosTodos($id_aluno, $id_turma);
-        
+
 
         return view('agente.visualizaQuestionarios', ['questionariosDisponiveisAluno' => $questionariosDisponiveisAluno]);
     }
@@ -149,13 +151,14 @@ class AgenteController extends Controller
 
         $agente = Agente::where('user_id', $agente_id)->count();
         $generos = Genero::all();
+        $sexos = Sexo::all();
         if ($agente == 0) {
-            return view('agente.createDados', ['generos' => $generos]);
+            return view('agente.createDados', ['generos' => $generos, 'sexos' => $sexos]);
         }
 
         $agente = Agente::where('user_id', $agente_id)->get();
-    
-        return view('agente.dadosAtualiza', ['agente' => $agente[0], 'generos' => $generos]);
+
+        return view('agente.dadosAtualiza', ['agente' => $agente[0], 'generos' => $generos, 'sexos' => $sexos]);
     }
 
     public function storeDados(Request $request)
@@ -166,6 +169,7 @@ class AgenteController extends Controller
             'cpf' => 'required|unique:agentes',
             'dataNascimento' => 'required',
             'sexo' => 'required',
+            'genero' => 'required',
         ];
 
         $feedback = [
@@ -180,6 +184,7 @@ class AgenteController extends Controller
         $agente->cpf = $request->cpf;
         $agente->codigo_agente = $request->codigo_agente;
         $agente->sexo = $request->sexo;
+        $agente->genero = $request->genero;
         $agente->dataNascimento = $request->dataNascimento;
         $agente->user_id = $agente_id;
 
@@ -201,24 +206,24 @@ class AgenteController extends Controller
     //vincular escolas e agente
     public function createAgenteEscolar($id)
     {
-        
-        $dado_agente = Agente::where('user_id','=',$id)->first();
-        
-        if(is_null($dado_agente)){
+
+        $dado_agente = Agente::where('user_id', '=', $id)->first();
+
+        if (is_null($dado_agente)) {
             return redirect('/agente/createVinculo')->with('msg', 'É preciso o agente completar os dados para a possível vinculação!');
         }
-        
+
         $agente = Agente::AgenteInformacoes($dado_agente->id);
-       
+
         $escolas = Escola::all();
         $agentesVinculados = Agente::with('UserAgenteVinculo')->where('id', '=', $dado_agente->id)->get();
-        
+
         return view('agente.vincularEscola', ['agente' => $agente, 'escolas' => $escolas, 'agentesVinculados' => $agentesVinculados[0]]);
     }
 
     public function storeVinculoEscolar(Request $request)
     {
-       
+
         $existeVinculo = Agente_Escola::where('escola_id', '=', $request->escola_id)->where('agente_id', '=', $request->agenteEscolar)->first();
         if ($existeVinculo) {
             return redirect('/agente/vincularEscola/' . $request->UserAgenteID)->with('msg', 'Usuário já possui vinculado com essa escola!');
@@ -246,26 +251,24 @@ class AgenteController extends Controller
     }
     public function deleteUserAgente(int $idUserAgente)
     {
-        $idAgente = Agente::where('user_id','=',$idUserAgente)->first();
+        $idAgente = Agente::where('user_id', '=', $idUserAgente)->first();
 
-        if($idAgente && $idAgente != null){
+        if ($idAgente && $idAgente != null) {
             $vinculoAgenteEscola = Agente_Escola::where('agente_id', '=', $idAgente)->first();
-        $acompanhamento = Acompanhamento::where('id_agente', '=', $idAgente)->select('id_aluno')->distinct()->get()->count();
-        if ($acompanhamento && $acompanhamento != null) {
-            return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui dados de acompanhamento!');
-        } else if ($vinculoAgenteEscola && $vinculoAgenteEscola != null) {
-            return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui vinculo com escolas!');
+            $acompanhamento = Acompanhamento::where('id_agente', '=', $idAgente)->select('id_aluno')->distinct()->get()->count();
+            if ($acompanhamento && $acompanhamento != null) {
+                return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui dados de acompanhamento!');
+            } else if ($vinculoAgenteEscola && $vinculoAgenteEscola != null) {
+                return redirect('/agente/createVinculo')->with('msg', 'Não é possível deletar, pois o agente possui vinculo com escolas!');
+            } else {
+                Agente::where('user_id', $idAgente)->delete();
+                User::where('id', $idUserAgente)->delete();
+
+                return redirect('/agente/createVinculo')->with('msg', 'Agente Saúde deletado com sucesso!');
+            }
         } else {
-            Agente::where('user_id', $idAgente)->delete();
-            User::where('id', $idUserAgente)->delete();
-
-            return redirect('/agente/createVinculo')->with('msg', 'Agente Saúde deletado com sucesso!');
-        }
-        }else{
             User::where('id', $idUserAgente)->delete();
             return redirect('/agente/createVinculo')->with('msg', 'Agente Saúde deletado com sucesso!');
         }
-
-      
     }
 }
