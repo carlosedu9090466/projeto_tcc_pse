@@ -9,6 +9,8 @@ use App\Models\Aluno;
 use App\Models\Escola;
 use App\Models\Genero;
 use App\Models\Imc;
+use App\Models\Log;
+use App\Models\Quiz;
 use App\Models\Role;
 use App\Models\Sexo;
 use App\Models\Turma;
@@ -135,12 +137,17 @@ class AgenteController extends Controller
         }
         $aluno = Aluno::findOrfail($id_aluno);
         $agente_id = auth()->user()->id;
-        $agente = Agente::where('user_id', $agente_id)->get();
+        $agente = Agente::where('user_id', $agente_id)->first();
         $turma = Turma::findOrfail($id_turma);
         $observacao = Acompanhamento::where('id_aluno', $id_aluno)->where('id_turma', $id_turma)->get();
         $imc = Imc::where('id_aluno', $id_aluno)->get();
+        $quiz = Quiz::findOrfail($id_quiz);
 
-        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente[0], 'turma' => $turma, 'observacao' => $observacao, 'imc' => $imc]);
+        //log para salvar a visualiação das respostas por parte do agente
+        Log::salvandoLog($agente->cpf, 'verificando as respostas do aluno: ' . $aluno->nome . ' Do quiz: ' . $quiz->nome_quiz);
+
+
+        return view('agente.visualizaRespostaAluno', ['alunoResposta' => $alunoResposta, 'aluno' => $aluno, 'agente' => $agente, 'turma' => $turma, 'observacao' => $observacao, 'imc' => $imc]);
     }
 
 

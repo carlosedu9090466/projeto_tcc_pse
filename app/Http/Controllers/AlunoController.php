@@ -8,6 +8,7 @@ use App\Models\Genero;
 use App\Models\Quiz;
 use App\Models\Quiz_Question;
 use App\Models\Responde_Quiz;
+use App\Models\Sexo;
 use App\Models\Turma;
 use App\Models\Turma_Aluno;
 use Carbon\Carbon;
@@ -22,6 +23,25 @@ class AlunoController extends Controller
         $escola = Escola::findOrfail($id);
         $generos = Genero::all();
         return view('aluno.create', ['escola' => $escola, 'generos' => $generos]);
+    }
+
+    public function edit($id)
+    {
+        $aluno = Aluno::findOrfail($id);
+        $generos = Genero::all();
+        $sexos = Sexo::all();
+
+        return view('aluno.edit', ['aluno' => $aluno, 'generos' => $generos, 'sexos' => $sexos]);
+    }
+
+    public function update(Request $request)
+    {
+
+        $data = $request->all();
+
+        Aluno::findOrFail($request->id)->update($data);
+
+        return redirect('/alunos/visualiza/' . $request->inep)->with('msg', 'Aluno editado com sucesso!');;
     }
 
     //verificar essa questão do retorno do valor
@@ -180,7 +200,7 @@ class AlunoController extends Controller
 
         $quizs = Quiz_Question::quizQuestionario($request->id_quiz);
         $dado_aluno = $request->all();
-       
+
         return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
     }
 
@@ -194,12 +214,12 @@ class AlunoController extends Controller
 
         $quiz_question = $request->id_quiz_question;
         $resposta = $request->resposta;
-        
+
 
         //$verificaRespostaQuiz = Responde_Quiz::where('id_aluno', '=', $request->id_aluno)->where('id_turma', '=', $request->id_turma)->first();
         //dd($verificaRespostaQuiz);
-        $verificaRespostaQuiz = Responde_Quiz::verificaQuizRespondido($request->id_quiz, $request->id_turma,$request->id_aluno);
-       
+        $verificaRespostaQuiz = Responde_Quiz::verificaQuizRespondido($request->id_quiz, $request->id_turma, $request->id_aluno);
+
         if ($verificaRespostaQuiz > 0) {
             return redirect('responsavel/home')->with('msg', 'Não é possível responder esse questionário, pois foi respondido!');
         }

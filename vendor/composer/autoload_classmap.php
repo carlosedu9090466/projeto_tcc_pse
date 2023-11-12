@@ -183,6 +183,7 @@ return array(
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
     'Database\\Seeders\\SalaSeeder' => $baseDir . '/database/seeders/SalaSeeder.php',
     'Database\\Seeders\\SerieSeeder' => $baseDir . '/database/seeders/SerieSeeder.php',
+    'Database\\Seeders\\SexoSeeder' => $baseDir . '/database/seeders/SexoSeeder.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

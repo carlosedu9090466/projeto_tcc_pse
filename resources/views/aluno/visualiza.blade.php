@@ -52,7 +52,7 @@
                             <td>{{ $aluno->cpf_responsavel }}</td>
 
                             <td>
-                                <a href="/alunos/edit/{{ $aluno->id }}" class="btn btn-info edit-btn">
+                                <a href="/aluno/edit/{{ $aluno->id }}" class="btn btn-info edit-btn">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Editar
                                 </a>
