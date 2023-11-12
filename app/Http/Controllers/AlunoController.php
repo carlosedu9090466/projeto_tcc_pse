@@ -22,7 +22,8 @@ class AlunoController extends Controller
     {
         $escola = Escola::findOrfail($id);
         $generos = Genero::all();
-        return view('aluno.create', ['escola' => $escola, 'generos' => $generos]);
+        $sexos = Sexo::all();
+        return view('aluno.create', ['escola' => $escola, 'generos' => $generos, 'sexos' => $sexos]);
     }
 
     public function edit($id)
@@ -81,6 +82,7 @@ class AlunoController extends Controller
             'cpf_responsavel' => 'required',
             'dataNascimento' => 'required',
             'sexo' => 'required',
+            'genero' => 'required',
             //'escola_id' => 'exists:escolas,id'
         ];
 
@@ -102,6 +104,7 @@ class AlunoController extends Controller
         $aluno->cpf_responsavel = $request->cpf_responsavel;
         $aluno->dataNascimento = $request->dataNascimento;
         $aluno->sexo = $request->sexo;
+        $aluno->genero = $request->genero;
         $aluno->inep = $request->escola_id;
 
         $aluno->save();

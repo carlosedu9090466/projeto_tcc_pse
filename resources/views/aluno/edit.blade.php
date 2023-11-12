@@ -18,6 +18,12 @@
 
                 </div>
                 <div class="col-md-3 mb-3">
+                    <label for="validationServer03">Data de Nascimento:</label>
+                    <input type="text" class="form-control is-valid" id="validationServer03"
+                        value="{{ date('Y-m-d', strtotime($aluno->dataNascimento)) }}" name="dataNascimento"
+                        aria-describedby="validationServer03Feedback" required>
+                </div>
+                <div class="col-md-3 mb-3">
                     <label for="validationServer02">Filiação I:</label>
                     <input type="text" class="form-control is-valid" id="validationServer02" name="nome_pai"
                         aria-describedby="validationServer02" value="{{ $aluno->nome_pai }}" required>
@@ -51,19 +57,26 @@
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label for="validationServer03">Data de Nascimento:</label>
-                    <input type="text" class="form-control is-valid" id="validationServer03"
-                        value="{{ date('Y-m-d', strtotime($aluno->dataNascimento)) }}" name="dataNascimento"
-                        aria-describedby="validationServer03Feedback" required>
+                    <label for="validationServer04">Sexo</label>
+                    <select class="custom-select is-valid" id="validationServer04" name="sexo"
+                        aria-describedby="validationServer04Feedback" required>
+                        <option selected disabled value="">Sexo</option>
+                        @foreach ($sexos as $sexo)
+                            <option value="{{ $sexo->sexo }}" {{ $sexo->sexo == $aluno->sexo ? 'selected' : '' }}>
+                                {{ $sexo->sexo }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <label for="validationServer04">Gênero</label>
-                    <select class="custom-select is-valid" id="validationServer04" name="sexo"
+                    <select class="custom-select is-valid" id="validationServer04" name="genero"
                         aria-describedby="validationServer04Feedback" required>
                         <option selected disabled value="">Gênero</option>
                         @foreach ($generos as $genero)
-                            <option value="{{ $genero->genero }}" {{ $genero->genero == $aluno->sexo ? 'selected' : '' }}>
+                            <option value="{{ $genero->genero }}"
+                                {{ $genero->genero == $aluno->genero ? 'selected' : '' }}>
                                 {{ $genero->genero }}
                             </option>
                         @endforeach

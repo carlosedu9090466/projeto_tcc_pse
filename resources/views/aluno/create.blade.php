@@ -47,17 +47,36 @@
                 <div class="form-group">
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
-                        <option>Selecione o seu gênero...</option>
-                        @foreach ($generos as $genero)
-                        <option value="{{ $genero->genero }}">
-                            {{ $genero->genero }}
-                        </option>
-                    @endforeach
+                        <option>Selecione o seu sexo...</option>
+                        @foreach ($sexos as $sexo)
+                            <option value="{{ $sexo->sexo }}">
+                                {{ $sexo->sexo }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 @if ($errors->has('sexo'))
                     <div class="alert alert-danger" role="alert">
                         {{ $errors->has('sexo') ? $errors->first('sexo') : '' }}
+                    </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="sexo">Gênero:</label>
+                    <select class="form-control" name="genero" id="genero">
+                        <option>Selecione o seu gênero...</option>
+                        @foreach ($generos as $genero)
+                            <option value="{{ $genero->genero }}">
+                                {{ $genero->genero }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @if ($errors->has('genero'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $errors->has('genero') ? $errors->first('genero') : '' }}
                     </div>
                 @endif
             </div>
@@ -116,7 +135,8 @@
 
             <div class="form-group">
                 <label for="nome">Número:</label>
-                <input type="number" class="form-control" id="numero" name="numero" placeholder="Endereço - Número">
+                <input type="number" class="form-control" id="numero" name="numero"
+                    placeholder="Endereço - Número">
                 @if ($errors->has('numero'))
                     <div class="alert alert-danger" role="alert">
                         {{ $errors->has('numero') ? $errors->first('numero') : '' }}

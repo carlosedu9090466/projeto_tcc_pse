@@ -25,6 +25,7 @@ class CreateAlunosTable extends Migration
             $table->string('cpf_responsavel', 11);
             $table->date('dataNascimento');
             $table->string('sexo', 20);
+            $table->string('genero');
             $table->string('inep', 20);
             $table->timestamps();
         });
