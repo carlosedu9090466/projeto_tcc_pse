@@ -15,7 +15,7 @@
 
 <div class="alert alert-danger col-md-6 offset-md-1" role="alert">
     <div class="d-flex align-items-center">
-        <strong>Não há registro de escolas, municipios e alunos no sistema...</strong>
+        <strong>Não há registro de alunos inseridos com o respectivo gênero e sexo...</strong>
         <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
     </div>
 </div>
