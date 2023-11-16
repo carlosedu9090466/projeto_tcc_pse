@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/scripts.js"></script>
 
@@ -91,6 +91,20 @@
                         </div>
 
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            Relatórios
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/relatorios/home">Cadastrar Usuários</a>
+                            <div class="dropdown-divider"></div>
+
+                        </div>
+
+                    </li>
+
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

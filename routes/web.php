@@ -5,6 +5,7 @@ use App\Http\Controllers\AgenteController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\DoencaController;
 use App\Http\Controllers\EscolaController;
+use App\Http\Controllers\GraficosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImcController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/escola/edit/{id}', [EscolaController::class, 'edit']);
     Route::put('/escola/update/{id}', [EscolaController::class, 'update']);
 
+    /*GRAFICOS ROUTE*/
+    Route::get('/relatorios/home', [GraficosController::class, 'index']);
 
+
+
+    /*END GRAFICOS ROUTE*/
 
     //Turmas - UserEscolar - views - acessando a escola com o user
     Route::get('/turmas/home/{id}', [TurmaController::class, 'index']);
