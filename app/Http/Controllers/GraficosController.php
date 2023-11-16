@@ -20,7 +20,7 @@ class GraficosController extends Controller
         ])
             ->groupBy('genero')
             ->get();
-
+        //teste
         foreach ($alunosData as $aluno) {
             $alunoGenero[] = $aluno->genero;
             $totalGenero[] = $aluno->total;
