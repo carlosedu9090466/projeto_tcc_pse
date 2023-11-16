@@ -34,9 +34,6 @@ Route::middleware(['auth'])->group(function () {
 
     /*GRAFICOS ROUTE*/
     Route::get('/relatorios/home', [GraficosController::class, 'index']);
-
-
-
     /*END GRAFICOS ROUTE*/
 
     //Turmas - UserEscolar - views - acessando a escola com o user
