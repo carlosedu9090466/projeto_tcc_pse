@@ -24,6 +24,26 @@ thead {
 table tbody tr:hover {
     background-color: rgba(255, 165, 0, 0.3); /* Cor de fundo ao passar o mouse sobre uma linha */
 }
+h1{
+    font-size: 2.5rem;
+    color: #ffa500;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover{
+    color: #ffa500;
+}
 
 
 .row {
@@ -33,6 +53,24 @@ table tbody tr:hover {
 .container-fluid {
     padding: 0;
 }
+
+/*INICIO CAROUSEL*/
+#carouselExampleIndicators {
+    max-width: 100%;
+    margin: 20px 0;
+}
+
+.carousel-inner img {
+    width: 100%;
+    border-radius: 10px; /* Adicione bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione uma sombra sutil */
+}
+
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+/*END carousel*/
 
 /*escola*/
 /* .container-edite{
