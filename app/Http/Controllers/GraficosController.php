@@ -13,19 +13,27 @@ class GraficosController extends Controller
 
     public function index()
     {
-
+        
         $alunosData = Aluno::select([
             DB::raw('genero'),
             DB::raw('COUNT(id) as total')
         ])
             ->groupBy('genero')
             ->get();
-        //teste
-        foreach ($alunosData as $aluno) {
-            $alunoGenero[] = $aluno->genero;
-            $totalGenero[] = $aluno->total;
+        
+        if($alunosData->count() > 0){
+            
+            foreach ($alunosData as $aluno) {
+                $alunoGenero[] = $aluno->genero;
+                $totalGenero[] = $aluno->total;
+            }
+        }else{
+           
+            $alunoGenero = [];
+            $totalGenero = [];
         }
-
+      
+    
         $dadosGerais = Escola::select('municipios.nome as municipio', 'escolas.nome as escola')
             ->join('municipios', 'escolas.localidade_id', '=', 'municipios.id')
             ->join('turmas', 'turmas.escola_id', '=', 'escolas.id')
