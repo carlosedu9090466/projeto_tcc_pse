@@ -8,20 +8,15 @@
     {{-- mudar dinamicamente --}}
     <title>@yield('title')</title>
     {{-- fonte do google --}}
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@400;600&family=Roboto:wght@100;400;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@400;600&family=Roboto:wght@100;400;700;900&display=swap" rel="stylesheet">
 
     {{-- CSS bootsrapt --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     {{-- JS Bootsrapt --}}
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
@@ -44,8 +39,7 @@
                         <a href="/" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Controle Doenças
                         </a>
                         <div class="dropdown-menu">
@@ -58,8 +52,7 @@
 
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Questionarios
                         </a>
                         <div class="dropdown-menu">
@@ -75,8 +68,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Usuários
                         </a>
                         <div class="dropdown-menu">
@@ -93,8 +85,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Relatórios
                         </a>
                         <div class="dropdown-menu">
@@ -110,57 +101,53 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
-                            </li>
-                        @endif
+                    @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
+                    </li>
+                    @endif
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar Usuário') }}</a>
-                            </li>
-                        @endif
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar Usuário') }}</a>
+                    </li>
+                    @endif
                     @else
-                        @if (Auth::user()->role_id == 2)
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Escolas Vinculas
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                    @if (Auth::user()->role_id == 2)
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Escolas Vinculas
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="/turmas/home" class="nav-link">Turmas</a>
-                            </li>
-                        @endif
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ __('Sair') }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Sair') }}
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/turmas/home" class="nav-link">Turmas</a>
+                    </li>
+                    @endif
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                {{ __('Sair') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                     @endguest
                 </ul>
             </div>
@@ -172,11 +159,11 @@
             <div class="row">
                 {{-- if com a mensagem vindo do controller. --}}
                 @if (session('msg'))
-                    <p class="msg">{{ session('msg') }}</p>
+                <p class="msg">{{ session('msg') }}</p>
                 @endif
                 {{-- Mensagem erro --}}
                 @if (session('error'))
-                    <p class="error">{{ session('error') }}</p>
+                <p class="error">{{ session('error') }}</p>
                 @endif
                 {{-- mudar dinamicamente --}}
                 @yield('content')
@@ -195,8 +182,10 @@
 
 
     </footer>
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 </html>
