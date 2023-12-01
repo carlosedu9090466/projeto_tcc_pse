@@ -6,7 +6,7 @@
     <h1>Relatórios Gerais</h1>
 </div>
 
-
+<!-- subir códigos -->
 @if (count($alunoGenero) > 0 && count($totalGenero) > 0)
 <div class="col-md-6 offset-md-1 dashboard-doencas-container">
     <canvas id="myChart" width="50"></canvas>
