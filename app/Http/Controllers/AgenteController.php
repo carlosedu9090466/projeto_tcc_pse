@@ -77,10 +77,8 @@ class AgenteController extends Controller
 
     public function homeAgente()
     {
-        //$agentes = Agente::all();
-        //$agentes = User::AgenteInformacoes(3);
+  
         $search = request('search');
-        //$userAgente = User::where('role_id', '=', 3)->get();
 
         if ($search) {
             $userAgente = User::where('role_id', '=', 3)->where(

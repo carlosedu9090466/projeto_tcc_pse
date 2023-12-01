@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doenca;
-
+use App\Repositories\DoencaRepository;
 
 class DoencaController extends Controller
 {
+
+    private DoencaRepository $doencaRepository;
+    private Doenca $doenca;
+
+    public function __construct(DoencaRepository $doencaRepository, Doenca $doenca)
+    {
+        $this->doencaRepository = $doencaRepository;
+        $this->doenca = $doenca;
+    }
 
     //home doencas - page
     public function index()
@@ -24,27 +33,10 @@ class DoencaController extends Controller
 
     public function store(Request $request)
     {
-
-        $doenca = new Doenca;
-
-        $regras = [
-            'nome' => 'required|min:3|max:100',
-            'sintomas' => 'required|min:5|max:2000'
-        ];
-
-        $feedback = [
-            'required' => 'o campo :attribute deve ser preenchido.',
-            'nome.min' => 'o campo nome deve ter no mínino 3 caracteres',
-            'nome.max' => 'o campo nome deve ter no máximo 100 caracteres',
-            'sintomas.min' => 'o campo sintomas deve ter no mínino 5 caracteres',
-            'sintomas.max' => 'o campo sintomas deve ter no máximo 2000 caracteres'
-        ];
-
-        $request->validate($regras, $feedback);
-
-        $doenca->nome = $request->nome;
-        $doenca->sintomas = $request->sintomas;
-        $doenca->save();
+        //validação dos dados
+        $request->validate($this->doenca->regras(), $this->doenca->feedback());
+        
+        $this->doencaRepository->createDoenca($request);
 
         return redirect('/doenca/home')->with('msg', 'Doença cadastrada com sucesso!');
     }
@@ -78,11 +70,7 @@ class DoencaController extends Controller
     public function destroy($id)
     {
 
-        //deletar as questions referente a doenca
-        //Doenca::with('question')->findOrFail($id)->delete();
         Doenca::findOrFail($id)->delete();
-
-
         return redirect('/doenca/home')->with('msg', 'Dado excluido com sucesso!');
     }
 }

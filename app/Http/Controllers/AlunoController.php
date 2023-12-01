@@ -147,7 +147,7 @@ class AlunoController extends Controller
         //dd($turma);
         $dt = new DateTime();
         $now = $dt->format('Y-m-d');
-        //$now = Carbon::now()->format('d-m-Y');
+  
 
 
         foreach ($request->id_aluno as $aluno) {
@@ -168,7 +168,6 @@ class AlunoController extends Controller
     //deletar aluno da turma
     public function destroy(int $id_aluno, int $id_turma)
     {
-        //User_Escolar::where('user_id', '=', $idUser)->where('escola_id', '=', $idEscola)->delete();
         $turma = Turma::where('id', '=', $id_turma)->where('status_turma', '=', 0)->first();
         if ($turma) {
             return redirect('/turmas/espelho/' . $id_turma)->with('msg', 'Não é possível excluir o aluno, pois a turma está fechada!');
@@ -180,27 +179,20 @@ class AlunoController extends Controller
 
 
     //Reponder Quiz
-
     public function createQuestionarios(Request $request)
     {
         $dado_aluno = $request->all();
         $dt = new DateTime();
         $now = $dt->format('Y-m-d');
-        //dd($now);
+        
         $quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
-        //dd($dado_aluno);
-        //$quizs = Quiz::where('status_quiz', '=', 1)->where('date_fim_quiz', '>=', $now)->get();
-        //$quiz = Quiz::with('QuizVinculoQuestion')->get();
-        //$quizs = Quiz_Question::quizQuestionario($quiz);
-
-        //return view('responderQuiz.create', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
+      
         return view('responderQuiz.questionariosAbertos', ['quizs' => $quizs, 'dado_aluno' => $dado_aluno]);
     }
 
     public function createResponde(Request $request)
     {
         /*VERIFICAR A QUESTÃO DA DATA SE ESTÁ OK PARA RESPONDER*/
-
         $quizs = Quiz_Question::quizQuestionario($request->id_quiz);
         $dado_aluno = $request->all();
 
@@ -218,9 +210,6 @@ class AlunoController extends Controller
         $quiz_question = $request->id_quiz_question;
         $resposta = $request->resposta;
 
-
-        //$verificaRespostaQuiz = Responde_Quiz::where('id_aluno', '=', $request->id_aluno)->where('id_turma', '=', $request->id_turma)->first();
-        //dd($verificaRespostaQuiz);
         $verificaRespostaQuiz = Responde_Quiz::verificaQuizRespondido($request->id_quiz, $request->id_turma, $request->id_aluno);
 
         if ($verificaRespostaQuiz > 0) {
