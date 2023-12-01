@@ -32,6 +32,7 @@
         </button>
     </div>
 </div>
+<!-- home - page -->
 
 <div class="col-md-4 dashboard-title-container">
     <h1 class="home-titulo">Programa Saúde nas Escolas</h1>
