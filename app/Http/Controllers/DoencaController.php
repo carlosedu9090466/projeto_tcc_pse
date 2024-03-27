@@ -52,7 +52,7 @@ class DoencaController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-
+       
         Doenca::findOrFail($request->id)->update($data);
 
         return redirect('/doenca/home')->with('msg', 'Dado editado com sucesso!');
